@@ -78,14 +78,19 @@
 
 \enabstract{PINNuclear-Neutrons project aims to learn and reproduce the solution of neutron related problems in nuclear reactor, using physical reaction neural network (PINN) and deep machine learning technology. Our main goal is to re-implement the "Solving Multidimensional Neutron Diffusion Equation Based on PINN Deep Machine Learning Technology" published by Liu Dong's team, so as to simulate neutron transport more accurately.}
 
-\keywords{基于物理信息指引的神经网络模型（PINN）; 深度学习; 核反应堆; 中子学扩散方程}
+\keywords{基于物理信息指引的神经网络模型; 深度学习; 核反应堆; 中子学扩散方程}
 
 \enkeywords{PINN; Deep Learning; Nuclear Reactor; Neutron Diffusion Equation}
 
 \maketitle
 \section*{引言}
+物理和工程动力系统可以用普通微分方程（ODEs）或偏微分方程（PDEs）建模，可以通过解析方法或数值方法如有限差分法（FDM）和有限元法（FEM）来求解。然而，最近出现了一种新的求解微分方程（DE）的方法，涉及使用深度学习神经网络（DNNs），可以在专用硬件系统上执行。DNNs首次用于解微分方程是在1998年由Lagaris提出的，后来由Raissi和Karniadakis进一步发展成为物理信息神经网络（PINNs）。PINNs利用神经网络的通用逼近特性来解微分方程，同时提供了一种不需要域离散化的无网格方法。与传统的数值求解器（如FEM和FDM）相比，PINNs利用自动微分（AD）这一优化技术。AD使用链式法则来计算导数，而不是依赖于导数的符号表达式。PINNs通过将控制ODEs/PDEs和初始条件（IC）以及边界条件（BC）整合到损失函数中来整合物理定律。这个过程建立了理论约束和偏见，以补充测量数据。PINNs可以应用于监督和无监督学习任务，以及正向和反向问题。与大多数深度学习方法相比，PINNs的训练过程需要的数据量要少得多，因为PINN的性能与训练数据的数量没有直接关系。PINNs吸引了广泛的技术领域的研究人员的兴趣，包括热传递、结构动力学、流体力学、固体力学和核反应堆动力学等。
 
+\section{PINNuclear-Neutrons项目简介}
+PINNuclear-Neutrons项目旨在学习和复现核反应堆中子相关问题的解决方法，使用物理反应神经网络（PINN）和深度机器学习技术。我们的主要目标是重新实现刘东老师团队发表的“基于PINN深度机器学习技术求解多维中子学扩散方程”,以更准确地模拟中子传输。
+鼓励对核能技术和深度学习感兴趣的研究人员和学生参与到这个项目中。在各个子目录中，您将找到有关每个主题的详细说明和示例。
 
+\section{PINNuclear-Neutrons项目的学习笔记}
 基于PINN深度机器学习技术求解多维中子学扩散方程临界条件下稳态扩散方程的验证当系统处于稳态时, 形式为:
 $$
 \nabla^2 \phi(r)+\frac{k_{\infty} / k_{\text {eff }}-1}{L^2} \phi(r)=0

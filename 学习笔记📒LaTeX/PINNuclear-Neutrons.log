@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 03:05
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 03:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1048,7 +1048,9 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 (fontspec)             <->"STFangsong/OT:language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
-(/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+[1
+
+] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 
@@ -1071,9 +1073,10 @@ Package fontspec Info: Font family 'CourierNew(0)' created for font 'Courier
 (fontspec)             New/BI/OT:script=latn;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
- [1
+ [2]
+Overfull \vbox (1.4438pt too high) has occurred while \output is active []
 
-] [2]
+ [3]
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
 
@@ -1089,19 +1092,19 @@ See the caption package documentation for explanation.
 Package caption Warning: Unused \captionsetup[algorithm] on input line 562.
 See the caption package documentation for explanation.
 
-[3] 
+[4] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
-(rerunfilecheck)             Checksum: 668B01FBF77A7A7FE9246CEAD71E0BF7;67.
+(rerunfilecheck)             Checksum: EAD7BD0139CEAEFDFE21BE45294AD7BA;431.
  ) 
 Here is how much of TeX's memory you used:
- 21652 strings out of 476683
- 455668 string characters out of 5804047
- 2201018 words of memory out of 5000000
- 41453 multiletter control sequences out of 15000+600000
+ 21730 strings out of 476683
+ 461436 string characters out of 5804047
+ 2068018 words of memory out of 5000000
+ 41531 multiletter control sequences out of 15000+600000
  528872 words of font info for 164 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 103i,13n,111p,1217b,2061s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,13n,111p,1217b,2093s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (3 pages).
+Output written on PINNuclear-Neutrons.pdf (4 pages).
