@@ -1,0 +1,509 @@
+﻿% !TeX encoding = UTF-8
+% !TeX program = xelatex
+% !TeX spellcheck = en_US
+
+%-----------------------------------------------------------------------
+% 中国科学: 信息科学 中文模板, 请用 CCT-LaTeX 编译
+% http://scis.scichina.com
+% 南开大学程明明注释：也可以在Overleaf中使用XeLaTeX直接编译，
+% 例如：
+%-----------------------------------------------------------------------
+
+\documentclass{Sichuan Normal University}
+%\usepackage{breakurl}
+%\captionsetup[subfloat]{labelformat=simple,captionskip=0pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 作者附加的定义
+%%% 常用环境已经加载好, 不需要重复加载
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 开始
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 作者不需要修改此处信息
+\ArticleType{学习笔记}
+%\SpecialTopic{}
+%\Luntan{中国科学院学部\quad 科学与技术前沿论坛}
+\Year{2023}
+\Vol{50}
+\No{1}
+\BeginPage{1}
+\DOI{}
+\ReceiveDate{}
+\ReviseDate{}
+\AcceptDate{}
+\OnlineDate{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{PINNuclear-Neutrons学习笔记}{PINNuclear-Neutrons}
+
+\entitle{Large-Scale Review Cross-Distribution Scheme Based on Genetic Algorithm}{Large-Scale Review Cross-Distribution Scheme Based on Genetic Algorithm}
+
+\author[1]{刘洋}{{mathliuyang@163.com}}
+% \author[1]{张鹤瀛}{}
+% \author[2]{孙晨}{}
+% \author[3]{作者4}{}
+
+\enauthor[1]{Liu Yang}{{mathliuyang@163.com}}
+% \enauthor[1]{Zhang Heying}{}
+% \enauthor[2]{Sun Chen}{}
+% \enauthor[3]{Ming XING}{}
+
+\address[1]{四川师范大学数学科学学院, 四川 成都 610066}
+% \address[2]{成都外国语实验学校, 四川 成都 610031}
+% \address[3]{作者单位, 城市 000000}
+
+\enaddress[1]{School of Mathematical Sciences, Sichuan Normal University, Chengdu {\rm 610068}, Sichuan}
+% \enaddress[2]{Chengdu Experimental Foreign Language School, Chengdu {\rm 610031}, Sichuan}
+% \enaddress[3]{Affiliation, City {\rm 000000}, Country}
+
+% \Foundation{基金资助}
+\Foundation{通信作者简介：刘洋（1997-），男，研究生，主要研究方向：偏微分方程与数学物理}%\\中图分类号: O29 $\quad$ 文献标志码: A $\quad$ 文章编号 : 202310006 }
+\AuthorMark{mathliuyang}
+
+% \AuthorCitation{作者1, 作者2, 作者3, 等}
+% \enAuthorCitation{Xing M, Xing M M, Xing M, et al}
+
+% \comment{\dag~同等贡献}
+%\encomment{\dag~Equal contribution}
+
+\abstract{PINNuclear-Neutrons 项目旨在学习和复现核反应堆中子相关问题的解决方法，使用物理反应神经网络（PINN）和深度机器学习技术。我们的主要目标是重新实现刘东老师团队发表的“基于PINN深度机器学习技术求解多维中子学扩散方程”,以更准确地模拟中子传输。
+鼓励对核能技术和深度学习感兴趣的研究人员和学生参与到这个项目中。在各个子目录中，您将找到有关每个主题的详细说明和示例。}
+
+\enabstract{PINNuclear-Neutrons project aims to learn and reproduce the solution of neutron related problems in nuclear reactor, using physical reaction neural network (PINN) and deep machine learning technology. Our main goal is to re-implement the "Solving Multidimensional Neutron Diffusion Equation Based on PINN Deep Machine Learning Technology" published by Liu Dong's team, so as to simulate neutron transport more accurately.}
+
+\keywords{基于物理信息指引的神经网络模型（PINN）; 深度学习; 核反应堆; 中子学扩散方程}
+
+\enkeywords{PINN; Deep Learning; Nuclear Reactor; Neutron Diffusion Equation}
+
+\maketitle
+\section*{引言}
+
+
+基于PINN深度机器学习技术求解多维中子学扩散方程临界条件下稳态扩散方程的验证当系统处于稳态时, 形式为:
+$$
+\nabla^2 \phi(r)+\frac{k_{\infty} / k_{\text {eff }}-1}{L^2} \phi(r)=0
+$$
+
+当系统处于临界状态 $\left(k_{\mathrm{eff}}=1\right)$ 时, 为:
+$$
+\nabla^2 \phi(r)+B_g^2 \phi(r)=0
+$$
+其中, $B_g^2$ 为系统临界时的几何曲率, 与系统的几何特性相关，临界时等于材料曲率。
+
+为了验证计算结果, 选取针对特定几何有解析解的扩散方程进行数值验证, 相关结论也可供其他形式的方程与几何形式参考。
+验证计算神经网络架构均采用全连接方式, 激活函数选取具有高阶导数连续特点的双曲正切函数 $\mathrm{tanh}$,
+其形式为 $\tanh (x)=\left(\mathrm{e}^x-\mathrm{e}^{-x}\right) /\left(\mathrm{e}^x+\mathrm{e}^{-x}\right)$,
+网络初始值权重 $\{\vec{w}, \vec{b}\}$采用高斯分布随机采样 。
+平板的解析解为: $C \cdot \cos (x \cdot \pi / a)$;球的解析解为: $C / r \cdot \sin (\pi \cdot r / R)$;
+
+验证计算神经网络的超参数设定为: 深度 $l=16$, 中间层隐藏神经单元数量 $s=20$, 边界权重 $P_{\mathrm{b}}=100, C=0.5$,
+几何网格点随机均布, 学习率从 0.001 开始, 训练至损失函数值 $f_{\text {Loss }}$ 在 100 次学习内不再下降结束.
+
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
+    import deepxde as dde
+    import numpy as np
+    
+    # 初始化参数
+    k_eff = 1  # 有效增殖系数
+    a = 1  # 平板的宽度
+    B2 = (np.pi / a) ** 2  # 系统临界时的几何曲率
+    l = 16  # 神经网络的深度
+    s = 20  # 神经网络的中间层隐藏神经单元数量
+    Pb = 100  # 边界权重
+    C = 0.5  # 解析解参数
+    
+    
+    # 定义解析解
+    def phi_analytical(x):
+        return C * np.cos(x * np.pi / a)
+    
+    
+    # 定义几何网格
+    geom = dde.geometry.Interval(-a / 2, a / 2)
+    
+    
+    # 定义微分方程
+    def pde(x, phi):
+        dphi_xx = dde.grad.hessian(phi, x, i=0, j=0)
+        return dphi_xx + B2 * phi
+    
+    
+    # 定义边界条件
+    bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
+    # 定义数据
+    data = dde.data.PDE(geom, pde, bc, num_domain=898, num_boundary=2, solution=phi_analytical, num_test=100)
+    # 定义神经网络
+    layer_size = [1] + [s] * l + [1]
+    activation = "tanh"
+    # 网络初始值权重采用高斯分布随机采样
+    initializer = "Glorot uniform"
+    net = dde.nn.PFNN(layer_size, activation, initializer)
+    # 定义模型
+    model = dde.Model(data, net)
+    # 定义求解器
+    model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pb])
+    # 训练模型
+    losshistory, train_state = model.train(epochs=3500)
+    # 保存和可视化训练结果
+    dde.saveplot(losshistory, train_state, issave=True, isplot=True)
+    
+    # 输出在 x=0 处的值(即 C)
+    print("Predicted value at x=0:", model.predict(np.array([0])))
+   \end{lstlisting}
+
+\section{结束语}
+本文主要介绍了PINNuclear-Neutrons项目的学习笔记，主要是对PINNuclear-Neutrons项目的学习过程进行了总结，复习了论文中的算例代码，并对项目中的一些关键代码进行了解读，对项目中的一些关键参数进行了调整，以便更好地理解论文中的算法。
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 致谢
+%%% 非必选
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\Acknowledgements{致谢.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 补充材料说明
+%%% 非必选
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Supplements{补充材料.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 参考文献, {}为引用的标签, 数字/字母均可
+%%% 文中上标引用: \upcite{1,2}
+%%% 文中正常引用: \upcite{1,2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{99}
+    \expandafter\ifx\csname url\endcsname\relax
+        \def\url#1{\texttt{#1}}\fi
+    \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+    \expandafter\ifx\csname href\endcsname\relax
+        \def\href#1#2{#2} \def\path#1{#1}\fi
+        \bibitem{prantikos2023}
+        Prantikos, K., Chatzidakis, S., Tsoukalas, L.H., Heifetz, A. (2023). \href{https://doi.org/10.1038/s41598-023-43325-1}{Physics-informed neural network with transfer learning (TL-PINN) based on domain similarity measure for prediction of nuclear reactor transients}. \textit{Scientific Reports}, 13, 16840.
+
+        % \bibitem{raissi2017a}
+        % Raissi, M., Perdikaris, P., Karniadakis, G. (2017). \href{https://arxiv.org/abs/your-arxiv-link}{Physics Informed Deep Learning (Part II): Data-driven Discovery of Nonlinear Partial Differential Equations}. \textit{arXiv}.
+
+        \bibitem{raissi2019}
+        Raissi, M., Perdikaris, P., Karniadakis, G.E. (2019). \href{https://doi.org/10.1016/j.jcp.2018.10.045}{Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations}. \textit{Journal of Computational Physics}, 378, 686–707.
+
+        % \bibitem{raissi2017b}
+        % Raissi, Maziar, Perdikaris, P., Karniadakis, G.E. (2017). \href{https://arxiv.org/abs/your-arxiv-link}{Physics Informed Deep Learning (Part I): Data-driven Solutions of Nonlinear Partial Differential Equations}.
+
+        \bibitem{ren2022}
+        任清华 (2022). \href{https://doi.org/10.27272/d.cnki.gshdu.2022.003244}{基于深度学习的偏微分方程求解方法 (硕士).} \textit{山东大学}.
+
+        \bibitem{sun2023}
+        孙靖威 (2023). \href{https://doi.org/10.27363/d.cnki.gtsfu.2023.000110}{基于深度学习求解偏微分方程的研究 (硕士).} \textit{天津师范大学}.
+
+        \bibitem{zeng2022}
+        曾壬源 (2022). \href{https://doi.org/10.27517/d.cnki.gzkju.2022.001485}{基于深度神经网络的偏微分方程求解 (硕士).} \textit{中国科学技术大学}.
+
+        \bibitem{yan2023}
+        颜怀笑 (2023). \href{https://doi.org/10.27204/d.cnki.glzhu.2023.002621}{深度学习在工程问题偏微分方程求解中的应用 (硕士).} \textit{兰州大学}.
+
+        \bibitem{liu2023a}
+        刘东, 唐雷, 安萍, 张斌, 江勇 (n.d.). \href{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CAPJ&dbname=CAPJLAST&filename=HDLG20230424002&v=}{核反应堆有效增殖系数深度学习直接搜索求解方法. \textit{核动力工程}}, 1–9. 
+
+        \bibitem{liu2023b}
+        刘东, 王雪强, 张斌, 俞蔡阳, 宫兆虎, 陈奇隆 (2023). \href{https://kns.cnki.net/kcms2/article/abstract?v=rNedIcCUbLBqIkch2F8QefV3lssVn9G8eOxrEoNAs8RU_8nd-8zgNE_lEKNRcYF3wtEUlU6w7EwbyCZCdhuWpQ5BNpoNGSMi_MD-4O-AgJ4UsKqU8bIsCg7gLgOoDJ-7M9bX84wGLUyeB9kAybUjAQ==&uniplatform=NZKPT&language=CHS}{深度学习方法求解中子输运方程的微分变阶理论. \textit{原子能科学技术}}, 57, 946–959.
+
+        \bibitem{liu2022}
+        刘东, 罗琦, 唐雷, 安萍, 杨帆 (2022). \href{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFD&dbname=CJFDLAST2022&filename=HDLG202202001&v=}{基于PINN深度机器学习技术求解多维中子学扩散方程. \textit{核动力工程}}, 43, 1–8. 
+
+    \end{thebibliography}
+
+
+
+% plain,按字母的顺序排列,比较次序为作者、年度和标题.
+% unsrt,样式同plain,只是按照引用的先后排序.
+% alpha,用作者名首字母+年份后两位作标号,以字母顺序排序.
+% abbrv,类似plain,将月份全拼改为缩写,更显紧凑.
+% ieeetr,国际电气电子工程师协会期刊样式.
+% acm,美国计算机学会期刊样式.
+% siam,美国工业和应用数学学会期刊样式.
+% apalike,美国心理学学会期刊样式.
+% abbrv、acm、alpha、apalike、ieeetr、plain、unsrt、siam
+
+% \bibliographystyle{elsarticle-num} 
+% \bibliography{/Users/turingscat/Zotero/better-bibtex/mylibrary.bib}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 附录章节, 自动从A编号, 以\section开始一节
+%%% 非必选
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{appendix}
+% \section{附录}
+% 附录从这里开始.
+% \begin{figure}[H]
+% \centering
+% %\includegraphics{fig1.eps}
+% \cnenfigcaption{附录里的图}{Caption}
+% \label{fig1}
+% \end{figure}
+% \end{appendix}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 自动生成英文标题部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeentitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 主要作者英文简介, 数量不超过4个
+%%% \authorcv[zp1.eps]{Ming XING}{was born in ...}
+%%% [照片文件名]请提供清晰的一寸浅色背景照片, 宽高比为 25:35
+%%% {姓名}与英文标题处一致
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \authorcv[./figure/个人形象照/IMG_5103.JPG]{Liu Yang}{was born in Sichuan in 1997. He is currently a master's student in the School of Mathematical Sciences, Sichuan Normal University. His research interests include partial differential equations and mathematical physics.}
+\authorcv[./figure/个人形象照/头像.JPEG]{Liu Yang}{was born in Sichuan in 1997. He is currently a master's student in the School of Mathematical Sciences, Sichuan Normal University. His research interests include partial differential equations and mathematical physics.}
+
+\authorcv[]{}{}
+
+\vspace*{6mm} % 调整照片行间距
+
+% \authorcv[]{Ming XING}{was born in ...}
+
+% \authorcv[]{Ming XING}{was born in ...}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 补充材料, 以附件形式作网络在线, 不出现在印刷版中
+%%% 不做加工和排版, 仅用于获得图片和表格编号
+%%% 自动从I编号, 以\section开始一节
+%%% 可以没有\section
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{supplement}
+%\section{supplement1}
+%自动从I编号, 以section开始一节.
+%\begin{figure}[H]
+%\centering
+%\includegraphics{fig1.eps}
+%\cnenfigcaption{补充材料里的图}{Caption}
+%\label{fig1}
+%\end{figure}
+%\end{supplement}
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 本模板使用的latex排版示例
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% 章节
+\section{}
+\subsection{}
+\subsubsection{}
+
+
+%%% 普通列表
+\begin{itemize}
+\item Aaa aaa.
+\item Bbb bbb.
+\item Ccc ccc.
+\end{itemize}
+
+%%% 自由编号列表
+\begin{itemize}
+\itemindent 4em
+\item[(1)] Aaa aaa.
+\item[(2)] Bbb bbb.
+\item[(3)] Ccc ccc.
+\end{itemize}
+
+%%% 定义、定理、引理、推论等, 可用下列标签
+%%% definition 定义
+%%% theorem 定理
+%%% lemma 引理
+%%% corollary 推论
+%%% axiom 公理
+%%% propsition 命题
+%%% example 例
+%%% exercise 习题
+%%% solution 解名
+%%% notation 注
+%%% assumption 假设
+%%% remark 注释
+%%% property 性质
+%%% []中的名称可以省略, \label{引用名}可在正文中引用
+\begin{definition}[定义名]\label{def1}
+定义内容.
+\end{definition}
+
+
+
+%%% 单图
+%%% 可在文中使用图\ref{fig1}引用图编号
+\begin{figure}[!t]
+\centering
+\includegraphics{fig1.eps}
+\cnenfigcaption{中文图题}{Caption}
+\label{fig1}
+\end{figure}
+
+%%% 并排图
+%%% 可在文中使用图\ref{fig1}、图\ref{fig2}引用图编号
+\begin{figure}[!t]
+\centering
+\begin{minipage}[c]{0.48\textwidth}
+\centering
+\includegraphics{fig1.eps}
+\end{minipage}
+\hspace{0.02\textwidth}
+\begin{minipage}[c]{0.48\textwidth}
+\centering
+\includegraphics{fig2.eps}
+\end{minipage}\\[3mm]
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\cnenfigcaption{中文图题1}{Caption1}
+\label{fig1}
+\end{minipage}
+\hspace{0.02\textwidth}
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\cnenfigcaption{中文图题2}{Caption2}
+\label{fig2}
+\end{minipage}
+\end{figure}
+
+%%% 并排子图
+%%% 需要英文分图题 (a)...; (b)...
+\begin{figure}[!t]
+\centering
+\begin{minipage}[c]{0.48\textwidth}
+\centering
+\includegraphics{subfig1.eps}
+\end{minipage}
+\hspace{0.02\textwidth}
+\begin{minipage}[c]{0.48\textwidth}
+\centering
+\includegraphics{subfig2.eps}
+\end{minipage}
+\cnenfigcaption{中文图题}{Caption}
+\label{fig1}
+\end{figure}
+
+%%% 算法
+%%% 可在文中使用 算法\ref{alg1} 引用算法编号
+\begin{algorithm}
+%\floatname{algorithm}{Algorithm}%更改算法前缀名称
+%\renewcommand{\algorithmicrequire}{\textbf{Input:}}% 更改输入名称
+%\renewcommand{\algorithmicensure}{\textbf{Output:}}% 更改输出名称
+\footnotesize
+\caption{算法标题}
+\label{alg1}
+\begin{algorithmic}[1]
+    \REQUIRE $n \geq 0 \vee x \neq 0$;
+    \ENSURE $y = x^n$;
+    \STATE $y \Leftarrow 1$;
+    \IF{$n < 0$}
+        \STATE $X \Leftarrow 1 / x$;
+        \STATE $N \Leftarrow -n$;
+    \ELSE
+        \STATE $X \Leftarrow x$;
+        \STATE $N \Leftarrow n$;
+    \ENDIF
+    \WHILE{$N \neq 0$}
+        \IF{$N$ is even}
+            \STATE $X \Leftarrow X \times X$;
+            \STATE $N \Leftarrow N / 2$;
+        \ELSE[$N$ is odd]
+            \STATE $y \Leftarrow y \times X$;
+            \STATE $N \Leftarrow N - 1$;
+        \ENDIF
+    \ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+%%% 简单表格
+%%% 可在文中使用 表\ref{tab1} 引用表编号
+\begin{table}[!t]
+\cnentablecaption{表题}{Caption}
+\label{tab1}
+\footnotesize
+\tabcolsep 49pt %space between two columns. 用于调整列间距
+\begin{tabular*}{\textwidth}{cccc}
+\toprule
+  Title a & Title b & Title c & Title d \\\hline
+  Aaa & Bbb & Ccc & Ddd\\
+  Aaa & Bbb & Ccc & Ddd\\
+  Aaa & Bbb & Ccc & Ddd\\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+%%% 换行表格
+\begin{table}[!t]
+\cnentablecaption{表题}{Caption}
+\label{tab1}
+\footnotesize
+\def\tabblank{\hspace*{10mm}} %blank leaving of both side of the table. 左右两边的留白
+\begin{tabularx}{\textwidth} %using p{?mm} to define the width of a column. 用p{?mm}控制列宽
+{@{\tabblank}@{\extracolsep{\fill}}cccp{100mm}@{\tabblank}}
+\toprule
+  Title a & Title b & Title c & Title d \\\hline
+  Aaa & Bbb & Ccc & Ddd ddd ddd ddd.
+
+  Ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd ddd.\\
+  Aaa & Bbb & Ccc & Ddd ddd ddd ddd.\\
+  Aaa & Bbb & Ccc & Ddd ddd ddd ddd.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%%% 单行公式
+%%% 可在文中使用 (\ref{eq1})式 引用公式编号
+%%% 如果是句子开头, 使用 公式(\ref{eq1}) 引用
+\begin{equation}
+A(d,f)=d^{l}a^{d}(f),
+\label{eq1}
+\end{equation}
+
+%%% 不编号的单行公式
+\begin{equation}
+\nonumber
+A(d,f)=d^{l}a^{d}(f),
+\end{equation}
+
+%%% 公式组
+\begin{eqnarray}
+\nonumber
+&X=[x_{11},x_{12},\ldots,x_{ij},\ldots ,x_{n-1,n}]^{\rm T},\\
+\nonumber
+&\varepsilon=[e_{11},e_{12},\ldots ,e_{ij},\ldots ,e_{n-1,n}],\\
+\nonumber
+&T=[t_{11},t_{12},\ldots ,t_{ij},\ldots ,t_{n-1,n}].
+\end{eqnarray}
+
+%%% 条件公式
+\begin{eqnarray}
+\sum_{j=1}^{n}x_{ij}-\sum_{k=1}^{n}x_{ki}=
+\left\{
+\begin{aligned}
+1,&\quad i=1,\\
+0,&\quad i=2,\ldots ,n-1,\\
+-1,&\quad i=n.
+\end{aligned}
+\right.
+\label{eq1}
+\end{eqnarray}
+
+%%% 其他格式
+\footnote{Comments.} %footnote. 脚注
+\raisebox{-1pt}[0mm][0mm]{xxxx} %put xxxx upper or lower. 控制xxxx的垂直位置
+
+%%% 图说撑满
+\Caption\protect\linebreak \leftline{Caption}
