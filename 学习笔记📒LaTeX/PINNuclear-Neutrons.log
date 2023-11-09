@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 20:56
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 23:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1048,29 +1048,12 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 (fontspec)             <->"STFangsong/OT:language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
-
-LaTeX Warning: Citation `lagarisArtificialNeuralNetworks1998' on page 1 undefined on input line 88.
-
-
-LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 1 undefined on input line 88.
-
-
-LaTeX Warning: Citation `LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022' on page 1 undefined on input line 92.
-
 [1
 
 ]
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
-
-
-LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 2 undefined on input line 108.
-
-[2]
-
-LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 3 undefined on input line 140.
-
-[3]
+ [2] [3]
 File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
 <./figure/链式裂变反应示意图.png>
  [4] [5]
@@ -1078,14 +1061,15 @@ LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 206.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 206.
- [6] [7]
-
-LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 8 undefined on input line 292.
-
-[8]
-No file PINNuclear-Neutrons.bbl.
+ [6] [7] [8] [9]
+File: ./figure/在两种介质分界面上的中子扩散.png Graphic file (type bmp)
+<./figure/在两种介质分界面上的中子扩散.png>
+File: ./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png Graphic file (type bmp)
+<./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png>
+ (./PINNuclear-Neutrons.bbl) [10]
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
+
 
 Package caption Warning: Unused \captionsetup[table] on input line 560.
 See the caption package documentation for explanation.
@@ -1094,22 +1078,19 @@ See the caption package documentation for explanation.
 Package caption Warning: Unused \captionsetup[algorithm] on input line 562.
 See the caption package documentation for explanation.
 
-[9] 
+[11] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
 (rerunfilecheck)             Checksum: 17844ED403073A5B9A375771310E1122;878.
  ) 
 Here is how much of TeX's memory you used:
- 21471 strings out of 476683
- 459271 string characters out of 5804047
+ 21509 strings out of 476683
+ 460442 string characters out of 5804047
  1881018 words of memory out of 5000000
- 41279 multiletter control sequences out of 15000+600000
- 529756 words of font info for 161 fonts, out of 8000000 for 9000
+ 41308 multiletter control sequences out of 15000+600000
+ 529780 words of font info for 164 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 103i,13n,111p,1217b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,13n,111p,1217b,700s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (9 pages).
+Output written on PINNuclear-Neutrons.pdf (11 pages).

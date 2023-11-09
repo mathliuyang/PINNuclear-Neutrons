@@ -259,7 +259,7 @@ L-BFGS 仍然面临一个问题, 就是当初始点与函数最优解的点相�
 方程 \eqref{eq:中子数守恒3} 叫做连续方程, 它实际上表征单位体积 (或微元) 内的中子数的平衡关系, 在反应堆理论中具有极为重要的意义。
 
 连续方程 \eqref{eq:中子数守恒3} 是具有普遍意义的, 但其中具有两个未知函数 $\phi(\boldsymbol{r}, t)$ 及 $\boldsymbol{J}(\boldsymbol{r}, t)$, 
-因此无法求解这个方程。如果在求解之前我们能找出 $\phi(\boldsymbol{r}, t)$ 和 $\boldsymbol{J}(\boldsymbol{r}, t)$ 之间的关系, 将其代人式 \eqref{eq:中子数守恒3}, 这样将其变成只含一个, 例如 $\phi(\boldsymbol{r}, t)$ 的方程, 问题就解决了。
+因此无法求解这个方程。如果在求解之前我们能找出 $\phi(\boldsymbol{r}, t)$ 和 $\boldsymbol{J}(\boldsymbol{r}, t)$ 之间的关系, 将其代入式 \eqref{eq:中子数守恒3}, 这样将其变成只含一个, 例如 $\phi(\boldsymbol{r}, t)$ 的方程, 问题就解决了。
 
 当考虑稳态情况，也就是中子通量密度不随时间变化时，同时我们假设以下条件成立：
     \begin{itemize}
@@ -321,6 +321,99 @@ L-BFGS 仍然面临一个问题, 就是当初始点与函数最优解的点相�
     \end{align}
     
 这个方程称为单能中子扩散方程，它是借助中子扩散的菲克定律从中子数守恒的连续方程推导而得的，是反应堆理论中的一个基本方程，在反应堆理论中广泛应用并占有很重要的位置。
+\subsubsection*{扩散方程边界条件}
+扩散方程式 \eqref{eq:单能中子扩散方程} 是一个微分方程, 它适用于普遍情况, 在它的普遍解中将包含有任意的积分常数。为了确定这些积分常数的数值, 就要根据具体问题在普遍解上加一些限制条件,也就是问题本身的物理或几何特性所规定的边界条件。边界条件的数目应恰好足以确定方程有唯一解。
+
+下面讨论求解扩散方程时经常用到的几种边界条件。
+\begin{itemize} 
+    \item 在扩散方程适用的范围内, 中子通量密度的数值必须是正的、有限的实数。
+
+    \item 在两种不同扩散性质的介质交界面上, 垂直于分界面的中子流密度相等, 中子通量密度相等。
+
+设有两种不同介质的分界面 (见图 \ref{fig:在两种介质分界面上的中子扩散}),在分界面上所有沿正 $x$ (或负 $x$ ) 方向穿过 $A$介质的中子数必定等于同一方向穿过 $B$ 介质的中子数 (因为在分界面上不能有中子的积累或消耗), 即
+
+\begin{equation}
+\left.J_x^{+}\right|_A=\left.J_x^{+}\right|_B
+\label{eq:界面上的中子流密度相等1}
+\end{equation}
+和
+\begin{equation}
+\left.J_x^{-}\right|_A=\left.J_x^{-}\right|_B
+\label{eq:界面上的中子流密度相等2}
+\end{equation}
+将 $J_x^{+}$及 $J_x^{-}$的表示式代入式 \eqref{eq:界面上的中子流密度相等1} 及式 \eqref{eq:界面上的中子流密度相等2}, 然后两式相减便可得到
+\begin{equation}
+\left.D_A \frac{\mathrm{d} \phi}{\mathrm{d} x}\right|_A=\left.D_B \frac{\mathrm{d} \phi}{\mathrm{d} x}\right|_B
+\label{eq:界面上的中子流密度相等}
+\end{equation}
+
+若两式相加则有
+\begin{equation}
+\phi_A=\phi_B
+\label{eq:界面上的中子通量密度相等}
+\end{equation}
+
+式  \eqref{eq:界面上的中子流密度相等} 及式 \eqref{eq:界面上的中子通量密度相等} 便是扩散方程在分界面上的边界条件。
+
+\item 介质与真空交界的外表面上,根据物理上的要求, 自真空返回介质的中子流等于零 (见图 \ref{fig:应用输运理论和扩散理论的外推距离求得的扩散方程的解}), 即
+\begin{equation}
+\left.J_x^{-}\right|_{x=0}=0
+\end{equation}
+
+反应堆的外表面就属于这种情况。空气虽然不是真空, 但是, 由于单位体积内的分子数比非气体介质要小得多, 所以, 中子在空气中的平均自由程比在非气体介质中的平均自由程
+要大得多, 因而可以把空气近似地当作真空来处理。由于中子不可能自真空中散射回到介质中来,所以在 $x=0$ 处沿负 $x$ 方向上的中子流等于零。有
+\begin{equation}
+\left.J_x^{-}\right|_{x=0}=\frac{\phi_0}{4}+\left.\frac{\lambda_{\text {tr }}}{6} \frac{\mathrm{d} \phi}{\mathrm{d} x}\right|_{x=0}=0
+\end{equation}
+
+或者写成
+\begin{equation}
+\left.\frac{\mathrm{d} \phi}{\mathrm{d} x}\right|_{x=0}=-\frac{3 \phi_0}{2 \lambda_{\mathrm{tr}}}
+\label{eq:外表面上的中子流密度等于零}
+\end{equation}
+
+这个条件可以写成更方便的形式。如果我们假想从交界面处将中子通量密度的分布曲线按它在交界面处的斜率向真空作直线外推 (见图 \ref{fig:应用输运理论和扩散理论的外推距离求得的扩散方程的解} 中的虚线), 则在离开交界面某个距离 $d$处的位置上中子通量密度将等于零, 于是有
+\begin{equation}
+\left.\frac{\mathrm{d} \phi}{\mathrm{d} x}\right|_{x=0}=-\frac{\phi_0}{d}
+\end{equation}
+
+而根据式 \eqref{eq:外表面上的中子流密度等于零} 有
+\begin{equation}
+d=\frac{2}{3} \lambda_{\mathrm{tr}}
+\end{equation}
+
+这里, $d$ 称为直线外推距离。
+应当指出, 上述的直线外推距离 $d$ 是从扩散理论求出的, 但是扩散理论在真空交界处附近不适用, 因而由此求出的 $d$ 也是不精确的。按照更精确的中子输运理论, 对于平面边界的情况, 可以求得 $d=0.7104 \lambda_{\mathrm{tr}}$, 以后在计算中, 我们将采用这一数值。严格地讲, 外推距离 $d$与表面曲率半径有关, 但对于曲率较小的表面, 近似地应用 $0.7104 \lambda_{\mathrm{tr}}$ 这一数值不会产生很大的误差。这样,自由外表面 (真空边界)的边界条件可以用更简单的形式表示:
+在自由表面外推距离 $d$ 处, 中子通量密度等于零。
+最后必须强调指出, 这个边界条件仅仅是为了简化扩散方程的求解而采取的一种数学处理方法, 并不是说在自由表面外, 中子通量密度的变化是真的按照直线外推的那样, 在外推边界上等于零。实际上, 在自由表面以外中子通量密度的分布是没有意义的。这种外推边界仅仅是一种假想的边界概念, 只是表示利用上述外推距离作为扩散方程的边界条件可以在许多情况下得出比较满意的近似结果, 如图 \ref{fig:应用输运理论和扩散理论的外推距离求得的扩散方程的解} 所示。从图中可以看到, 应用输运理论的外推距离求得扩散方程的解, 除靠近边界附近有偏差外, 其它部分与输运理论的严格解吻合良好。
+
+
+%%% 并排图
+%%% 可在文中使用图\ref{fig1}、图\ref{fig2}引用图编号
+\begin{figure}[!t]
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/在两种介质分界面上的中子扩散.png}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png}
+    \end{minipage}\\[3mm]
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{在两种介质分界面上的中子扩散}{Neutron diffusion at the interface of two media}
+    \label{fig:在两种介质分界面上的中子扩散}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{外推距离求得的扩散方程的解}{The solution of the diffusion equation}
+    \label{fig:应用输运理论和扩散理论的外推距离求得的扩散方程的解}
+    \end{minipage}
+    \end{figure}
+\end{itemize}
 \subsection{本章小结}
 本章主要对本文所需要用到的理论基础与技术进行了简单地介绍。了解了本文方法将物理信息引入神经网络的理论基础，并对本文使用的网络结构的理论基
 础进行介绍，最后介绍了一种不常用的二阶优化算法 L-BFGS，为后文的方法介绍做好了理论方面的准备。
