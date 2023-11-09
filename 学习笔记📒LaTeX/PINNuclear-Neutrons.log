@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 11:57
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 14:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1050,30 +1050,10 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 
 [1
 
-] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-
-Package fontspec Info: Font family 'CourierNew(0)' created for font 'Courier
-(fontspec)             New' with options [].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.: <->"Courier
-(fontspec)             New/OT:script=latn;language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             - 'bold' (b/n) with NFSS spec.: <->"Courier
-(fontspec)             New/B/OT:script=latn;language=dflt;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
-(fontspec)             - 'italic' (m/it) with NFSS spec.: <->"Courier
-(fontspec)             New/I/OT:script=latn;language=dflt;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Courier
-(fontspec)             New/BI/OT:script=latn;language=dflt;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
-
- [2] [3]
+]
+File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
+<use ./figure/PINN网络结构图.pdf>
+ [2] [3] (./PINNuclear-Neutrons.bbl)
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
 
@@ -1082,26 +1062,22 @@ Package caption Warning: Unused \captionsetup[table] on input line 560.
 See the caption package documentation for explanation.
 
 
-Package caption Warning: Unused \captionsetup[figure] on input line 561.
-See the caption package documentation for explanation.
-
-
 Package caption Warning: Unused \captionsetup[algorithm] on input line 562.
 See the caption package documentation for explanation.
 
-[4] 
+[4] [5] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
-(rerunfilecheck)             Checksum: EAD7BD0139CEAEFDFE21BE45294AD7BA;431.
+(rerunfilecheck)             Checksum: 050F49D8CFD584D13131F802604EC80D;632.
  ) 
 Here is how much of TeX's memory you used:
- 21724 strings out of 476683
- 461243 string characters out of 5804047
- 2070018 words of memory out of 5000000
- 41527 multiletter control sequences out of 15000+600000
- 528856 words of font info for 162 fonts, out of 8000000 for 9000
+ 21382 strings out of 476683
+ 455326 string characters out of 5804047
+ 1881018 words of memory out of 5000000
+ 41196 multiletter control sequences out of 15000+600000
+ 528792 words of font info for 154 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 103i,13n,111p,1217b,2093s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,13n,111p,1217b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (4 pages).
+Output written on PINNuclear-Neutrons.pdf (5 pages).

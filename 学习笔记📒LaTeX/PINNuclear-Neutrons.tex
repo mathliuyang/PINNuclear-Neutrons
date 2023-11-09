@@ -84,84 +84,136 @@
 
 \maketitle
 \section*{引言}
-物理和工程动力系统可以用普通微分方程（ODEs）或偏微分方程（PDEs）建模，可以通过解析方法或数值方法如有限差分法（FDM）和有限元法（FEM）来求解。然而，最近出现了一种新的求解微分方程（DE）的方法，涉及使用深度学习神经网络（DNNs），可以在专用硬件系统上执行。DNNs首次用于解微分方程是在1998年由Lagaris提出的，后来由Raissi和Karniadakis进一步发展成为物理信息神经网络（PINNs）。PINNs利用神经网络的通用逼近特性来解微分方程，同时提供了一种不需要域离散化的无网格方法。与传统的数值求解器（如FEM和FDM）相比，PINNs利用自动微分（AD）这一优化技术。AD使用链式法则来计算导数，而不是依赖于导数的符号表达式。PINNs通过将控制ODEs/PDEs和初始条件（IC）以及边界条件（BC）整合到损失函数中来整合物理定律。这个过程建立了理论约束和偏见，以补充测量数据。PINNs可以应用于监督和无监督学习任务，以及正向和反向问题。与大多数深度学习方法相比，PINNs的训练过程需要的数据量要少得多，因为PINN的性能与训练数据的数量没有直接关系。PINNs吸引了广泛的技术领域的研究人员的兴趣，包括热传递、结构动力学、流体力学、固体力学和核反应堆动力学等。
+随着人工智能技术的迅猛发展，深度学习神经网络（DNNs）在解决复杂偏微分方程（PDE）的领域引起了广泛的兴趣。在核反应堆设计和工程领域，中子学扩散模型是核反应堆工程设计的重要组成部分。传统的中子扩散模型采用有限差分法（FDM）和有限元法（FEM）等数值方法进行求解，这些方法在工程实践中取得了显著的成功。
+然而，随着深度学习技术的不断发展，一种新的方法已经崭露头角，即基于物理信息指导的神经网络模型（PINN），它在解决微分方程方面展现出巨大潜力。DNNs首次用于解微分方程是在1998年由Lagaris提出的\cite{lagarisArtificialNeuralNetworks1998}，后来由Raissi和Karniadakis进一步发展成为基于物理信息的神经网络（PINNs）\cite{raissiPhysicsinformedNeuralNetworks2019}，
+将方程和边界条件等物理信息的知识作为损失函数引入到神经网络训练当中，通过这种方法将问题的物理信息考虑进去，不再仅仅依靠数据驱动的方法来使得网络拟合偏微分方程的解函数；同时，此研究也指出如果将方程中的系数当作未知参数也可以完成发现方程的任务。此后，便有许多研究围绕基于物理信息的神经网络展开，而这些研究通常可以总结为调整神经网络结构，更改损失函数的形式，挑选不同的激活函数，采用不同的优化策略。
+PINN模型充分利用了深度学习神经网络的通用逼近能力，同时能够处理多维高阶复杂微分方程。与传统数值方法相比，PINNs具有多方面的优势，包括无需事先收集大量训练数据、适用于正向和反向问题、无空间几何限制等。因此，PINNs已经引起了广泛的研究兴趣，并在热传递、结构动力学、流体力学、固体力学以及核反应堆动力学等多个领域取得了重要突破。
 
-\section{PINNuclear-Neutrons项目简介}
-PINNuclear-Neutrons项目旨在学习和复现核反应堆中子相关问题的解决方法，使用物理反应神经网络（PINN）和深度机器学习技术。我们的主要目标是重新实现刘东老师团队发表的“基于PINN深度机器学习技术求解多维中子学扩散方程”,以更准确地模拟中子传输。
-鼓励对核能技术和深度学习感兴趣的研究人员和学生参与到这个项目中。在各个子目录中，您将找到有关每个主题的详细说明和示例。
+本PINNuclear-Neutrons项目笔记旨在深入理解PINN模型的原理和应用，通过推导和复现刘东老师的研究工作\cite{LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022}，进一步探讨PINN模型在核反应堆设计和工程中的潜在应用。我们将重点关注PINN模型的工作原理、关键参数的影响以及可能的优化方向，以便更好地理解和应用这一创新方法。通过本学习笔记，我们希望能够为核反应堆设计和工程领域的研究人员提供有关PINNs的深入见解，以应对复杂问题和挑战。
 
-\section{PINNuclear-Neutrons项目的学习笔记}
-基于PINN深度机器学习技术求解多维中子学扩散方程临界条件下稳态扩散方程的验证当系统处于稳态时, 形式为:
-$$
-\nabla^2 \phi(r)+\frac{k_{\infty} / k_{\text {eff }}-1}{L^2} \phi(r)=0
-$$
 
-当系统处于临界状态 $\left(k_{\mathrm{eff}}=1\right)$ 时, 为:
-$$
-\nabla^2 \phi(r)+B_g^2 \phi(r)=0
-$$
-其中, $B_g^2$ 为系统临界时的几何曲率, 与系统的几何特性相关，临界时等于材料曲率。
+\section{相关理论和技术}
+本章的主要内容是介绍相关理论和技术，首先介绍基于物理信息的神经网络，通过这种方法可以将物理信息引入到神经网络当中，然后介绍了本文方法中所用到的二阶优化函数 L-BFGS，为了网络更快更好的优化。最后介绍了核反应堆物理的相关知识，为后文的方法介绍做好理论上的准备。
+\subsection{基于物理信息的神经网络}
+使用神经网络逼近函数从万能逼近定理被提出之后就一直是科学计算的重要方向，然而随着数据时代的到来，大数据在人工智能领域取得了巨大的成功，于是人们想通过数据驱动的方式来拟合函数，
+但对于某些难以求解的函数，函数的解析解和数值解很难获得，无法大量产生训练神经网络所需要的数据。并且数据驱动的方法还会降低模型的泛用性，只在有监督的点的位置能达到对应的精度，
+而在做推断位置的点所求出的值精度就会与训练时相差很多，直至采点够密集才能使求解精度达到对应要求。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/PINN网络结构图.pdf}
+    \cnenfigcaption{PINN网络结构图}{PINN Network Structure}
+    \label{fig:PINN Network Structure}
+    \end{figure}
 
-为了验证计算结果, 选取针对特定几何有解析解的扩散方程进行数值验证, 相关结论也可供其他形式的方程与几何形式参考。
-验证计算神经网络架构均采用全连接方式, 激活函数选取具有高阶导数连续特点的双曲正切函数 $\mathrm{tanh}$,
-其形式为 $\tanh (x)=\left(\mathrm{e}^x-\mathrm{e}^{-x}\right) /\left(\mathrm{e}^x+\mathrm{e}^{-x}\right)$,
-网络初始值权重 $\{\vec{w}, \vec{b}\}$采用高斯分布随机采样 。
-平板的解析解为: $C \cdot \cos (x \cdot \pi / a)$;球的解析解为: $C / r \cdot \sin (\pi \cdot r / R)$;
+为此 Raissi 等人在 2019 年提出了基于物理信息的神经网络(PINN)\cite{raissiPhysicsinformedNeuralNetworks2019}，通过将物理方程条件作为损失函数，将物理方程信息参与到神经网络的训练过程之中。
+当网络训练时，神经网络迭代优化所反向传播的不仅仅有数值上的损失，同时还有物理方程的损失，这样就可以对神经网络所表示的空间进行限制，逐渐去逼近真正的解空间。
+而且有了物理信息的引入，网络对数据的要求也逐渐降低，不再完全依赖数据驱动，在有很少的数据，甚至没有数据的情况下依然能的到很好的回归效果，大大增加了网络的泛用性和稳定性。
+具体神经网络结构如下图 \ref{fig:PINN Network Structure} 所示。
+如图中所示定义损失函数为:
+\begin{equation}
+    M S E=M S E_u+M S E_{B C, I C}+M S E_R
+    \label{eq:损失函数}  
+\end{equation}
+其中 $M S E_R$ 是解的数值约束, 只对能取到解的值的点进行约束, 通过数值约束来使得神经网络拟合对应的函数; $M S E_{B C, I C}$ 是初边值条件的约束, 当一个点来自于初边值中任意一个点时, 需要满足其对应的初边值条件, 通过边值条件来限制解空间; 
+$M S E_u$ 是方程本身的约束, 对于内部区域的点, 都需要满足微分方程, 通过微分方程来限制解空间。当损失函数整体趋于零时, 可以认为神经网络很好的拟合了满足初边值条件和方程约束的解, 所以此时解方程问题变成了满足对应损失函数的优化问题, 可以使用神经网络的优化方法来求得对应方程的解。
 
-验证计算神经网络的超参数设定为: 深度 $l=16$, 中间层隐藏神经单元数量 $s=20$, 边界权重 $P_{\mathrm{b}}=100, C=0.5$,
-几何网格点随机均布, 学习率从 0.001 开始, 训练至损失函数值 $f_{\text {Loss }}$ 在 100 次学习内不再下降结束.
+\subsection{L-BFGS 优化算法}
+常用的人工智能优化算法如 $\mathrm{Adam}, \mathrm{SGD}$ 等都是在一阶梯度下降法 (Gradient Descent) 上改进的, 而 L-BFGS 是基于二阶优化算法牛顿法改进的。牛顿法作为二阶的优化算法收敛速度要远快于一阶算法的, 
+但是牛顿法需要计算海森矩阵的逆矩阵, 运算成本很高, 所以针对这个问题, 人们提出了 BFGS 算法和 L-BFGS 算法降低内存的需求, 在介绍此算法前, 先介绍牛顿法的过程。
 
-\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
-    import deepxde as dde
-    import numpy as np
+设 $f(x)$ 的零点为 $\tilde{x}$, 随机选取初始点 $x_0$, 做 $f(x)$ 的切线得到 $y=f\left(x_0\right)+$ $f^{\prime}\left(x_0\right)\left(x-x_0\right)$, 令 $y=0$, 得到 $x_1=x_0-\frac{f\left(x_0\right)}{f^{\prime}\left(x_0\right)}$, 
+由此我们可以得到递推公式 $x_{\mathrm{n}+1}=$用目标函数 $f(x)$ 的二阶泰勒展开求驻点, 即 $f(x) \approx f\left(x_{\mathrm{n}}\right)+f^{\prime}\left(x_{\mathrm{n}}\right)\left(x-x_n\right)+$ $\frac{1}{2} f^{\prime \prime}\left(x_n\right)\left(x-x_n\right)^2$, 
+对其进行求导可得 $f^{\prime}\left(x_{\mathrm{n}}\right)+f^{\prime \prime}\left(x_n\right)\left(x-x_n\right)=0$, 由此更新 $x$ 来得到是目标函数最小的点。
+
+当 $f(x)$ 是多元函数时, $x$ 与 $f^{\prime}(x)$ 为向量, 记 $f^{\prime}(x)$ 为 $g, f^{\prime \prime}(x)$ 为海森矩阵记为 $H$,则牛顿法在多元情况下的迭代公式变为 $x_{k+1}=x_k-g_k H_k^{-1}, k=0,1, \cdots$, 其中 $H_k^{-1}$是海森矩阵的逆, 
+而直接求海森矩阵的逆十分困难, 所以 BFGS 算法提出通过迭代来近似 $H_k^{-1}$, 即:
+\begin{equation}
+    B_{k+1}^{-1}=\left(I-\frac{\delta_k y_k^T}{y_k^T \delta_k}\right) B_k^{-1}\left(I-\frac{y_k \delta_k^T}{y_k^T \delta_k}\right)+\frac{\delta_k \delta_k^T}{y_k^T \delta_k}
+\label{eq:BFGS}
+\end{equation}
+其中 $B_{k+1}^{-1}$ 是对 $H_{k+1}^{-1}$ 的逼近, $B_0^{-1}=I, \delta_k=x_{k+1}-x_k, y_k=g_{k+1}-g_k$ 。
+利用 $B_k^{-1}$ 的迭代公式, 每次都需要储存 $B$, 当数据维度很大时, 对计算机的内存需求也变得很高, 于是 L-BFGS 方法提出只储存 $\delta_k$ 与 $y_k$, 每个 $B_k^{-1}$ 都可由 $\delta_{1, \cdots, k}$与 $y_{1, \cdots, k}$ 迭代计算得出, 但当 $\mathrm{k}$ 过于大时, 计算机内存仍然会面临内存不足的风险, 于是在算法中可以设定一个超参数 $\mathrm{N}$, 当 $\mathrm{k}$ 超过 $\mathrm{N}$ 时, 我们释放前 $k-N$ 项,仅用最近的 $\mathrm{N}$ 项来逼近 $B_k^{-1}$, 虽然会损失部分精度, 但可以在有限的内存条件下完成函数的优化。
+
+L-BFGS 仍然面临一个问题, 就是当初始点与函数最优解的点相距过远时, L-BFGS 算法可能会收敛到鞍点, 所以在本文实际应用时会先用 Adam 优化算法寻找一个最优解可能存在的区域, 再使用 L-BFGS 优化方法加快收敛的速度, 得到更好的优化结果。
+
+\subsection{核反应堆物理}
+核反应堆是一种能以可控方式实现自续链式核反应的装置。根据原子核产生能量的方式, 可以分为裂变反应堆和聚变反应堆两种\cite{XieZhongShengHeFanYingDuiWuLiFenXi2020}。当今世界上已建成和广泛使用的反应堆都是裂变反应堆, 聚变反应堆目前尚处于研究设计阶段。裂变反应堆通过把一个重核裂变为两个中等质量核而释放能量。它是由核燃料、冷却剂、慢化剂、结构材料和吸收剂等材料组成的一个复杂系统。按用途不同, 裂变反应堆可分为生产堆、实验堆和动力堆。按冷却剂或慢化剂的种类不同可分为轻水堆、重水堆、气冷堆和液态金属冷却快中子增殖堆。按引起裂变反应的中子能量不同,又可分为热中子反应堆和快中子反应堆。
+\subsection{本章小结}
+本章主要对本文所需要用到的理论基础与技术进行了简单地介绍。了解了本文方法将物理信息引入神经网络的理论基础，并对本文使用的网络结构的理论基
+础进行介绍，最后介绍了一种不常用的二阶优化算法 L-BFGS，为后文的方法介绍做好了理论方面的准备。
+
+
+% 基于PINN深度机器学习技术求解多维中子学扩散方程临界条件下稳态扩散方程的验证当系统处于稳态时, 形式为:
+% $$
+% \nabla^2 \phi(r)+\frac{k_{\infty} / k_{\text {eff }}-1}{L^2} \phi(r)=0
+% $$
+
+% 当系统处于临界状态 $\left(k_{\mathrm{eff}}=1\right)$ 时, 为:
+% $$
+% \nabla^2 \phi(r)+B_g^2 \phi(r)=0
+% $$
+% 其中, $B_g^2$ 为系统临界时的几何曲率, 与系统的几何特性相关，临界时等于材料曲率。
+
+% 为了验证计算结果, 选取针对特定几何有解析解的扩散方程进行数值验证, 相关结论也可供其他形式的方程与几何形式参考。
+% 验证计算神经网络架构均采用全连接方式, 激活函数选取具有高阶导数连续特点的双曲正切函数 $\mathrm{tanh}$,
+% 其形式为 $\tanh (x)=\left(\mathrm{e}^x-\mathrm{e}^{-x}\right) /\left(\mathrm{e}^x+\mathrm{e}^{-x}\right)$,
+% 网络初始值权重 $\{\vec{w}, \vec{b}\}$采用高斯分布随机采样 。
+% 平板的解析解为: $C \cdot \cos (x \cdot \pi / a)$;球的解析解为: $C / r \cdot \sin (\pi \cdot r / R)$;
+
+% 验证计算神经网络的超参数设定为: 深度 $l=16$, 中间层隐藏神经单元数量 $s=20$, 边界权重 $P_{\mathrm{b}}=100, C=0.5$,
+% 几何网格点随机均布, 学习率从 0.001 开始, 训练至损失函数值 $f_{\text {Loss }}$ 在 100 次学习内不再下降结束.
+
+% \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
+%     import deepxde as dde
+%     import numpy as np
     
-    # 初始化参数
-    k_eff = 1  # 有效增殖系数
-    a = 1  # 平板的宽度
-    B2 = (np.pi / a) ** 2  # 系统临界时的几何曲率
-    l = 16  # 神经网络的深度
-    s = 20  # 神经网络的中间层隐藏神经单元数量
-    Pb = 100  # 边界权重
-    C = 0.5  # 解析解参数
+%     # 初始化参数
+%     k_eff = 1  # 有效增殖系数
+%     a = 1  # 平板的宽度
+%     B2 = (np.pi / a) ** 2  # 系统临界时的几何曲率
+%     l = 16  # 神经网络的深度
+%     s = 20  # 神经网络的中间层隐藏神经单元数量
+%     Pb = 100  # 边界权重
+%     C = 0.5  # 解析解参数
     
     
-    # 定义解析解
-    def phi_analytical(x):
-        return C * np.cos(x * np.pi / a)
+%     # 定义解析解
+%     def phi_analytical(x):
+%         return C * np.cos(x * np.pi / a)
     
     
-    # 定义几何网格
-    geom = dde.geometry.Interval(-a / 2, a / 2)
+%     # 定义几何网格
+%     geom = dde.geometry.Interval(-a / 2, a / 2)
     
     
-    # 定义微分方程
-    def pde(x, phi):
-        dphi_xx = dde.grad.hessian(phi, x, i=0, j=0)
-        return dphi_xx + B2 * phi
+%     # 定义微分方程
+%     def pde(x, phi):
+%         dphi_xx = dde.grad.hessian(phi, x, i=0, j=0)
+%         return dphi_xx + B2 * phi
     
     
-    # 定义边界条件
-    bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
-    # 定义数据
-    data = dde.data.PDE(geom, pde, bc, num_domain=898, num_boundary=2, solution=phi_analytical, num_test=100)
-    # 定义神经网络
-    layer_size = [1] + [s] * l + [1]
-    activation = "tanh"
-    # 网络初始值权重采用高斯分布随机采样
-    initializer = "Glorot uniform"
-    net = dde.nn.PFNN(layer_size, activation, initializer)
-    # 定义模型
-    model = dde.Model(data, net)
-    # 定义求解器
-    model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pb])
-    # 训练模型
-    losshistory, train_state = model.train(epochs=3500)
-    # 保存和可视化训练结果
-    dde.saveplot(losshistory, train_state, issave=True, isplot=True)
+%     # 定义边界条件
+%     bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
+%     # 定义数据
+%     data = dde.data.PDE(geom, pde, bc, num_domain=898, num_boundary=2, solution=phi_analytical, num_test=100)
+%     # 定义神经网络
+%     layer_size = [1] + [s] * l + [1]
+%     activation = "tanh"
+%     # 网络初始值权重采用高斯分布随机采样
+%     initializer = "Glorot uniform"
+%     net = dde.nn.PFNN(layer_size, activation, initializer)
+%     # 定义模型
+%     model = dde.Model(data, net)
+%     # 定义求解器
+%     model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pb])
+%     # 训练模型
+%     losshistory, train_state = model.train(epochs=3500)
+%     # 保存和可视化训练结果
+%     dde.saveplot(losshistory, train_state, issave=True, isplot=True)
     
-    # 输出在 x=0 处的值(即 C)
-    print("Predicted value at x=0:", model.predict(np.array([0])))
-   \end{lstlisting}
+%     # 输出在 x=0 处的值(即 C)
+%     print("Predicted value at x=0:", model.predict(np.array([0])))
+%    \end{lstlisting}
 
 \section{结束语}
 本文主要介绍了PINNuclear-Neutrons项目的学习笔记，主要是对PINNuclear-Neutrons项目的学习过程进行了总结，复习了论文中的算例代码，并对项目中的一些关键代码进行了解读，对项目中的一些关键参数进行了调整，以便更好地理解论文中的算法。
@@ -185,46 +237,43 @@ $$
 %%% 文中正常引用: \upcite{1,2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{thebibliography}{99}
-    \expandafter\ifx\csname url\endcsname\relax
-        \def\url#1{\texttt{#1}}\fi
-    \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
-    \expandafter\ifx\csname href\endcsname\relax
-        \def\href#1#2{#2} \def\path#1{#1}\fi
-        \bibitem{prantikos2023}
-        Prantikos, K., Chatzidakis, S., Tsoukalas, L.H., Heifetz, A. (2023). \href{https://doi.org/10.1038/s41598-023-43325-1}{Physics-informed neural network with transfer learning (TL-PINN) based on domain similarity measure for prediction of nuclear reactor transients}. \textit{Scientific Reports}, 13, 16840.
 
-        % \bibitem{raissi2017a}
-        % Raissi, M., Perdikaris, P., Karniadakis, G. (2017). \href{https://arxiv.org/abs/your-arxiv-link}{Physics Informed Deep Learning (Part II): Data-driven Discovery of Nonlinear Partial Differential Equations}. \textit{arXiv}.
+% \begin{thebibliography}{99}
+%     \expandafter\ifx\csname url\endcsname\relax
+%         \def\url#1{\texttt{#1}}\fi
+%     \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+%     \expandafter\ifx\csname href\endcsname\relax
+%         \def\href#1#2{#2} \def\path#1{#1}\fi
+%         \bibitem{Lagaris1998}
+%         Lagaris, I.E., Likas, A., Fotiadis, D.I., (1998). \href{https://doi.org/10.1109/72.712178}{Artificial Neural Networks for Solving Ordinary and Partial Differential Equations.} IEEE Trans. Neural Netw., 9, 987–1000. 
+%         \bibitem{raissi2019}
+%         Raissi, M., Perdikaris, P., Karniadakis, G.E. (2019). \href{https://doi.org/10.1016/j.jcp.2018.10.045}{Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations}. \textit{Journal of Computational Physics}, 378, 686–707.
+        
+%         \bibitem{prantikos2023}
+%         Prantikos, K., Chatzidakis, S., Tsoukalas, L.H., Heifetz, A. (2023). \href{https://doi.org/10.1038/s41598-023-43325-1}{Physics-informed neural network with transfer learning (TL-PINN) based on domain similarity measure for prediction of nuclear reactor transients}. \textit{Scientific Reports}, 13, 16840.
 
-        \bibitem{raissi2019}
-        Raissi, M., Perdikaris, P., Karniadakis, G.E. (2019). \href{https://doi.org/10.1016/j.jcp.2018.10.045}{Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations}. \textit{Journal of Computational Physics}, 378, 686–707.
+%         \bibitem{ren2022}
+%         任清华 (2022). \href{https://doi.org/10.27272/d.cnki.gshdu.2022.003244}{基于深度学习的偏微分方程求解方法 (硕士).} \textit{山东大学}.
 
-        % \bibitem{raissi2017b}
-        % Raissi, Maziar, Perdikaris, P., Karniadakis, G.E. (2017). \href{https://arxiv.org/abs/your-arxiv-link}{Physics Informed Deep Learning (Part I): Data-driven Solutions of Nonlinear Partial Differential Equations}.
+%         \bibitem{sun2023}
+%         孙靖威 (2023). \href{https://doi.org/10.27363/d.cnki.gtsfu.2023.000110}{基于深度学习求解偏微分方程的研究 (硕士).} \textit{天津师范大学}.
 
-        \bibitem{ren2022}
-        任清华 (2022). \href{https://doi.org/10.27272/d.cnki.gshdu.2022.003244}{基于深度学习的偏微分方程求解方法 (硕士).} \textit{山东大学}.
+%         \bibitem{zeng2022}
+%         曾壬源 (2022). \href{https://doi.org/10.27517/d.cnki.gzkju.2022.001485}{基于深度神经网络的偏微分方程求解 (硕士).} \textit{中国科学技术大学}.
 
-        \bibitem{sun2023}
-        孙靖威 (2023). \href{https://doi.org/10.27363/d.cnki.gtsfu.2023.000110}{基于深度学习求解偏微分方程的研究 (硕士).} \textit{天津师范大学}.
+%         \bibitem{yan2023}
+%         颜怀笑 (2023). \href{https://doi.org/10.27204/d.cnki.glzhu.2023.002621}{深度学习在工程问题偏微分方程求解中的应用 (硕士).} \textit{兰州大学}.
 
-        \bibitem{zeng2022}
-        曾壬源 (2022). \href{https://doi.org/10.27517/d.cnki.gzkju.2022.001485}{基于深度神经网络的偏微分方程求解 (硕士).} \textit{中国科学技术大学}.
+%         \bibitem{liu2023a}
+%         刘东, 唐雷, 安萍, 张斌, 江勇 (n.d.). \href{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CAPJ&dbname=CAPJLAST&filename=HDLG20230424002&v=}{核反应堆有效增殖系数深度学习直接搜索求解方法. \textit{核动力工程}}, 1–9. 
 
-        \bibitem{yan2023}
-        颜怀笑 (2023). \href{https://doi.org/10.27204/d.cnki.glzhu.2023.002621}{深度学习在工程问题偏微分方程求解中的应用 (硕士).} \textit{兰州大学}.
+%         \bibitem{liu2023b}
+%         刘东, 王雪强, 张斌, 俞蔡阳, 宫兆虎, 陈奇隆 (2023). \href{https://kns.cnki.net/kcms2/article/abstract?v=rNedIcCUbLBqIkch2F8QefV3lssVn9G8eOxrEoNAs8RU_8nd-8zgNE_lEKNRcYF3wtEUlU6w7EwbyCZCdhuWpQ5BNpoNGSMi_MD-4O-AgJ4UsKqU8bIsCg7gLgOoDJ-7M9bX84wGLUyeB9kAybUjAQ==&uniplatform=NZKPT&language=CHS}{深度学习方法求解中子输运方程的微分变阶理论. \textit{原子能科学技术}}, 57, 946–959.
 
-        \bibitem{liu2023a}
-        刘东, 唐雷, 安萍, 张斌, 江勇 (n.d.). \href{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CAPJ&dbname=CAPJLAST&filename=HDLG20230424002&v=}{核反应堆有效增殖系数深度学习直接搜索求解方法. \textit{核动力工程}}, 1–9. 
+%         \bibitem{liu2022}
+%         刘东, 罗琦, 唐雷, 安萍, 杨帆 (2022). \href{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFD&dbname=CJFDLAST2022&filename=HDLG202202001&v=}{基于PINN深度机器学习技术求解多维中子学扩散方程. \textit{核动力工程}}, 43, 1–8. 
 
-        \bibitem{liu2023b}
-        刘东, 王雪强, 张斌, 俞蔡阳, 宫兆虎, 陈奇隆 (2023). \href{https://kns.cnki.net/kcms2/article/abstract?v=rNedIcCUbLBqIkch2F8QefV3lssVn9G8eOxrEoNAs8RU_8nd-8zgNE_lEKNRcYF3wtEUlU6w7EwbyCZCdhuWpQ5BNpoNGSMi_MD-4O-AgJ4UsKqU8bIsCg7gLgOoDJ-7M9bX84wGLUyeB9kAybUjAQ==&uniplatform=NZKPT&language=CHS}{深度学习方法求解中子输运方程的微分变阶理论. \textit{原子能科学技术}}, 57, 946–959.
-
-        \bibitem{liu2022}
-        刘东, 罗琦, 唐雷, 安萍, 杨帆 (2022). \href{https://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFD&dbname=CJFDLAST2022&filename=HDLG202202001&v=}{基于PINN深度机器学习技术求解多维中子学扩散方程. \textit{核动力工程}}, 43, 1–8. 
-
-    \end{thebibliography}
+%     \end{thebibliography}
 
 
 
@@ -236,10 +285,10 @@ $$
 % acm,美国计算机学会期刊样式.
 % siam,美国工业和应用数学学会期刊样式.
 % apalike,美国心理学学会期刊样式.
-% abbrv、acm、alpha、apalike、ieeetr、plain、unsrt、siam
+% abbrv、acm、alpha、apalike、ieeetr、plain、unsrt、siam、elsarticle-num
 
-% \bibliographystyle{elsarticle-num} 
-% \bibliography{/Users/turingscat/Zotero/better-bibtex/mylibrary.bib}
+\bibliographystyle{acm} 
+\bibliography{/Users/turingscat/Zotero/better-bibtex/mylibrary.bib}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
