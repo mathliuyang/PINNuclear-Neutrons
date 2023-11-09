@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}PINN 相关理论和技术}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}基于物理信息的神经网络}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}L-BFGS 优化算法}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}核反应堆物理分析}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}链式裂变反应}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}单能中子扩散方程}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}均匀裸堆的单群理论}{11}{subsection.2.3}%
+\contentsline {section}{\numberline {3}结束语}{23}{section.3}%

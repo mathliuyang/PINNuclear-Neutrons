@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 14:05
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  10 NOV 2023 02:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -721,17 +721,24 @@ LaTeX Info: Redefining \GenericWarning on input line 433.
 \sl@TempBOE=\toks41
 \sl@BankOfErrors=\toks42
 LaTeX Info: Redefining \GenericError on input line 601.
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen314
+\WF@size=\dimen315
+\c@WF@wrappedlines=\count371
+\WF@box=\box111
+\WF@everypar=\toks43
+Package: wrapfig 2003/01/31  v 3.6
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2021/07/05 v2.14 Sectioning titles
-\ttl@box=\box111
+\ttl@box=\box112
 \beforetitleunit=\skip88
 \aftertitleunit=\skip89
-\ttl@plus=\dimen314
-\ttl@minus=\dimen315
-\ttl@toksa=\toks43
-\titlewidth=\dimen316
-\titlewidthlast=\dimen317
-\titlewidthfirst=\dimen318
+\ttl@plus=\dimen316
+\ttl@minus=\dimen317
+\ttl@toksa=\toks44
+\titlewidth=\dimen318
+\titlewidthlast=\dimen319
+\titlewidthfirst=\dimen320
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/cite/cite.sty
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
@@ -740,62 +747,63 @@ Package: cite 2015/02/27  v 5.5
 Package: caption 2023/03/12 v3.6j Customizing captions (AR)
  (/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
-\caption@tempdima=\dimen319
-\captionmargin=\dimen320
-\caption@leftmargin=\dimen321
-\caption@rightmargin=\dimen322
-\caption@width=\dimen323
-\caption@indent=\dimen324
-\caption@parindent=\dimen325
-\caption@hangindent=\dimen326
+\caption@tempdima=\dimen321
+\captionmargin=\dimen322
+\caption@leftmargin=\dimen323
+\caption@rightmargin=\dimen324
+\caption@width=\dimen325
+\caption@indent=\dimen326
+\caption@parindent=\dimen327
+\caption@hangindent=\dimen328
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count371
-\c@continuedfloat=\count372
+\c@caption@flags=\count372
+\c@continuedfloat=\count373
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: picins package is loaded.
 Package caption Info: supertabular package is loaded.
+Package caption Info: wrapfig package is loaded.
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count373
-\lst@gtempboxa=\box112
-\lst@token=\toks44
-\lst@length=\count374
-\lst@currlwidth=\dimen327
-\lst@column=\count375
-\lst@pos=\count376
-\lst@lostspace=\dimen328
-\lst@width=\dimen329
-\lst@newlines=\count377
-\lst@lineno=\count378
-\lst@maxwidth=\dimen330
+\lst@mode=\count374
+\lst@gtempboxa=\box113
+\lst@token=\toks45
+\lst@length=\count375
+\lst@currlwidth=\dimen329
+\lst@column=\count376
+\lst@pos=\count377
+\lst@lostspace=\dimen330
+\lst@width=\dimen331
+\lst@newlines=\count378
+\lst@lineno=\count379
+\lst@maxwidth=\dimen332
  (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count379
-\lst@skipnumbers=\count380
-\lst@framebox=\box113
+\c@lstnumber=\count380
+\lst@skipnumbers=\count381
+\lst@framebox=\box114
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
  (/usr/local/texlive/2023/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
 Package: xeCJK-listings 2022/08/05 v3.9.1 xeCJK patch file for listings
-\l__xeCJK_listings_max_char_int=\count381
-\l__xeCJK_listings_flag_int=\count382
+\l__xeCJK_listings_max_char_int=\count382
+\l__xeCJK_listings_flag_int=\count383
 )
-\c@definition=\count383
-\c@theorem=\count384
-\c@lemma=\count385
-\c@corollary=\count386
-\c@axiom=\count387
-\c@propsition=\count388
-\c@example=\count389
-\c@exercise=\count390
-\c@solution=\count391
-\c@notation=\count392
-\c@assumption=\count393
-\c@remark=\count394
-\c@property=\count395
+\c@definition=\count384
+\c@theorem=\count385
+\c@lemma=\count386
+\c@corollary=\count387
+\c@axiom=\count388
+\c@propsition=\count389
+\c@example=\count390
+\c@exercise=\count391
+\c@solution=\count392
+\c@notation=\count393
+\c@assumption=\count394
+\c@remark=\count395
+\c@property=\count396
 ) (./PINNuclear-Neutrons.aux)
 \openout1 = `PINNuclear-Neutrons.aux'.
 
@@ -918,7 +926,7 @@ Package hyperref Info: Link coloring ON on input line 26.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count396
+\c@lstlisting=\count397
 LaTeX Font Info:    Trying to load font information for U+msa on input line 85.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1048,36 +1056,77 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 (fontspec)             <->"STFangsong/OT:language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
-[1
+(./PINNuclear-Neutrons.toc)
+\tf@toc=\write4
+\openout4 = `PINNuclear-Neutrons.toc'.
+
+ [1
 
 ]
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
- [2] [3] (./PINNuclear-Neutrons.bbl)
+ [2] [3]
+File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
+<./figure/链式裂变反应示意图.png>
+ [4] [5]
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 206.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 206.
+ [6] [7] [8]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[9]
+File: ./figure/在两种介质分界面上的中子扩散.png Graphic file (type bmp)
+<./figure/在两种介质分界面上的中子扩散.png>
+File: ./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png Graphic file (type bmp)
+<./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png>
+ [10] [11]
+File: ./figure/无限平板形反应堆.png Graphic file (type bmp)
+<./figure/无限平板形反应堆.png>
+File: ./figure/圆柱体反应堆.png Graphic file (type bmp)
+<./figure/圆柱体反应堆.png>
+ [12]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[13] [14]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[15] [16] [17]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+File: ./figure/零阶贝赛尔函数曲线.png Graphic file (type bmp)
+<./figure/零阶贝赛尔函数曲线.png>
+[18] [19]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[20]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[21]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[22] (./PINNuclear-Neutrons.bbl)
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
 
 
-Package caption Warning: Unused \captionsetup[table] on input line 560.
+Package caption Warning: Unused \captionsetup[algorithm] on input line 565.
 See the caption package documentation for explanation.
 
-
-Package caption Warning: Unused \captionsetup[algorithm] on input line 562.
-See the caption package documentation for explanation.
-
-[4] [5] 
+[23] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
-(rerunfilecheck)             Checksum: 050F49D8CFD584D13131F802604EC80D;632.
+(rerunfilecheck)             Checksum: 7EB1F777CDA859E6064944CE473C6274;928.
  ) 
 Here is how much of TeX's memory you used:
- 21382 strings out of 476683
- 455326 string characters out of 5804047
- 1881018 words of memory out of 5000000
- 41196 multiletter control sequences out of 15000+600000
- 528792 words of font info for 154 fonts, out of 8000000 for 9000
+ 21652 strings out of 476683
+ 463736 string characters out of 5804047
+ 1876018 words of memory out of 5000000
+ 41441 multiletter control sequences out of 15000+600000
+ 529780 words of font info for 164 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 103i,13n,111p,1217b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,18n,111p,1217b,700s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (5 pages).
+Output written on PINNuclear-Neutrons.pdf (23 pages).
