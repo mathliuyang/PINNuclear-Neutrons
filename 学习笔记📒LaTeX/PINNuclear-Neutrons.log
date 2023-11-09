@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 03:28
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  9 NOV 2023 11:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1073,10 +1073,7 @@ Package fontspec Info: Font family 'CourierNew(0)' created for font 'Courier
 (fontspec)             New/BI/OT:script=latn;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
- [2]
-Overfull \vbox (1.4438pt too high) has occurred while \output is active []
-
- [3]
+ [2] [3]
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
 
@@ -1099,11 +1096,11 @@ Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
 (rerunfilecheck)             Checksum: EAD7BD0139CEAEFDFE21BE45294AD7BA;431.
  ) 
 Here is how much of TeX's memory you used:
- 21730 strings out of 476683
- 461436 string characters out of 5804047
- 2068018 words of memory out of 5000000
- 41531 multiletter control sequences out of 15000+600000
- 528872 words of font info for 164 fonts, out of 8000000 for 9000
+ 21724 strings out of 476683
+ 461243 string characters out of 5804047
+ 2070018 words of memory out of 5000000
+ 41527 multiletter control sequences out of 15000+600000
+ 528856 words of font info for 162 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,13n,111p,1217b,2093s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
