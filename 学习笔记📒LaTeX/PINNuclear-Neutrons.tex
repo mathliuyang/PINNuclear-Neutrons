@@ -138,6 +138,189 @@ L-BFGS 仍然面临一个问题, 就是当初始点与函数最优解的点相�
 
 \subsection{核反应堆物理}
 核反应堆是一种能以可控方式实现自续链式核反应的装置。根据原子核产生能量的方式, 可以分为裂变反应堆和聚变反应堆两种\cite{XieZhongShengHeFanYingDuiWuLiFenXi2020}。当今世界上已建成和广泛使用的反应堆都是裂变反应堆, 聚变反应堆目前尚处于研究设计阶段。裂变反应堆通过把一个重核裂变为两个中等质量核而释放能量。它是由核燃料、冷却剂、慢化剂、结构材料和吸收剂等材料组成的一个复杂系统。按用途不同, 裂变反应堆可分为生产堆、实验堆和动力堆。按冷却剂或慢化剂的种类不同可分为轻水堆、重水堆、气冷堆和液态金属冷却快中子增殖堆。按引起裂变反应的中子能量不同,又可分为热中子反应堆和快中子反应堆。
+\subsubsection{链式裂变反应}
+
+核反应堆中的核裂变反应是一种自持续的链式反应。当中子与裂变物质作用而发生核裂变反应时,裂变物质的原子核通常分裂为两个中等质量数的核 (称为裂变碎片)。与此同时, 还将平均地产生两个以上新的裂变中子, 并释放出蕴藏在原子核内部的核能。在适当的条件下, 这些裂变中子又会引起周围其它裂变同位素的裂变, 如此不断地继续下去。这种反应过程称为链式裂变反应, 其反应过程如下图 \ref{fig:链式裂变反应} 所示。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/链式裂变反应示意图.png}
+    \cnenfigcaption{PINN网络结构图}{PINN Network Structure}
+    \label{fig:链式裂变反应}
+    \end{figure}
+如果每次裂变反应产生的中子数目大于引起核裂变所消耗的中子数目, 那么一旦在少数的原子核中引起了裂变反应之后, 就有可能不再依靠外界的作用而使裂变反应不断地进行下去。这样的裂变反应称作自续链式裂变反应。裂变核反应堆就是一种能以可控方式产生自续链式裂变反应的装置。它能够以一定的速率将蕴藏在原子核内部的核能释放出来。
+
+从上面的讨论可以看出, 实现自续链式裂变反应的条件是: 当一个裂变核俘获一个中子产生裂变以后, 在新产生的中子中, 平均至少应该再有一个中子去引起另外一个核的裂变。由于
+裂变物质每次裂变时平均地放出两个以上裂变中子, 因而实现自续的链式裂变反应是有可能的。但是, 因为核反应堆是由核燃料、慢化剂、冷却剂以及结构材料等所组成的装置, 所以在反应堆内, 不可避免地有一部分中子要被非裂变材料吸收。同时, 还有一部分中子要从反应堆中泄漏出去。因此, 在实际的反应堆中, 并不是全部的裂变中子都能引起新的核裂变反应。一个反应堆能否实现自续的链式裂变反应, 就取决于上述裂变、非裂变吸收和泄漏等过程中中子的产生率与消失率之间的平衡关系。如果在上述的反应过程中, 产生的中子数等于或多于消耗掉的中子数,则链式裂变反应将会自续地进行下去。
+
+反应堆内自续链式裂变反应的条件可以很方便地用有效增殖系数 $k_{\mathrm{eff}}$ 来表示。它的定义是: 对给定系统, 新生一代的中子数和产生它的直属上一代中子数之比, 即
+\begin{equation}
+    k_{\mathrm{eff}}=\frac{\text { 新生一代中子数 }}{\text { 直属上一代中子数 }}
+    \label{eq:有效增殖系数}
+\end{equation}
+
+上式的定义是直观地从中子的“寿命一循环”观点出发的。然而, 该式在实用上是不太方便的, 因为在实际问题中很难确定中子每 “代” 的起始和终了时间。例如, 在芯部中有的中子从裂变产生后立即就引起新的裂变, 有的中子则需要经过慢化过程成为热中子之后才引起裂变, 有的中子在慢化过程中便泄漏出系统或者被辐射俘获。所以, 实际上从中子的平衡关系来定义系统的有效增殖系数更为方便, 即
+\begin{equation}
+    k_{\text {eff }}=\frac{\text { 系统内中子的产生率 }}{\text { 系统内中子的总消失 (吸收 }+ \text { 泄漏) 率 }}
+    \label{eq:有效增殖系数2}
+\end{equation}
+
+若芯部的有效增殖系数 $k_{\mathrm{eff}}$ 恰好等于 1 , 则系统内中子的产生率便恰好等于中子的消失率。这样, 在系统内已经进行的链式裂变反应, 将以恒定的速率不断地进行下去, 也就是说, 链式裂变反应过程处于稳态状况, 这种系统称为临界系统。若有效增殖系数 $k_{\mathrm{eff}}$ 小于 1 , 这时系统内的中子数目将随时间而不断地衰减, 链式裂变反应是非自续的, 这种系统便称为次临界系统。若有效增殖系数 $k_{\mathrm{efi}}$ 大于 1 , 则系统内的中子数目将随时间而不断地增加, 我们称这种系统为超临界系统。
+
+显然, 有效增殖系数 $k_{\mathrm{eff}}$ 与系统的材料成分和结构 (例如易裂变同位素的富集度, 燃料-慢化剂的比例等)有关。同时, 它还与中子的泄漏程度, 或反应堆的大小有关。当反应堆的尺寸为无限大时, 中子的泄漏损失便等于零, 这时增殖系数将只与系统的材料成分和结构有关。通常, 我们把无限大介质的增殖系数称为无限介质增殖系数, 以 $k_{\infty}$ 表示。
+
+对于实际的有限大小的反应堆, 中子的泄漏损失总是不可避免的。假定中子的不泄漏概率为 $\Lambda$, 它的定义是
+\begin{equation}
+    \Lambda=\frac{\text { 系统内中子的吸收率 }}{\text { 系统内中子的泄漏率 }}
+    \label{eq:不泄漏概率}
+\end{equation}
+
+不泄漏概率 $\Lambda$ 主要取决于反应堆芯部的大小和几何形状, 当然它也和芯部成分有关。一般说来, 芯部愈大, 不泄漏概率也愈大。于是, 由式 \eqref{eq:有效增殖系数2} 和式 \eqref{eq:不泄漏概率} 可知, 有限尺寸芯部的有效增殖系数为
+\begin{equation}
+    k_{\text {eff }}=k_{\infty} \Lambda
+    \label{eq:有效增殖系数3}
+\end{equation}
+
+当系统为无限大时, $\Lambda=1$, 这时有效增殖系数 $k_{\mathrm{eff}}=k_{\infty}$ 。
+根据以上的讨论, 立即可以得出反应堆维持自续链式裂变反应的条件是
+\begin{equation}
+    k_{\text {eff }}=k_{\infty} \Lambda=1
+    \label{eq:反应堆维持自续链式裂变反应的条件}
+\end{equation}
+
+式 \eqref{eq:反应堆维持自续链式裂变反应的条件} 称为反应堆的临界条件。可以看出, 要使有限大小反应堆维持临界状态, 首先必须要求 $k_{\infty}>1$ 。如果对于由特定的材料组成和布置的系统, 它的无限介质增殖系数 $k_{\infty}>1$, 那么, 对于这种系统必定可以通过改变反应堆芯部的大小, 找到一个合适的芯部尺寸, 恰好使 $k_{\infty} \Lambda=1$, 亦就是使反应堆处于临界状态, 这时反应堆芯部的大小称为临界大小。在临界情况下, 反应堆内所装载的燃料质量叫作临界质量。
+
+反应堆的临界大小取决于反应堆的材料组成与几何形状。例如, 对于采用富集铀的反应堆, 它的 $k_{\infty}$ 比较大, 所以即使其不泄漏概率小一点, 仍然可能满足 $k_{\infty} \Lambda=1$ 的条件。这样, 用富集铀做燃料的反应堆, 其临界大小必定小于用天然铀做燃料的反应堆。决定临界大小的另一个因素是反应堆的几何形状。由于中子总是通过反应堆的表面泄漏出去, 而中子的产生则发生在反应堆的整个体积中, 因而, 要减少中子的泄漏损失, 增加不泄漏概率, 就需要减少反应堆的表面积与体积之比。在体积相同的所有几何形状中, 球形的表面积最小, 亦即球形反应堆的中子泄漏损失最小。然而, 实际中出于工程上的考虑, 动力反应堆是做成圆柱形的。
+
+\subsubsection{单能中子扩散方程}
+在物理学中, 我们已熟悉分子的扩散现象, 即分子间的无规则碰撞运动。分子从浓度大的地方向浓度小的地方扩散, 并且分子扩散的速率与分子密度的梯度成正比, 也就是服从分子扩散现象中的 “菲克扩散定律”。同样地, 若把一个中子源 (例如 $\mathrm{Ra}-\mathrm{Be}$ 源) 放到某一介质内, 我们可以通过测量仪器观察到, 中子不断地从源点扩散开来, 经过一段时间后, 介质内到处都有中子了。由于中子密度 (在热中子反应堆内约为 $10^{16} \mathrm{~m}^{-3}$ 数量级) 比起介质的原子核密度 (一般约为 $10^{28} \mathrm{~m}^{-3}$ ) 要小得多, 因而它与分子扩散现象不同, 其主要差别在于分子扩散是由于分子间的相互碰撞引起的, 而中子的扩散主要是中子与介质原子核间的散射碰撞的结果, 中子之间的相互碰撞可以略去不计。在中子密度大的地方, 中子与原子核碰撞的次数就多, 而每次碰撞以后, 中子通常要改变运动方向离开碰撞中心, 因此与分子的扩散相似, 中子总
+是从中子密度高的地方向密度低的地方扩散。下面即将证明,与分子扩散相类似, 中子的扩散也服从与分子扩散相类似的定律, 它是中子扩散近似模型的基础。
+
+显然中子扩散问题属于统计问题, 因而可以像气体动力论一样, 把它发展成为一种处理大量中子运动的宏观理论。例如, 在气体分子或热的扩散中扩散物质有一种倾向,就是从分子密度大的区域向分子密度小的区域移动 (扩散)。中子的行为也一样, 从中子密度大的区域向中子密度小的区域移动 (扩散)。它的规律服从气体动力学中的扩散规律, 因此可以以某种扩散方程为基础来处理大量中子行为的 (扩散) 宏观理论。
+
+在扩散宏观理论中, 中子密度 $n(\boldsymbol{r}, E)$ 是一个重要的参量, 它描述了中子群在介质内的分布情况。另外, 还有以下两个参量也是我们经常要用到的重要参数。
+
+(1) $\phi(r, E)$ 。如前所述它与中子在介质中的核反应率密切相关。
+
+(2) $\boldsymbol{J}(\boldsymbol{r}, E)$ 。它定义为中子的净流密度
+\begin{equation}
+    \boldsymbol{J}(\boldsymbol{r}, E)=\int_{4 \pi} \boldsymbol{\Omega} \boldsymbol{\Phi}(\boldsymbol{r}, \boldsymbol{\Omega}) \mathrm{d} \boldsymbol{\Omega}
+    \label{eq:中子的净流密度}
+\end{equation}
+
+从物理上看, 它是由很多具有不同方向的微分中子束矢量合成的量, 表示该处中子的净流动情况, 因而它是一个矢量。设 $n$ 表示该点的法线方向，则
+\begin{equation}
+    J_n(\boldsymbol{r}, E)=\boldsymbol{J}(\boldsymbol{r}, E) \cdot \boldsymbol{n}
+    \label{eq:中子的净流密度2}
+\end{equation}
+就表示每秒穿过该点的净中子数目 (净中子流)。它表示中子在介质中的流动情况。
+
+链式核反应堆理论用到的一个基本原理, 就是所谓的 “中子数守恒”或者“中子数平衡”, 即在一定的体积 $V$ 内, 中子总数对时间的变化率应等于该体积内中子的产生率减去该体积内中子的吸收率和泄漏率。如果 $n(\boldsymbol{r}, t)$ 是 $t$ 时刻在 $\boldsymbol{r}$ 处的中子密度, 则在 $V$ 内中子数守恒的方程可写成
+\begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d} t} \int_V n(\boldsymbol{r}, t) \mathrm{d} V=\text { 产生率 }(S) \text { - 泄漏率 }(L) \text { - 吸收率 }(A)
+    \label{eq:中子数守恒}
+\end{equation}
+
+中子扩散方程就是根据这一平衡原则建立的。
+首先计算中子的泄漏率。
+让我们观察空间 $\boldsymbol{r}$ 处的微体积元 $\mathrm{d} V$ 。我们知道 $\boldsymbol{J}(\boldsymbol{r}, t) \cdot \boldsymbol{n}$ 等于在 $r$ 处中子通过垂直于外法线 $n$ 的单位面积的净流动率。如果取 $n$ 为体积 $V$ 的表面积 $\mathrm{d} S$ 上的外法线单位向量, 那么 $\boldsymbol{J}(\boldsymbol{r}, t) \cdot n \mathrm{~d} S$ 就等于中子通过表面积元 $\mathrm{d} S$ 向外的净流率, 于是中子从体积 $V$ 的整个表面泄漏出去的总速率为
+\begin{equation}
+    \text { 泄漏率 }=\int_S \boldsymbol{J}(\boldsymbol{r}, t) \cdot \boldsymbol{n} \mathrm{d} S
+    \label{eq:泄漏率}
+\end{equation}
+
+应用高斯散度公式可以把面积分变换成体积分,于是
+\begin{equation}
+    \text { 泄漏率 }=\int_S \boldsymbol{J}(\boldsymbol{r}, t) \cdot \boldsymbol{n} \mathrm{d} S=\int_V \nabla \cdot \boldsymbol{J}(\boldsymbol{r}, t) \mathrm{d} V=\int_V \operatorname{div} \boldsymbol{J}(\boldsymbol{r}, t) \mathrm{d} V
+    \label{eq:泄漏率2}
+\end{equation}
+
+设源分布函数以 $S(\boldsymbol{r}, t)$ 表示, 它等于 $t$ 时刻 $\boldsymbol{r}$ 处每秒、每单位体积由源放出的中子数。因此, 在 $V$ 内中子的产生率为
+\begin{equation}
+    \text { 产生率 }=\int_V S(\boldsymbol{r}, t) \mathrm{d} V
+    \label{eq:产生率}
+\end{equation}
+在 $V$ 内中子的吸收率可以表示为
+\begin{equation}
+    \text { 吸收率 }=\int_V \sum_{\mathrm{a}} \phi(\boldsymbol{r}, t) \mathrm{d} V
+    \label{eq:吸收率}
+\end{equation}
+于是式 \eqref{eq:中子数守恒} 可以写成
+\begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d} t} \int_V n(\boldsymbol{r}, t) \mathrm{d} V=\int_V S(\boldsymbol{r}, t) \mathrm{d} V-\int_V \sum_{\mathrm{a}} \phi(\boldsymbol{r}, t) \mathrm{d} V-\int_V \operatorname{div} \boldsymbol{J}(\boldsymbol{r}, t) \mathrm{d} V
+    \label{eq:中子数守恒2}
+\end{equation}
+
+由于所有积分都是在相同的积分体积内进行的, 所以方程 \eqref{eq:中子数守恒2} 两边被积函数必然相等, 即
+\begin{equation}
+    \frac{\partial n(\boldsymbol{r}, t)}{\partial t}=S(\boldsymbol{r}, t)-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r}, t)-\operatorname{div} \boldsymbol{J}(\boldsymbol{r}, t)
+    \label{eq:中子数守恒3}
+\end{equation}
+
+方程 \eqref{eq:中子数守恒3} 叫做连续方程, 它实际上表征单位体积 (或微元) 内的中子数的平衡关系, 在反应堆理论中具有极为重要的意义。
+
+连续方程 \eqref{eq:中子数守恒3} 是具有普遍意义的, 但其中具有两个未知函数 $\phi(\boldsymbol{r}, t)$ 及 $\boldsymbol{J}(\boldsymbol{r}, t)$, 
+因此无法求解这个方程。如果在求解之前我们能找出 $\phi(\boldsymbol{r}, t)$ 和 $\boldsymbol{J}(\boldsymbol{r}, t)$ 之间的关系, 将其代人式 \eqref{eq:中子数守恒3}, 这样将其变成只含一个, 例如 $\phi(\boldsymbol{r}, t)$ 的方程, 问题就解决了。
+
+当考虑稳态情况，也就是中子通量密度不随时间变化时，同时我们假设以下条件成立：
+    \begin{itemize}
+        \item[] \hspace{1em}(1) 介质是无限的、均匀的；
+        \item[] \hspace{1em}(2) 在实验室坐标系中，散射是各向同性的；
+        \item[] \hspace{1em}(3) 介质的吸收截面很小，即 $\Sigma_{\mathrm{a}} \ll \Sigma_{\mathrm{s}}$；
+        \item[] \hspace{1em}(4) 中子通量密度是随空间位置缓慢变化的函数。
+    \end{itemize}
+在这种情况下，可以得到以下定理：
+
+\begin{theorem}[菲克定律]
+    中子流密度 $\boldsymbol{J}$ 正比于负的中子通量密度梯度, 即
+    \begin{equation}
+    \boldsymbol{J}=-D \operatorname{grad} \phi
+    \label{eq:菲克定律}
+\end{equation}
+    其中比例常数 $D=\frac{\lambda_{\mathrm{s}}}{3}$, 并称作扩散系数。
+\end{theorem}
+
+应该指出, 在上面的推导过程中, 曾经假设在实验室坐标系中中子散射是各向同性的, 实际上, 这一假设只有对于重核才近似成立, 在一般情况下, 这种假设是不正确的。由中子输运理论可以证明, 为了对散射的各向异性作适当的修正, 扩散系数中, 必须用输运平均自由程 $\lambda_{\mathrm{tr}}$ 来代替式中的散射平均自由程 $\lambda_{\mathrm{s}}$ 。菲克定律中的扩散系数 $D$ 为
+\begin{equation}
+    D=\frac{\lambda_{\text {tr }}}{3}
+    \label{eq:扩散系数}
+\end{equation}
+    $\lambda_{\mathrm{tr}}$ 为输运平均自由程, 它等于
+\begin{equation}
+    \lambda_{\mathrm{tr}}=\frac{\lambda_{\mathrm{s}}}{1-\bar{\mu}_0}
+    \label{eq:输运平均自由程}
+\end{equation}
+其中: $\bar{\mu}_0$ 是实验室系统内的平均散射角余弦\cite{XieZhongShengHeFanYingDuiWuLiFenXi2020}, $\bar{\mu}_0=\frac{2}{3 A}$。对于重核, $\bar{\mu}_0 \ll 1$, 则 $\lambda_{\mathrm{tr}}$便近似地等于 $\lambda_{\mathrm{s}}$ 。
+式 \eqref{eq:菲克定律} 表明: 任一处净中子流动的方向与中子通量密度分布的梯度的方向相反。因为 $\operatorname{grad} \phi$ 的方向指向 $\phi$ 的增加方向, 所以 $J$ 的方向指向 $\phi$ 减小最快的方向。
+
+
+在求出中子流密度 $J(r, E)$ 和中子通量 $\phi$ 的关系后, 就可以从中子连续方程直接导出只含有中子通量 $\phi$ 的中子扩散方程。如前所述, 根据连续方程
+
+\begin{equation}
+    \frac{\partial n(\boldsymbol{r}, t)}{\partial t}=S(\boldsymbol{r}, t)-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r}, t)-\operatorname{div} \boldsymbol{J}(\boldsymbol{r}, t)
+\end{equation}
+
+它实际上表征单位体积 (或微元) 内的中子数的平衡关系。其中方程的右端第三项表示泄漏项。根据菲克定律它可以写成
+\begin{equation}
+    \operatorname{div} \boldsymbol{J}(\boldsymbol{r}, t)=-\operatorname{div} D \operatorname{grad} \phi=D \nabla^2 \phi
+    \label{eq:中子数守恒4}
+\end{equation}
+同时由于假定所有中子都具有相同的能量, 所以中子通量密度
+\begin{equation}
+\phi=n v
+\end{equation}
+方程变为
+\begin{equation}
+    D \nabla^2 \phi-\Sigma_{\mathrm{a}} \phi+S=\frac{1}{v} \frac{\partial \phi}{\partial t}
+    \label{eq:单能中子扩散方程}
+\end{equation}
+式中: $\nabla^2$ 是拉普拉斯算符。在反应堆计算常用的几种坐标系中, $\nabla^2$ 的表达式如下:
+\begin{align}
+    \text{直角坐标系} & \quad \nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2} \\
+    \text{柱坐标系} & \quad \nabla^2 = \frac{\partial^2}{\partial r^2} + \frac{1}{r} \frac{\partial}{\partial r} + \frac{1}{r^2} \frac{\partial^2}{\partial \theta^2} + \frac{\partial^2}{\partial z^2} \\
+    \text{球坐标系} & \quad \nabla^2 = \frac{\partial^2}{\partial r^2} + \frac{2}{r} \frac{\partial}{\partial r} + \frac{1}{r^2} \frac{\partial^2}{\partial \theta^2} + \frac{1}{r^2} \cot \theta \frac{\partial}{\partial \theta} + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2}{\partial \varphi^2}
+    \end{align}
+    
+这个方程称为单能中子扩散方程，它是借助中子扩散的菲克定律从中子数守恒的连续方程推导而得的，是反应堆理论中的一个基本方程，在反应堆理论中广泛应用并占有很重要的位置。
 \subsection{本章小结}
 本章主要对本文所需要用到的理论基础与技术进行了简单地介绍。了解了本文方法将物理信息引入神经网络的理论基础，并对本文使用的网络结构的理论基
 础进行介绍，最后介绍了一种不常用的二阶优化算法 L-BFGS，为后文的方法介绍做好了理论方面的准备。

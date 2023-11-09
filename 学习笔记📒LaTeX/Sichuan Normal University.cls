@@ -29,7 +29,7 @@
 \WarningFilter{latexfont}{Size substitutions}
 \WarningFilter{latexfont}{Some font shapes were not available}
 
-
+\numberwithin{equation}{section}%公式编号依赖于章节
 \RequirePackage{titlesec}%章节号
 \urlstyle{same}%定义url字体和正文相同
 \renewcommand{\today}{\number\year-\number\month-\number\day}%日期格式
