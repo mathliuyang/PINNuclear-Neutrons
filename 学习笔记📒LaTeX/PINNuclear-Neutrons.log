@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  10 NOV 2023 01:22
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  10 NOV 2023 02:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -807,82 +807,82 @@ Package: xeCJK-listings 2022/08/05 v3.9.1 xeCJK patch file for listings
 ) (./PINNuclear-Neutrons.aux)
 \openout1 = `PINNuclear-Neutrons.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup12
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 27.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 27.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 27.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 27.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 27.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 27.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 27.
-LaTeX Font Info:    Redeclaring math accent \check on input line 27.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 27.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 27.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 27.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 27.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 27.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 26.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 26.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 26.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 26.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 26.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 26.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 26.
+LaTeX Font Info:    Redeclaring math accent \check on input line 26.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 26.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 26.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 26.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 26.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 26.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 27.
+(Font)              `operators' in the math version `normal' on input line 26.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 27.
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 26.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 27.
+(Font)              `operators' in the math version `bold' on input line 26.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 27.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 26.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 27.
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 27.
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 27.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 27.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 27.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 26.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 27.
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 27.
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 27.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 27.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 26.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -918,7 +918,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 27.
+Package hyperref Info: Link coloring ON on input line 26.
 (./PINNuclear-Neutrons.out) (./PINNuclear-Neutrons.out)
 \@outlinefile=\write3
 \openout3 = `PINNuclear-Neutrons.out'.
@@ -927,15 +927,15 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count397
-LaTeX Font Info:    Trying to load font information for U+msa on input line 86.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 85.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 86.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 85.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 86.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 85.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
@@ -1062,36 +1062,36 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 
 
 
-LaTeX Warning: Citation `lagarisArtificialNeuralNetworks1998' on page 1 undefined on input line 90.
+LaTeX Warning: Citation `lagarisArtificialNeuralNetworks1998' on page 1 undefined on input line 89.
 
 
-LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 1 undefined on input line 90.
+LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 1 undefined on input line 89.
 
 [1
 
 ]
 
-LaTeX Warning: Citation `LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022' on page 2 undefined on input line 94.
+LaTeX Warning: Citation `LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022' on page 2 undefined on input line 93.
 
 
-LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 2 undefined on input line 104.
+LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 2 undefined on input line 103.
 
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
 [2] [3]
 
-LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 4 undefined on input line 143.
+LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 4 undefined on input line 140.
 
 File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
 <./figure/链式裂变反应示意图.png>
 [4] [5]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 209.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 206.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 209.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 206.
  [6] [7]
 
-LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 8 undefined on input line 295.
+LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 8 undefined on input line 291.
 
 [8]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
@@ -1103,28 +1103,21 @@ File: ./figure/应用输运理论和扩散理论的外推距离求得的扩散�
  [10] [11]
 File: ./figure/无限平板形反应堆.png Graphic file (type bmp)
 <./figure/无限平板形反应堆.png>
+File: ./figure/圆柱体反应堆.png Graphic file (type bmp)
+<./figure/圆柱体反应堆.png>
  [12]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 [13] [14]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[15] [16]
-File: ./figure/圆柱体反应堆.png Graphic file (type bmp)
-<./figure/圆柱体反应堆.png>
-
+[15] [16] [17]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[17]
 File: ./figure/零阶贝赛尔函数曲线.png Graphic file (type bmp)
 <./figure/零阶贝赛尔函数曲线.png>
- [18]
-Overfull \hbox (32.22844pt too wide) detected at line 875
-[][][][][]
- []
-
-[19]
+[18] [19]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
@@ -1133,43 +1126,30 @@ Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 [21]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[22] [23]
+[22]
 No file PINNuclear-Neutrons.bbl.
-
-Overfull \hbox (162.57991pt too wide) in paragraph at lines 1148--1149
-|  [] 
- []
-
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
 
-Overfull \hbox (156.49144pt too wide) in paragraph at lines 1158--1161
-[]
- []
-
-
-Package caption Warning: Unused \captionsetup[algorithm] on input line 563.
+Package caption Warning: Unused \captionsetup[algorithm] on input line 565.
 See the caption package documentation for explanation.
 
-[24] 
+[23] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
 (rerunfilecheck)             Checksum: 7EB1F777CDA859E6064944CE473C6274;928.
  ) 
 Here is how much of TeX's memory you used:
- 21612 strings out of 476683
- 462898 string characters out of 5804047
- 1875018 words of memory out of 5000000
- 41408 multiletter control sequences out of 15000+600000
+ 21639 strings out of 476683
+ 463338 string characters out of 5804047
+ 1876018 words of memory out of 5000000
+ 41435 multiletter control sequences out of 15000+600000
  529756 words of font info for 161 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,18n,111p,1217b,700s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (24 pages).
+Output written on PINNuclear-Neutrons.pdf (23 pages).

@@ -30,7 +30,7 @@
 \WarningFilter{latexfont}{Some font shapes were not available}
 
 \usepackage{wrapfig}%实现图文并排，将图片排版在文字右
-\numberwithin{equation}{subsection}%公式编号依赖于章节
+\numberwithin{equation}{section}%公式编号依赖于章节
 \RequirePackage{titlesec}%章节号
 \urlstyle{same}%定义url字体和正文相同
 \renewcommand{\today}{\number\year-\number\month-\number\day}%日期格式
@@ -257,6 +257,7 @@
             \end{figure}
         \fi
     \fi
+    
     \renewcommand\thefootnote{\@fnsymbol\c@footnote}
     \def\@makefnmark{\hbox{\@textsuperscript{\normalfont\@thefnmark}}}
     \long\def\@makefntext##1{\noindent\@textsuperscript{\normalfont\@thefnmark}##1}
@@ -267,6 +268,7 @@
     \renewcommand\thefootnote{\arabic{footnote}}
     \setcounter{footnote}{0}
     \setcounter{page}{\@BeginPage}
+    
 }
 
 \renewcommand{\raggedright}{\leftskip=0pt \rightskip=0pt plus 0cm}
