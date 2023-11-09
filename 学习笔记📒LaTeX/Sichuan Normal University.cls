@@ -29,7 +29,8 @@
 \WarningFilter{latexfont}{Size substitutions}
 \WarningFilter{latexfont}{Some font shapes were not available}
 
-\numberwithin{equation}{section}%公式编号依赖于章节
+\usepackage{wrapfig}%实现图文并排，将图片排版在文字右
+\numberwithin{equation}{subsection}%公式编号依赖于章节
 \RequirePackage{titlesec}%章节号
 \urlstyle{same}%定义url字体和正文相同
 \renewcommand{\today}{\number\year-\number\month-\number\day}%日期格式
