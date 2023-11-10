@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  10 NOV 2023 13:09
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  10 NOV 2023 16:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1060,96 +1060,77 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 \tf@toc=\write4
 \openout4 = `PINNuclear-Neutrons.toc'.
 
-
-
-LaTeX Warning: Citation `lagarisArtificialNeuralNetworks1998' on page 1 undefined on input line 89.
-
-
-LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 1 undefined on input line 89.
-
-[1
+ [1
 
 ]
-
-LaTeX Warning: Citation `LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022' on page 2 undefined on input line 93.
-
-
-LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 2 undefined on input line 103.
-
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
-[2] [3]
-
-LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 4 undefined on input line 140.
-
+ [2] [3] [4]
 File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
 <./figure/链式裂变反应示意图.png>
-[4] [5]
-LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 206.
-LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 206.
- [6] [7]
-
-LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 8 undefined on input line 291.
-
-[8]
+ [5] [6]
+File: ./figure/热中子反应堆内的中子平衡.png Graphic file (type bmp)
+<./figure/热中子反应堆内的中子平衡.png>
+ [7]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[9]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[8]
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 303.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 303.
+ [9] [10]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[11] [12]
 File: ./figure/在两种介质分界面上的中子扩散.png Graphic file (type bmp)
 <./figure/在两种介质分界面上的中子扩散.png>
 File: ./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png Graphic file (type bmp)
 <./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png>
- [10] [11]
+ [13] [14]
 File: ./figure/无限平板形反应堆.png Graphic file (type bmp)
 <./figure/无限平板形反应堆.png>
 File: ./figure/圆柱体反应堆.png Graphic file (type bmp)
 <./figure/圆柱体反应堆.png>
- [12]
+ [15] [16] [17]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[13] [14]
+[18] [19]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[15] [16] [17]
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[20]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 File: ./figure/零阶贝赛尔函数曲线.png Graphic file (type bmp)
 <./figure/零阶贝赛尔函数曲线.png>
-[18] [19] [20]
+[21] [22] [23]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[21]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[22]
+[24]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[23] [24]
-No file PINNuclear-Neutrons.bbl.
+[25] [26] (./PINNuclear-Neutrons.bbl)
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
+
 
 Package caption Warning: Unused \captionsetup[algorithm] on input line 565.
 See the caption package documentation for explanation.
 
-[25] 
+[27] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
-(rerunfilecheck)             Checksum: 7EB1F777CDA859E6064944CE473C6274;928.
+(rerunfilecheck)             Checksum: 0E08D7EA4A0C7E0E59F44CEF11A999C7;1195.
  ) 
 Here is how much of TeX's memory you used:
- 21641 strings out of 476683
- 463372 string characters out of 5804047
+ 21666 strings out of 476683
+ 464060 string characters out of 5804047
  1876018 words of memory out of 5000000
- 41437 multiletter control sequences out of 15000+600000
- 529756 words of font info for 161 fonts, out of 8000000 for 9000
+ 41454 multiletter control sequences out of 15000+600000
+ 529780 words of font info for 164 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,18n,111p,1217b,700s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (25 pages).
+Output written on PINNuclear-Neutrons.pdf (27 pages).
