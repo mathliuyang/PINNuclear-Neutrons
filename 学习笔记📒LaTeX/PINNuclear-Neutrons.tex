@@ -625,7 +625,7 @@ k_{\infty}=\frac{\nu \Sigma_{\mathrm{f}} \phi(\boldsymbol{r})}{\Sigma_{\mathrm{a
 \end{equation}
 将式 \eqref{eq:单群扩散方程的分离变量解} 代入式 \eqref{eq:单群扩散方程} 中, 并用 $\varphi(x) T(t)$ 除方程中的各项,便得到
 \begin{equation}
-\frac{\nabla^2 \varphi(x)}{\varphi(x)}=\frac{1}{\operatorname{Dv} T(t)} \frac{\mathrm{d} T(t)}{\mathrm{d} t}-\frac{k_{\infty}-1}{L^2}
+\frac{\nabla^2 \varphi(x)}{\varphi(x)}=\frac{1}{{Dv} T(t)} \frac{\mathrm{d} T(t)}{\mathrm{d} t}-\frac{k_{\infty}-1}{L^2}
 \label{eq:单群扩散方程的分离变量解48}
 \end{equation}
 上式左端是仅含 $x$ 的函数, 而右端是仅含 $t$ 的函数, 因此要使等式成立, 等式两端必须都等于某一常数( 例如, $-B^2$ )。这样有
@@ -671,7 +671,7 @@ B_n=\frac{(2 n-1) \pi}{a} \quad n=1,2,3, \cdots
 下面接着来讨论方程 \eqref{eq:单群扩散方程的分离变量解48} 的求解, 由于特征函数的正交性 \footnote{单群特征函数的正交性可表示为 $\int_V \varphi_n(\boldsymbol{r}) \varphi_m(\boldsymbol{r}) \mathrm{d} V=0$, 当 $m \neq n$ 时。
 }, 对于每一个 $n$ 值的项都是线性独立的, 因而对应每一个 $B_n^2$ 值和 $\varphi_n(x)$, 都有一个 $T_n(t)$ 与之对应, 由方程 \eqref{eq:单群扩散方程的分离变量解48} 得
 \begin{equation}
-\frac{1}{\operatorname{Dv}_n(t)} \frac{\mathrm{d} T_n(t)}{\mathrm{d} t}=\frac{k_{\infty}-1}{L^2}-B_n^2
+\frac{1}{{Dv}T_n(t)} \frac{\mathrm{d} T_n(t)}{\mathrm{d} t}=\frac{k_{\infty}-1}{L^2}-B_n^2
 \end{equation}
 
 用 $L^2 /\left(1+L^2 B_n^2\right)$ 乘上式的每一项, 可以化简得到下列等式
@@ -681,7 +681,7 @@ B_n=\frac{(2 n-1) \pi}{a} \quad n=1,2,3, \cdots
 \end{equation}
 其中
 \begin{align}
-l_n&=\frac{L^2}{D_v\left(1+L^2 B_n^2\right)}=\frac{l_{\infty}}{1+L^2 B_n^2} \label{eq:413}\\
+l_n&=\frac{L^2}{Dv\left(1+L^2 B_n^2\right)}=\frac{l_{\infty}}{1+L^2 B_n^2} \label{eq:413}\\
 k_n&=\frac{k_{\infty}}{1+L^2 B_n^2}\label{eq:414}
 \end{align}
 $l_{\infty}=\frac{\lambda_{\mathrm{a}}}{v}$ 为无限介质的热中子寿命, $\lambda_{\mathrm{a}}$ 是热中子的平均吸收自由程。方程 \eqref{eq:单群扩散方程的分离变量解412} 的解为
@@ -693,7 +693,6 @@ T_n=C_n \mathrm{e}^{\left(k_n-1\right) t / l_n}
 \phi(x, t)=\sum_{n=1}^{\infty} A_n^{\prime}\left[\cos \frac{(2 n-1) \pi}{a} x\right] \mathrm{e}^{\left(k_n-1\right) t / l_n}
 \label{eq:单群扩散方程的分离变量解415}
 \end{equation}
-
 根据问题的初值条件式 \eqref{eq:初始条件44}, 可确定出上式中的待定系数 $A_n^{\prime}$ 。为此, 令式中的 $t=0$, 可得
 \begin{equation}
 \phi_0(x)=\sum_{n=1}^{\infty} A_n^{\prime}\left[\cos \frac{(2 n-1) \pi}{a} x\right]
@@ -702,7 +701,7 @@ T_n=C_n \mathrm{e}^{\left(k_n-1\right) t / l_n}
 \begin{equation}
 A_n^{\prime}=\frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} \phi_0(x) \cos \frac{(2 n-1) \pi}{a} x \mathrm{~d} x
 \end{equation}
-将其代入式 \eqref{eq:单群扩散方程的分离变量解415}, 可得到图 4-1 所示无限平板反应堆内的中子通量密度分布为
+将其代入式 \eqref{eq:单群扩散方程的分离变量解415}, 可得到图 \ref{fig:无限平板形反应堆} 所示无限平板反应堆内的中子通量密度分布为
 \begin{equation}
 \phi(x, t)=\sum_{n=1}^{\infty}\left[\frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} \phi_0\left(x^{\prime}\right) \cos \frac{(2 n-1) \pi}{a} x^{\prime} \mathrm{d} x^{\prime}\right] \cos \frac{(2 n-1) \pi}{a} x \mathrm{e}^{\left(k_n-1\right) t / l_n}
 \end{equation}
