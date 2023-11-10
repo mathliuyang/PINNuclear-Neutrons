@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}PINN 相关理论和技术}{2}{section.1}%
 \contentsline {subsection}{\numberline {1.1}基于物理信息的神经网络}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}L-BFGS 优化算法}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.2}L-BFGS 优化算法}{4}{subsection.1.2}%
 \contentsline {section}{\numberline {2}核反应堆物理分析}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}裂变能量的释放}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}链式裂变反应}{5}{subsection.2.2}%
@@ -15,5 +15,6 @@
 \contentsline {subsubsection}{\numberline {2.5.4}单群理论的修正}{20}{subsubsection.2.5.4}%
 \contentsline {subsubsection}{\numberline {2.5.5}稳态单群扩散方程}{21}{subsubsection.2.5.5}%
 \contentsline {section}{\numberline {3}基于PINN深度机器学习技术求解多维中子学扩散方程}{22}{section.3}%
-\contentsline {subsection}{\numberline {3.1}title}{22}{subsection.3.1}%
-\contentsline {section}{\numberline {4}结束语}{23}{section.4}%
+\contentsline {subsection}{\numberline {3.1}理论原理}{22}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}中子学扩散方程模型}{22}{subsubsection.3.1.1}%
+\contentsline {section}{\numberline {4}结束语}{24}{section.4}%

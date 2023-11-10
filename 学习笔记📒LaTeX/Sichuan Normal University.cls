@@ -28,7 +28,7 @@
 \WarningFilter{latexfont}{Font shape `}
 \WarningFilter{latexfont}{Size substitutions}
 \WarningFilter{latexfont}{Some font shapes were not available}
-
+\usepackage{xcolor}
 \usepackage{wrapfig}%实现图文并排，将图片排版在文字右
 \numberwithin{equation}{section}%公式编号依赖于章节
 \RequirePackage{titlesec}%章节号

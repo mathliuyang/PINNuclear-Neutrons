@@ -1147,8 +1147,83 @@ k_{\text {eff }} & =\frac{\int_V \nu \Sigma_f \phi(\boldsymbol{r}) \mathrm{d} V}
 这正是前面式 \eqref{eq:有效增殖系数2} 所定义的有效增殖系数.
 
 \section{基于PINN深度机器学习技术求解多维中子学扩散方程}
-在前面的学习中，我们已经掌握了有关物理反应神经网络（PINN）和核反应堆物理的知识。现在，我们将深入学习刘东老师的论文，该论文使用PINN深度学习技术来解决多维中子学扩散方程的问题。通过对论文内容的分析，我们将理解深度学习在核反应堆物理中的具体应用，包括模型构建、关键技术、数值验证等方面。
-\subsection{title}
+在前面的学习中，已经掌握了有关物理反应神经网络（PINN）和核反应堆物理的知识。现在，将深入学习刘东老师的论文，该论文使用PINN深度学习技术来解决多维中子学扩散方程的问题。通过对论文内容的分析，将理解深度学习在核反应堆物理中的具体应用，包括模型构建、关键技术、数值验证等方面。
+\subsection{理论原理}
+\subsubsection{中子学扩散方程模型}
+核反应堆工程堆芯中子学设计计算中采用中子扩散模型的方程形式如式 \eqref{eq:多群中子学扩散方程模型} 所示:
+
+\begin{equation}
+    \begin{aligned}
+    & \color{blue}\frac{1}{v} \frac{\partial \phi(r, E, t)}{\partial t} \color{black}= \color{red}\nabla \cdot D \nabla \phi(r, E, t) \color{black} \color{green}- \Sigma_{\mathrm{t}}(r, E) \phi(r, E, t)\\
+    & \color{black}+ \color{purple}x(E) \int_0^{\infty} \vartheta\left(E^{\prime}\right) \Sigma_{\mathrm{f}}\left(r, E^{\prime}\right) \phi\left(r, E^{\prime}, t\right) \mathrm{d} E^{\prime} \color{black} \\
+    & \color{black}+\color{orange} S(r, E, t) \color{black}+ \color{brown}\int_0^{\infty} \Sigma_{\mathrm{s}}\left(r, E^{\prime} \rightarrow E\right) \phi\left(r, E^{\prime}, t\right) \mathrm{d} E^{\prime} \color{black}
+    \end{aligned}
+    \label{eq:多群中子学扩散方程模型}
+    \end{equation}
+    方程 \eqref{eq:多群中子学扩散方程模型} 是核反应堆中描述中子行为的重要方程，其各项的物理意义对于理解中子守恒和核反应堆的性能至关重要。通过表 \ref{tab:terms_explanation} 中的详细解释，我们能够更深入地理解这些项在方程中的作用，从而全面把握中子守恒原理及核反应堆的行为特征。这方程是核工程领域的基础，其深刻理解对于设计和优化核反应堆具有重要意义。
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|}
+        \toprule
+        \textbf{方程项} & \textbf{物理含义} \\    
+        \midrule
+        \textcolor{blue}{\(\frac{1}{v} \frac{\partial \phi(r, E, t)}{\partial t}\)} & \textcolor{blue}{通量密度变化率} \\
+
+        \textcolor{red}{\(\nabla \cdot D \nabla \phi(r, E, t)\)} &  \textcolor{red}{泄漏项} \\
+
+        \textcolor{green}{\(- \Sigma_{\mathrm{t}}(r, E) \phi(r, E, t)\)} &  \textcolor{green}{吸收项} \\
+
+        \textcolor{purple}{\(x(E) \int_0^{\infty} \vartheta\left(E^{\prime}\right) \Sigma_{\mathrm{f}}\left(r, E^{\prime}\right) \phi\left(r, E^{\prime}, t\right) \mathrm{d} E^{\prime}\)} & \textcolor{purple}{裂变项} \\
+
+        \textcolor{orange}{\(S(r, E, t)\)} & \textcolor{orange}{源项} \\
+        
+        \textcolor{brown}{\(\int_0^{\infty} \Sigma_{\mathrm{s}}\left(r, E^{\prime} \rightarrow E\right) \phi\left(r, E^{\prime}, t\right) \mathrm{d} E^{\prime}\)} & \textcolor{brown}{散射项} \\
+        \bottomrule
+        \end{tabular}
+        \caption{多群中子学扩散方程模型各项解释}
+        \label{tab:terms_explanation}
+        \end{table}
+        
+
+式中, $\phi(r, E, t)$ 是 $t$ 时刻在 $r$ 位置处能量为 $E$ 的中子注量率; $v$ 为中子速率; $D$ 为中子扩散系数; $\vartheta$为每次裂变放出的平均中子数; $x(E)$ 是裂变中子的能谱分布; $\Sigma_{\mathrm{t}} 、 \Sigma_{\mathrm{s}}$ 和 $\Sigma_{\mathrm{f}}$ 分别是总的反应截面、散射截面和裂变截面; $S(r, E, t)$ 为外源。其单能群无外源扩散方程形式 ${ }^{[1]}$ 可写为:
+\begin{equation}
+\frac{1}{D v} \frac{\partial \phi(r, t)}{\partial t}=\nabla^2 \phi(r, t)+\frac{k_{\infty}-1}{L^2} \phi(r, t)
+\end{equation}
+式中, $L$ 为扩散长度; $k_{\infty}$ 为无限介质增殖系数。当系统处于稳态时, 式 (2) 形式 ${ }^{[1]}$ 为:
+\begin{equation}
+\nabla^2 \phi(r)+\frac{k_{\infty} / k_{\text {eff }}-1}{L^2} \phi(r)=0
+\end{equation}
+
+当系统处于临界状态 $\left(k_{\mathrm{eff}}=1\right)$ 时, 式 (3)的形式 ${ }^{[1]}$ 为:
+\begin{equation}
+\nabla^2 \phi(r)+B_g^2 \phi(r)=0
+\end{equation}
+式中, $B_g^2$ 为系统临界时的几何曲率, 与系统的几何特性相关，临界时等于材料曲率。
+
+式 (1) 式 (4) 可描述为统一的两阶偏微分方程形式 ${ }^{[3]}$ :
+\begin{equation}
+F\left[\vec{x}, \phi(\vec{x}), \nabla \phi(\vec{x}), \nabla^2 \phi(\vec{x})\right]=0
+\end{equation}
+式中， $\vec{x}$ 为扩散方程几何描述空间向量。
+
+% \subsubsection{PINN基本原理与数值计算流程}
+
+% \subsection{利用PINN求解扩散方程的关键技术}
+% \subsubsection{扩散方程特征向量加速收敛方法}
+% \subsubsection{$k_{\text{eff}}$并行搜索方法}
+% \subsubsection{几何空间网格点密度不均匀分布策略}
+% \subsubsection{深度机器学习的超参数设置}
+
+% \subsection{数值计算验证程序复现}
+% \subsubsection{临界条件下稳态扩散方程的验证}
+% \subsubsection{扩散方程特征向量加速收敛方法验证}
+% \subsubsection{瞬态条件扩散方程求解及$k_{\text{eff}}$搜索方法验证}
+% \subsubsection{网格点不均匀分布策略验证}
+% \subsubsection{深度神经网络超参数敏感性验证}
+% \subsubsection{边界条件损失函数权重敏感性分析验证}
+
+
 
 % \subsection{本章小结}
 % 本章主要对本文所需要用到的理论基础与技术进行了简单地介绍.了解了本文方法将物理信息引入神经网络的理论基础,并对本文使用的网络结构的理论基

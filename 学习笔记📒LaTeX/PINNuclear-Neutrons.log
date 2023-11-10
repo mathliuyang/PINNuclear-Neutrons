@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  11 NOV 2023 01:47
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  11 NOV 2023 02:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -721,6 +721,22 @@ LaTeX Info: Redefining \GenericWarning on input line 433.
 \sl@TempBOE=\toks41
 \sl@BankOfErrors=\toks42
 LaTeX Info: Redefining \GenericError on input line 601.
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 227.
+LaTeX Info: Redefining \color on input line 711.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen314
 \WF@size=\dimen315
@@ -1062,10 +1078,27 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 \tf@toc=\write4
 \openout4 = `PINNuclear-Neutrons.toc'.
 
- [2]
+
+
+LaTeX Warning: Citation `lagarisArtificialNeuralNetworks1998' on page 2 undefined on input line 89.
+
+
+LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 2 undefined on input line 89.
+
+
+LaTeX Warning: Citation `LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022' on page 2 undefined on input line 93.
+
+[2]
+
+LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 3 undefined on input line 103.
+
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
- [3] [4]
+[3]
+
+LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 4 undefined on input line 140.
+
+[4]
 File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
 <./figure/链式裂变反应示意图.png>
  [5] [6]
@@ -1080,6 +1113,9 @@ LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 303.
  [9] [10]
+
+LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 11 undefined on input line 387.
+
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 [11] [12]
 File: ./figure/在两种介质分界面上的中子扩散.png Graphic file (type bmp)
@@ -1091,33 +1127,32 @@ File: ./figure/无限平板形反应堆.png Graphic file (type bmp)
 <./figure/无限平板形反应堆.png>
  [15] [16] [17] [18] [19] [20]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[21] [22] (./PINNuclear-Neutrons.bbl)
+[21]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[22] [23]
+No file PINNuclear-Neutrons.bbl.
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
-
 
 Package caption Warning: Unused \captionsetup[algorithm] on input line 565.
 See the caption package documentation for explanation.
 
-[23] 
+[24] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
 
-Package rerunfilecheck Warning: File `PINNuclear-Neutrons.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: Checksums for `PINNuclear-Neutrons.out':
-(rerunfilecheck)             Before: A338AD5917DC4C5657ECBC44309BFB33;2487
-(rerunfilecheck)             After:  CD8F43C04B32EB55F8D4E64C98E5C22B;2570.
+Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
+(rerunfilecheck)             Checksum: 2A268F3D532B81C1AB64C4D94C8643BD;2717.
  ) 
 Here is how much of TeX's memory you used:
- 21558 strings out of 476683
- 457252 string characters out of 5804047
+ 21967 strings out of 476683
+ 462132 string characters out of 5804047
  1875018 words of memory out of 5000000
- 41348 multiletter control sequences out of 15000+600000
- 529780 words of font info for 164 fonts, out of 8000000 for 9000
+ 41756 multiletter control sequences out of 15000+600000
+ 529756 words of font info for 161 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,13n,111p,1217b,692s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (23 pages).
+Output written on PINNuclear-Neutrons.pdf (24 pages).
