@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  10 NOV 2023 23:13
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  11 NOV 2023 01:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1056,16 +1056,16 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 (fontspec)             <->"STFangsong/OT:language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
-(./PINNuclear-Neutrons.toc)
+(./PINNuclear-Neutrons.toc [1
+
+])
 \tf@toc=\write4
 \openout4 = `PINNuclear-Neutrons.toc'.
 
- [1
-
-]
+ [2]
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
- [2] [3] [4]
+ [3] [4]
 File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
 <./figure/链式裂变反应示意图.png>
  [5] [6]
@@ -1089,28 +1089,9 @@ File: ./figure/应用输运理论和扩散理论的外推距离求得的扩散�
  [13] [14]
 File: ./figure/无限平板形反应堆.png Graphic file (type bmp)
 <./figure/无限平板形反应堆.png>
-File: ./figure/圆柱体反应堆.png Graphic file (type bmp)
-<./figure/圆柱体反应堆.png>
- [15] [16] [17]
+ [15] [16] [17] [18] [19] [20]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[18] [19]
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[20]
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-File: ./figure/零阶贝赛尔函数曲线.png Graphic file (type bmp)
-<./figure/零阶贝赛尔函数曲线.png>
-[21] [22] [23]
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[24]
-Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[25] [26] (./PINNuclear-Neutrons.bbl)
+[21] [22] (./PINNuclear-Neutrons.bbl)
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
 
@@ -1118,19 +1099,25 @@ File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 Package caption Warning: Unused \captionsetup[algorithm] on input line 565.
 See the caption package documentation for explanation.
 
-[27] 
+[23] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
-Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
-(rerunfilecheck)             Checksum: 0E08D7EA4A0C7E0E59F44CEF11A999C7;1195.
+
+Package rerunfilecheck Warning: File `PINNuclear-Neutrons.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `PINNuclear-Neutrons.out':
+(rerunfilecheck)             Before: A338AD5917DC4C5657ECBC44309BFB33;2487
+(rerunfilecheck)             After:  CD8F43C04B32EB55F8D4E64C98E5C22B;2570.
  ) 
 Here is how much of TeX's memory you used:
- 21666 strings out of 476683
- 464060 string characters out of 5804047
- 1876018 words of memory out of 5000000
- 41454 multiletter control sequences out of 15000+600000
+ 21558 strings out of 476683
+ 457252 string characters out of 5804047
+ 1875018 words of memory out of 5000000
+ 41348 multiletter control sequences out of 15000+600000
  529780 words of font info for 164 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 103i,18n,111p,1217b,700s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,13n,111p,1217b,692s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (27 pages).
+Output written on PINNuclear-Neutrons.pdf (23 pages).

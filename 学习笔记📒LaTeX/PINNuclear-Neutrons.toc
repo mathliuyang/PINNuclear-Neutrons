@@ -6,5 +6,14 @@
 \contentsline {subsection}{\numberline {2.2}链式裂变反应}{5}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}热中子反应堆内的中子循环}{7}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}单能中子扩散方程}{9}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}扩散方程边界条件}{12}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}菲克定律和扩散理论的适用范围}{13}{subsubsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.5}均匀裸堆的单群理论}{14}{subsection.2.5}%
-\contentsline {section}{\numberline {3}结束语}{27}{section.3}%
+\contentsline {subsubsection}{\numberline {2.5.1}均匀裸堆的单群扩散方程的解}{15}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}热中子反应堆的临界条件}{17}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}反应堆曲率和临界计算任务}{19}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}单群理论的修正}{20}{subsubsection.2.5.4}%
+\contentsline {subsubsection}{\numberline {2.5.5}稳态单群扩散方程}{21}{subsubsection.2.5.5}%
+\contentsline {section}{\numberline {3}基于PINN深度机器学习技术求解多维中子学扩散方程}{22}{section.3}%
+\contentsline {subsection}{\numberline {3.1}title}{22}{subsection.3.1}%
+\contentsline {section}{\numberline {4}结束语}{23}{section.4}%
