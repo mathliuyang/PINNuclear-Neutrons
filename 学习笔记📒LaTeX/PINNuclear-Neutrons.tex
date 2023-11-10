@@ -323,6 +323,7 @@ L-BFGS 仍然面临一个问题, 就是当初始点与函数最优解的点相�
     在扩散理论中有两个重要的物理参数: 扩散系数 $D$ 和扩散长度 $L$ 。它们是确定中子在介质内扩散过程的重要参数。根据定义, 扩散长度为
     \begin{equation}
 L^2=\frac{D}{\Sigma_{\mathrm{a}}}=\frac{\lambda_{\mathrm{a}} \lambda_{\mathrm{tr}}}{3}
+\label{eq:扩散长度与扩散系数}
 \end{equation}
 或
 \begin{equation}
@@ -446,7 +447,6 @@ d=\frac{2}{3} \lambda_{\mathrm{tr}}
 \begin{equation}
 S_{\mathrm{F}}(\boldsymbol{r}, t)=\nu \Sigma_{\mathrm{f}} \phi(\boldsymbol{r}, t)
 \end{equation}
-
 或者根据无限介质增殖系数的定义, 可表示为介质 $k_{\infty}$ 和中子吸收率的乘积, 即
 \begin{equation}
 S_{\mathrm{F}}(\boldsymbol{r}, t)=k_{\infty} \Sigma_{\mathrm{a}} \phi(\boldsymbol{r}, t)
@@ -462,6 +462,13 @@ k_{\infty}=\frac{\nu \Sigma_{\mathrm{f}} \phi(\boldsymbol{r})}{\Sigma_{\mathrm{a
 \frac{1}{v} \frac{\partial \phi(\boldsymbol{r}, t)}{\partial t}=D \nabla^2 \phi(\boldsymbol{r}, t)-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r}, t)+k_{\infty} \Sigma_{\mathrm{a}} \phi(\boldsymbol{r}, t)+S_0(\boldsymbol{r}, t)
 \label{eq:均匀裸堆的单群扩散方程42}
 \end{equation}
+通过式\eqref{eq:扩散长度与扩散系数}， 将吸收截面 $\Sigma_{\mathrm{a}}$ 用扩散长度 $L$ 和扩散系数 $D$ 表示出来, 有 $\Sigma_{\mathrm{a}}=\frac{D}{L^2}$，则上式可写成
+\begin{align}
+    \frac{1}{v} \frac{\partial \phi(\boldsymbol{r}, t)}{\partial t}&=D \nabla^2 \phi(\boldsymbol{r}, t)-\frac{D}{L^2} \phi(\boldsymbol{r}, t)+k_{\infty} \frac{D}{L^2} \phi(\boldsymbol{r}, t)+S_0(\boldsymbol{r}, t)\\
+    \frac{1}{v} \frac{\partial \phi(\boldsymbol{r}, t)}{\partial t}&=D \nabla^2 \phi(\boldsymbol{r}, t)+\left(k_{\infty}-1\right) \frac{D}{L^2} \phi(\boldsymbol{r}, t)+S_0(\boldsymbol{r}, t)\\
+    \frac{1}{Dv} \frac{\partial \phi(\boldsymbol{r}, t)}{\partial t}&=\nabla^2 \phi(\boldsymbol{r}, t)+\frac{k_{\infty}-1}{L^2} \phi(\boldsymbol{r}, t)+\frac{1}{D}S_0(\boldsymbol{r}, t)
+    \label{eq:均匀裸堆的单群扩散方程1110}
+\end{align}
 
 注意式中出现的 $D$ 和 $\Sigma_{\mathrm{a}}$ 都是对中子能谱平均后的数值。值得指出的是, 在工程实际中, 除了反应堆启动的初期阶段, 由于反应堆内中子通量密度水平很低, 必须考虑外源中子的影响之外, 在大多数情况下都可以忽略外中子源的影响, 认为核裂变是反应堆内中子的唯一来源。
 
@@ -521,13 +528,11 @@ k_{\infty}=\frac{\nu \Sigma_{\mathrm{f}} \phi(\boldsymbol{r})}{\Sigma_{\mathrm{a
 \phi(x, t)=\varphi(x) T(t)
 \label{eq:单群扩散方程的分离变量解}
 \end{equation}
-
 将式 \eqref{eq:单群扩散方程的分离变量解} 代入式 \eqref{eq:单群扩散方程} 中, 并用 $\varphi(x) T(t)$ 除方程中的各项,便得到
 \begin{equation}
 \frac{\nabla^2 \varphi(x)}{\varphi(x)}=\frac{1}{\operatorname{Dv} T(t)} \frac{\mathrm{d} T(t)}{\mathrm{d} t}-\frac{k_{\infty}-1}{L^2}
 \label{eq:单群扩散方程的分离变量解48}
 \end{equation}
-
 上式左端是仅含 $x$ 的函数, 而右端是仅含 $t$ 的函数, 因此要使等式成立, 等式两端必须都等于某一常数( 例如, $-B^2$ )。这样有
 \begin{equation}
 \frac{\nabla^2 \varphi(x)}{\varphi(x)}=-B^2
@@ -551,7 +556,6 @@ k_{\infty}=\frac{\nu \Sigma_{\mathrm{f}} \phi(\boldsymbol{r})}{\Sigma_{\mathrm{a
 \begin{equation}
 A \cos \frac{B a}{2}=0
 \end{equation}
-
 因此要求
 \begin{equation}
 B_n=\frac{n \pi}{a} \quad n=1,3,5, \cdots
@@ -599,12 +603,10 @@ T_n=C_n \mathrm{e}^{\left(k_n-1\right) t / l_n}
 \begin{equation}
 \phi_0(x)=\sum_{n=1}^{\infty} A_n^{\prime}\left[\cos \frac{(2 n-1) \pi}{a} x\right]
 \end{equation}
-
 利用正交关系,可求得
 \begin{equation}
 A_n^{\prime}=\frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} \phi_0(x) \cos \frac{(2 n-1) \pi}{a} x \mathrm{~d} x
 \end{equation}
-
 将其代入式 \eqref{eq:单群扩散方程的分离变量解415}, 可得到图 4-1 所示无限平板反应堆内的中子通量密度分布为
 \begin{equation}
 \phi(x, t)=\sum_{n=1}^{\infty}\left[\frac{2}{a} \int_{-\frac{a}{2}}^{\frac{a}{2}} \phi_0\left(x^{\prime}\right) \cos \frac{(2 n-1) \pi}{a} x^{\prime} \mathrm{d} x^{\prime}\right] \cos \frac{(2 n-1) \pi}{a} x \mathrm{e}^{\left(k_n-1\right) t / l_n}
@@ -663,7 +665,7 @@ k_1=\frac{k_{\infty}}{1+L^2\left(\frac{\pi}{a}\right)^2}=1
 k_1=k_{\infty} \Lambda=1
 \end{equation}
 
-它与第 1 章中的临界条件式 $(1-56)$ 完全一样。由此可见, 这里的 $k_1$ 也就是前面所定义的反应堆有效增殖系数 $k$ 。同时, 由式 \eqref{eq:413} 可知, $l_1$ 为考虑热中子泄漏影响后的中子寿命。
+它与临界条件式 \eqref{eq:反应堆维持自续链式裂变反应的条件} 完全一样。由此可见, 这里的 $k_1$ 也就是前面所定义的反应堆有效增殖系数 $k$ 。同时, 由式 \eqref{eq:413} 可知, $l_1$ 为考虑热中子泄漏影响后的中子寿命。
 
 另外, 从式 \eqref{eq:单群扩散方程的特征值问题421} 可以看出, 反应堆的中子泄漏不仅与扩散长度有关, 而且与几何曲率有关。从前面平板形反应堆的例子中可以看到, 当反应堆体积增大时, $B_8^2$ 就减小, 因而正如所预期的那样, 不泄漏概率也就增大。此外, 从 3.4 节的讨论可知扩散长度 $L$ 愈大, 意味着中子自产生到被吸收所穿行的距离也愈大, 因而从反应堆中泄漏出去的概率也就愈大, 不泄漏概率 $P_{\mathrm{L}}$ 就要减小, 这和式 \eqref{eq:单群扩散方程的特征值问题421} 的结果是一致的。
 下面以一个简单例子说明上述结果的应用。
@@ -879,6 +881,55 @@ B_{\mathrm{g}}^2=B_{\mathrm{r}}^2+B_z^2=\left(\frac{2.405}{R}\right)^2+\left(\fr
     \begin{equation}
     C=\frac{3.29 P}{V E_{\mathrm{i}} \Sigma_{\mathrm{f}}}
 \end{equation}
+
+\begin{remark}\quad
+
+\begin{itemize}
+    \item 贝塞尔函数
+贝塞尔方程为
+\begin{equation}
+x^2 f^{\prime \prime}+x f^{\prime}+\left(x^2-n^2\right) f=0
+\end{equation}
+
+若 $n$ 为整数或零, 它的两个解为
+\begin{equation}
+\begin{gathered}
+f(x)=\left\{\begin{array}{l}
+\mathrm{J}_n(x) \\
+\mathrm{Y}_n(x)
+\end{array}\right. \\
+\mathrm{J}_n(x)=\sum_{k=0}^{\infty} \frac{(-1)^k}{\Gamma(k+1) \Gamma(k+n+1)}\left(\frac{x}{2}\right)^{n+2 k} \\
+\mathrm{Y}_n(x)=\frac{\mathrm{J}_n(x) \cos (n \pi)-\mathrm{J}_n(x)}{\sin (n \pi)}
+\end{gathered}
+\end{equation}
+
+函数 $\mathrm{J}_n(x)$ 和 $\mathrm{Y}_n(x)$ 分别称为第一类和第二类贝塞尔函数。 $\mathrm{J}_0(x)$ 和 $\mathrm{Y}_0(x)$ 如图 \ref{fig:零阶贝赛尔函数曲线} 所示。
+\item 修正贝塞尔函数
+修正贝塞尔方程为
+\begin{equation}
+x^2 f^{\prime \prime}+x f^{\prime}-\left(x^2+n^2\right) f=0
+\end{equation}
+
+若 $n$ 为整数或零, 它的两个解为
+\begin{equation}
+f(x)=\left\{\begin{array}{l}
+\mathrm{I}_n(x) \\
+\mathrm{K}_n(x)
+\end{array}\right.
+\end{equation}
+
+其中
+\begin{equation}
+\begin{gathered}
+\mathrm{I}_n(x)=i^{-n} \mathrm{~J}_n(i x)=i^n \mathrm{~J}_n(-i x) \\
+\mathrm{K}_n(x)=\frac{\pi}{2} i^{n+1}\left[\mathrm{~J}_n(i x)+i \mathrm{Y}_n(i x)\right]
+\end{gathered}
+\end{equation}
+
+函数 $\mathrm{I}_n(x)$ 和 $\mathrm{K}_n(x)$ 分别称为第一类和第二类修正贝塞尔函数。 $\mathrm{I}_0(x)$ 和 $\mathrm{K}_0(x)$ 如图 \ref{fig:零阶贝赛尔函数曲线} 所示。
+\end{itemize}
+\end{remark}
+
 \subsubsection*{反应堆曲率和临界计算任务}
     
     从前面的讨论知道, 稳态反应堆内中子通量密度的空间分布满足波动方程, 即
@@ -942,7 +993,7 @@ D \nabla^2 \phi(\boldsymbol{r})-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r})+k_{\inf
 \label{eq:稳态单群扩散方程450}
 \end{equation}
 
-显然, 它只对于临界系统才成立。由反应堆临界理论, 对于给定的参数 $D_c 、 \Sigma_{a}$ 和 $\Sigma_{\mathrm{f}}$ (或 $k_{\infty}$ ), 只有在一定几何形状和尺寸的情况下, 系统才能达到稳态, 方程 \eqref{eq:稳态单群扩散方程450} 才能成立, 并且有解。一般来说, 对于同时任意给定的几何形状大小和材料特性的系统, 它不一定处于稳态,方程 \eqref{eq:稳态单群扩散方程450} 不一定都成立。但是, 从物理上, 我们可以通过引人一个特征参数 $k$ 来进行调整使其达到临界, 即人为地把 $k_{\infty}$ 或每次裂变的中子产额 $\nu$ 除以参数 $k$ 。根据具体情况, 改变 $k$ 值的大小便可以使系统达到临界。因为若原来的问题是次临界的, 则我们将 $k_{\infty}$ 除以一个小于 1 的正数 $k$, 亦即人为地提高裂变产生的中子数。改变 $k$ 值大小必然可以使得系统恰好到达临界。
+显然, 它只对于临界系统才成立。由反应堆临界理论, 对于给定的参数 $D 、 \Sigma_{a}$ 和 $\Sigma_{\mathrm{f}}$ (或 $k_{\infty}$ ), 只有在一定几何形状和尺寸的情况下, 系统才能达到稳态, 方程 \eqref{eq:稳态单群扩散方程450} 才能成立, 并且有解。一般来说, 对于同时任意给定的几何形状大小和材料特性的系统, 它不一定处于稳态,方程 \eqref{eq:稳态单群扩散方程450} 不一定都成立。但是, 从物理上, 我们可以通过引人一个特征参数 $k$ 来进行调整使其达到临界, 即人为地把 $k_{\infty}$ 或每次裂变的中子产额 $\nu$ 除以参数 $k$ 。根据具体情况, 改变 $k$ 值的大小便可以使系统达到临界。因为若原来的问题是次临界的, 则我们将 $k_{\infty}$ 除以一个小于 1 的正数 $k$, 亦即人为地提高裂变产生的中子数。改变 $k$ 值大小必然可以使得系统恰好到达临界。
 反之, 若系统是超临界的, 则应除以大于 1 的 $k$ 值, 也可以使其达到临界。当系统临界时, $k=1$ 。这样, 对于任意系统, 都可以写出它的稳态单群扩散方程如下
 \begin{equation}
 D \nabla^2 \phi(\boldsymbol{r})-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r})+\frac{k_{\infty}}{k} \Sigma_{\mathrm{a}} \phi(\boldsymbol{r})=0
@@ -951,7 +1002,7 @@ D \nabla^2 \phi(\boldsymbol{r})-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r})+\frac{k
 或者写成
 \begin{equation}
 \boldsymbol{\nabla}^2 \phi(\boldsymbol{r})+B^2 \phi(\boldsymbol{r})=0
-\end{equation}其中\footnote{对于修正单群理论, 应为 $B_{\mathrm{c}}^2=\frac{k_{\infty} / k-1}{M^2}$ 。}
+\end{equation}其中\footnote{对于修正单群理论, 应为 $B^2=\frac{k_{\infty} / k-1}{M^2}$ 。}
 \begin{equation}
 B^2=\frac{k_{\infty} / k-1}{L^2}
 \end{equation}
@@ -962,7 +1013,7 @@ B^2=\frac{k_{\infty} / k-1}{L^2}
 它就是单位时间内从整个表面泄漏出去的中子数, 这样由式 \eqref{eq:稳态单群扩散方程451} 有
 \begin{equation}
 \begin{aligned}
-k_{\text {eff }} & =\frac{\int_V \nu \Sigma_i \phi_c(\boldsymbol{r}) \mathrm{d} V}{-\int_V D \nabla^2 \phi(\boldsymbol{r}) \mathrm{d} V+\int_V \Sigma_{\mathrm{a}} \phi(\boldsymbol{r}) \mathrm{d} V} \\
+k_{\text {eff }} & =\frac{\int_V \nu \Sigma_f \phi(\boldsymbol{r}) \mathrm{d} V}{-\int_V D \nabla^2 \phi(\boldsymbol{r}) \mathrm{d} V+\int_V \Sigma_{\mathrm{a}} \phi(\boldsymbol{r}) \mathrm{d} V} \\
 & =\frac{\text { 新一代中子产生率 }}{\text { 中子总消失率(泄漏率+被吸收率) }}
 \end{aligned}
 \end{equation}
