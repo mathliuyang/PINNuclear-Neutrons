@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  11 NOV 2023 03:08
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  11 NOV 2023 05:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -820,7 +820,14 @@ Package: xeCJK-listings 2022/08/05 v3.9.1 xeCJK patch file for listings
 \c@assumption=\count394
 \c@remark=\count395
 \c@property=\count396
-) (./PINNuclear-Neutrons.aux)
+) (./PINNuclear-Neutrons.aux
+
+LaTeX Warning: Label `eq:单群扩散方程的特征值问题解的无穷性' multiply defined.
+
+
+LaTeX Warning: Label `sec:均匀裸堆的单群扩散方程的解' multiply defined.
+
+)
 \openout1 = `PINNuclear-Neutrons.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
@@ -1094,43 +1101,76 @@ LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 3 unde
 
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
-[3]
+[3] [4]
 
-LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 4 undefined on input line 141.
+LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 5 undefined on input line 141.
 
-[4]
+[5]
 File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
 <./figure/链式裂变反应示意图.png>
- [5] [6]
+ [6] [7]
 File: ./figure/热中子反应堆内的中子平衡.png Graphic file (type bmp)
 <./figure/热中子反应堆内的中子平衡.png>
- [7]
+ [8]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[8]
+[9]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 304.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 305.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 304.
- [9] [10]
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 305.
+ [10]
 
-LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 11 undefined on input line 388.
+LaTeX Warning: Citation `XieZhongShengHeFanYingDuiWuLiFenXi2020' on page 11 undefined on input line 389.
 
 [11]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[12]
+[12] [13]
 File: ./figure/在两种介质分界面上的中子扩散.png Graphic file (type bmp)
 <./figure/在两种介质分界面上的中子扩散.png>
 File: ./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png Graphic file (type bmp)
 <./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png>
- [13] [14]
+ [14] [15]
 File: ./figure/无限平板形反应堆.png Graphic file (type bmp)
 <./figure/无限平板形反应堆.png>
- [15] [16] [17] [18] [19] [20]
+ [16] [17] [18] [19] [20] [21]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[21] [22]
+[22]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 [23] [24]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1244.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 1244.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1244.
+
+File: ./figure/k_eff并行搜索流程图.png Graphic file (type bmp)
+<./figure/k_eff并行搜索流程图.png>
+[25] [26]
+Overfull \hbox (8.57724pt too wide) in paragraph at lines 1309--1316
+ [][] 
+ []
+
+[27] [28]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1352.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 1352.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1352.
+
+[29] [30] [31] [32]
 No file PINNuclear-Neutrons.bbl.
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
@@ -1138,25 +1178,25 @@ File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 Package caption Warning: Unused \captionsetup[algorithm] on input line 566.
 See the caption package documentation for explanation.
 
-[25] 
+[33] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
 
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
-(rerunfilecheck)             Checksum: ABBC6A5CCA44288D5E53452BD09963B0;3393.
+(rerunfilecheck)             Checksum: A790BD7717CA9172D2AC1555580A6819;5059.
  ) 
 Here is how much of TeX's memory you used:
- 21998 strings out of 476683
- 464005 string characters out of 5804047
+ 22093 strings out of 476683
+ 467543 string characters out of 5804047
  1874018 words of memory out of 5000000
- 41787 multiletter control sequences out of 15000+600000
- 529756 words of font info for 161 fonts, out of 8000000 for 9000
+ 41866 multiletter control sequences out of 15000+600000
+ 535824 words of font info for 187 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 103i,13n,111p,1217b,692s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,19n,111p,1217b,692s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (25 pages).
+Output written on PINNuclear-Neutrons.pdf (33 pages).
