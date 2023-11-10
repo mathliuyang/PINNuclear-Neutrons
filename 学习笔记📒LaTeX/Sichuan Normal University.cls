@@ -30,6 +30,7 @@
 \WarningFilter{latexfont}{Some font shapes were not available}
 \usepackage{xcolor}
 \usepackage{wrapfig}%实现图文并排，将图片排版在文字右
+\numberwithin{figure}{section}%公式编号依赖于章节
 \numberwithin{equation}{section}%公式编号依赖于章节
 \RequirePackage{titlesec}%章节号
 \urlstyle{same}%定义url字体和正文相同

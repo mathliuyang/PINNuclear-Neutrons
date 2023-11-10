@@ -93,7 +93,7 @@ PINN模型充分利用了深度学习神经网络的通用逼近能力,同时能
 本PINNuclear-Neutrons项目笔记旨在深入理解PINN模型的原理和应用,通过推导和复现刘东老师的研究工作\cite{LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022},进一步探讨PINN模型在核反应堆设计和工程中的潜在应用.将重点关注PINN模型的工作原理、关键参数的影响以及可能的优化方向,以便更好地理解和应用这一创新方法.通过本学习笔记,希望能够为核反应堆设计和工程领域的研究人员提供有关PINNs的深入见解,以应对复杂问题和挑战.
 
 
-\section{PINN 相关理论和技术}
+\section{预备知识：PINN 相关理论和技术}
 本章的主要内容是介绍相关理论和技术,首先介绍基于物理信息的神经网络,通过这种方法可以将物理信息引入到神经网络当中,然后介绍了本文方法中所用到的二阶优化函数 L-BFGS,为了网络更快更好的优化.最后介绍了核反应堆物理的相关知识,为后文的方法介绍做好理论上的准备.
 \subsection{基于物理信息的神经网络}
 使用神经网络逼近函数从万能逼近定理被提出之后就一直是科学计算的重要方向,然而随着数据时代的到来,大数据在人工智能领域取得了巨大的成功,于是人们想通过数据驱动的方式来拟合函数,
@@ -116,7 +116,8 @@ PINN模型充分利用了深度学习神经网络的通用逼近能力,同时能
     \label{eq:损失函数}  
 \end{equation}其中 $M S E_R$ 是解的数值约束, 只对能取到解的值的点进行约束, 通过数值约束来使得神经网络拟合对应的函数; $M S E_{B C, I C}$ 是初边值条件的约束, 当一个点来自于初边值中任意一个点时, 需要满足其对应的初边值条件, 通过边值条件来限制解空间; 
 $M S E_u$ 是方程本身的约束, 对于内部区域的点, 都需要满足微分方程, 通过微分方程来限制解空间.当损失函数整体趋于零时, 可以认为神经网络很好的拟合了满足初边值条件和方程约束的解, 所以此时解方程问题变成了满足对应损失函数的优化问题, 可以使用神经网络的优化方法来求得对应方程的解.
-
+\subsubsection{正问题}
+\subsubsection{逆问题}
 \subsection{L-BFGS 优化算法}
 常用的人工智能优化算法如 $\mathrm{Adam}, \mathrm{SGD}$ 等都是在一阶梯度下降法 (Gradient Descent) 上改进的, 而 L-BFGS 是基于二阶优化算法牛顿法改进的.牛顿法作为二阶的优化算法收敛速度要远快于一阶算法的, 
 但是牛顿法需要计算海森矩阵的逆矩阵, 运算成本很高, 所以针对这个问题, 人们提出了 BFGS 算法和 L-BFGS 算法降低内存的需求, 在介绍此算法前, 先介绍牛顿法的过程.
@@ -135,7 +136,7 @@ $M S E_u$ 是方程本身的约束, 对于内部区域的点, 都需要满足微
 
 L-BFGS 仍然面临一个问题, 就是当初始点与函数最优解的点相距过远时, L-BFGS 算法可能会收敛到鞍点, 所以在本文实际应用时会先用 Adam 优化算法寻找一个最优解可能存在的区域, 再使用 L-BFGS 优化方法加快收敛的速度, 得到更好的优化结果.
 
-\section{核反应堆物理分析}
+\section{预备知识：核反应堆物理分析}
 
 核反应堆是一种能以可控方式实现自续链式核反应的装置.根据原子核产生能量的方式, 可以分为裂变反应堆和聚变反应堆两种\cite{XieZhongShengHeFanYingDuiWuLiFenXi2020}.当今世界上已建成和广泛使用的反应堆都是裂变反应堆, 聚变反应堆目前尚处于研究设计阶段.裂变反应堆通过把一个重核裂变为两个中等质量核而释放能量.它是由核燃料、冷却剂、慢化剂、结构材料和吸收剂等材料组成的一个复杂系统.按用途不同, 裂变反应堆可分为生产堆、实验堆和动力堆.按冷却剂或慢化剂的种类不同可分为轻水堆、重水堆、气冷堆和液态金属冷却快中子增殖堆.按引起裂变反应的中子能量不同,又可分为热中子反应堆和快中子反应堆.
 
@@ -538,7 +539,7 @@ d=\frac{2}{3} \lambda_{\mathrm{tr}}
 
 菲克定律是扩散理论的基础, 因而在反应堆物理分析中应用这一近似时, 应牢记上述这些限制条件.在上述菲克定律不能适用的地方, 必须应用其它更精确的方法 (例如输运理论), 或者对扩散理论所得结果作一些必要的修正.
 
-\subsection{均匀裸堆的单群理论}
+\subsection{均匀裸堆的单群理论}\label{sec:均匀裸堆的单群理论}
 对于由燃料和慢化剂组成的均匀增殖介质的反应堆系统, 根据裂变反应率的物理含义, 反应堆内单位时间、单位体积内的裂变中子源强可写为
 \begin{equation}
 S_{\mathrm{F}}(\boldsymbol{r}, t)=\nu \Sigma_{\mathrm{f}} \phi(\boldsymbol{r}, t)
@@ -567,7 +568,7 @@ k_{\infty}=\frac{\nu \Sigma_{\mathrm{f}} \phi(\boldsymbol{r})}{\Sigma_{\mathrm{a
 
 注意式中出现的 $D$ 和 $\Sigma_{\mathrm{a}}$ 都是对中子能谱平均后的数值.值得指出的是, 在工程实际中, 除了反应堆启动的初期阶段, 由于反应堆内中子通量密度水平很低, 必须考虑外源中子的影响之外, 在大多数情况下都可以忽略外中子源的影响, 认为核裂变是反应堆内中子的唯一来源.
 
-\subsubsection{均匀裸堆的单群扩散方程的解} 
+\subsubsection{均匀裸堆的单群扩散方程的解} \label{sec:均匀裸堆的单群扩散方程的解}
 本节以一个长、宽为无限大, 厚度 (包括外推距离在内) 为 $a$ 的平板裸堆为例 (见图 \ref{fig:无限平板形反应堆}),来讨论单群扩散方程所描述的核反应堆特性.选取这种假想的 “平板反应堆” 的主要原因在于一维平板几何条件十分简单, 有利于详细求解单群扩散方程.
 
 %%% 图文并排
@@ -1113,7 +1114,7 @@ B_{\mathrm{m}}^2=\frac{k_{\infty}-1}{M^2}
 这就是所谓的热中子反应堆的修正单群理论.
 修正单群理论之所以能改善计算结果, 其主要原因可以从物理上解释如下: 在单群理论中, 把所有中子都看成是热中子, 因而该理论没有考虑慢化过程对中子泄漏的影响.知道, $L^2$ 与中子从变成热中子地点开始到它被吸收为止所移动过的距离有关, $1 /\left(1+L^2 B_{\mathrm{g}}^2\right)$ 为热中子扩散过程中的不泄漏概率.但是, 在反应堆内, 实际上中子由裂变中子慢化成为热中子之前, 已经移动过了一个距离 $\tau$, 而徙动面积 $M^2=L^2+\tau$ 跟中子由核裂变产生直到它被吸收所穿行距离的均方值有关, 故若用徙动面积 $M^2=L^2+\tau$ 来代替 $L^2$, 便可初步地考虑慢化过程对泄漏的影响, 因而使计算精度得到改善.实际计算结果也证明了这一结论.因此, 以后提到单群理论一般都是指应用修正的单群理论公式, 它既简单又具有较好的精度.
 
-\subsubsection{稳态单群扩散方程}
+\subsubsection{稳态单群扩散方程}\label{sec:稳态单群扩散方程}
 当反应堆在稳态 (临界) 时, 由式 \eqref{eq:均匀裸堆的单群扩散方程42}得的中子扩散方程为
 \begin{equation}
 D \nabla^2 \phi(\boldsymbol{r})-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r})+k_{\infty} \Sigma_{\mathrm{a}} \phi(\boldsymbol{r})=0
@@ -1129,6 +1130,7 @@ D \nabla^2 \phi(\boldsymbol{r})-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r})+\frac{k
 或者写成
 \begin{equation}
 \boldsymbol{\nabla}^2 \phi(\boldsymbol{r})+B^2 \phi(\boldsymbol{r})=0
+\label{eq:均匀裸堆稳态单群扩散方程}
 \end{equation}其中\footnote{对于修正单群理论, 应为 $B^2=\frac{k_{\infty} / k-1}{M^2}$ .}
 \begin{equation}
 B^2=\frac{k_{\infty} / k-1}{L^2}
@@ -1146,7 +1148,7 @@ k_{\text {eff }} & =\frac{\int_V \nu \Sigma_f \phi(\boldsymbol{r}) \mathrm{d} V}
 \end{equation}
 这正是前面式 \eqref{eq:有效增殖系数2} 所定义的有效增殖系数.
 
-\section{基于PINN深度机器学习技术求解多维中子学扩散方程}
+\section{学习笔记：基于PINN深度机器学习技术求解多维中子学扩散方程}
 在前面的学习中，已经掌握了有关物理反应神经网络（PINN）和核反应堆物理的知识。现在，将深入学习刘东老师的论文，该论文使用PINN深度学习技术来解决多维中子学扩散方程的问题。通过对论文内容的分析，将理解深度学习在核反应堆物理中的具体应用，包括模型构建、关键技术、数值验证等方面。
 \subsection{理论原理}
 \subsubsection{中子学扩散方程模型}
@@ -1178,31 +1180,40 @@ k_{\text {eff }} & =\frac{\int_V \nu \Sigma_f \phi(\boldsymbol{r}) \mathrm{d} V}
     \caption{多群中子学扩散方程模型各项解释}
     \label{tab:terms_explanation}
     \end{table}
-式中, $\phi(r, E, t)$ 是 $t$ 时刻在 $r$ 位置处能量为 $E$ 的中子注量率; $v$ 为中子速率; $D$ 为中子扩散系数; $\vartheta$为每次裂变放出的平均中子数; $x(E)$ 是裂变中子的能谱分布; $\Sigma_{\mathrm{t}} 、 \Sigma_{\mathrm{s}}$ 和 $\Sigma_{\mathrm{f}}$ 分别是总的反应截面、散射截面和裂变截面; $S(r, E, t)$ 为外源。其单能群无外源扩散方程形式 ${ }^{[1]}$ 可写为:
+式中, $\phi(r, E, t)$ 是 $t$ 时刻在 $r$ 位置处能量为 $E$ 的中子注量率; $v$ 为中子速率; $D$ 为中子扩散系数; $\vartheta$为每次裂变放出的平均中子数; $x(E)$ 是裂变中子的能谱分布; $\Sigma_{\mathrm{t}} 、 \Sigma_{\mathrm{s}}$ 和 $\Sigma_{\mathrm{f}}$ 分别是总的反应截面、散射截面和裂变截面; $S(r, E, t)$ 为外源。
+
+其单能群存在独立的外中子源 $S_0(\boldsymbol{r}, t)$ 的扩散方程\footnote{推导细节见第\ref{sec:均匀裸堆的单群理论}节式\eqref{eq:均匀裸堆的单群扩散方程1110}}就可以写成
+\begin{align}
+\frac{1}{Dv} \frac{\partial \phi(\boldsymbol{r}, t)}{\partial t}&=\nabla^2 \phi(\boldsymbol{r}, t)+\frac{k_{\infty}-1}{L^2} \phi(\boldsymbol{r}, t)+\frac{1}{D}S_0(\boldsymbol{r}, t)
+\end{align}
+
+其单能群无外源扩散方程\footnote{推导细节见第\ref{sec:均匀裸堆的单群扩散方程的解}节式\eqref{eq:单群扩散方程}}形式可写为:
 \begin{equation}
 \frac{1}{D v} \frac{\partial \phi(r, t)}{\partial t}=\nabla^2 \phi(r, t)+\frac{k_{\infty}-1}{L^2} \phi(r, t)
+\label{eq:单群扩散方程(lw)}
 \end{equation}
-式中, $L$ 为扩散长度; $k_{\infty}$ 为无限介质增殖系数。当系统处于稳态时, 式 (2) 形式 ${ }^{[1]}$ 为:
+式中, $L$ 为扩散长度; $k_{\infty}$ 为无限介质增殖系数。当系统处于稳态\footnote{推导细节见第\ref{sec:稳态单群扩散方程}节式\eqref{eq:均匀裸堆稳态单群扩散方程}}时, 式 \eqref{eq:单群扩散方程(lw)} 形式为:
 \begin{equation}
 \nabla^2 \phi(r)+\frac{k_{\infty} / k_{\text {eff }}-1}{L^2} \phi(r)=0
+\label{eq:均匀裸堆稳态单群扩散方程(lw)}
 \end{equation}
 
-当系统处于临界状态 $\left(k_{\mathrm{eff}}=1\right)$ 时, 式 (3)的形式 ${ }^{[1]}$ 为:
+当系统处于临界状态 $\left(k_{\mathrm{eff}}=1\right)$ 时, 式 (3)的形式为:
 \begin{equation}
 \nabla^2 \phi(r)+B_g^2 \phi(r)=0
 \end{equation}
 式中, $B_g^2$ 为系统临界时的几何曲率, 与系统的几何特性相关，临界时等于材料曲率。
 
-式 (1) 式 (4) 可描述为统一的两阶偏微分方程形式 ${ }^{[3]}$ :
+式 \eqref{eq:多群中子学扩散方程模型}  $\sim$ 式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 可描述为统一的两阶偏微分方程形式:
 \begin{equation}
 F\left[\vec{x}, \phi(\vec{x}), \nabla \phi(\vec{x}), \nabla^2 \phi(\vec{x})\right]=0
 \end{equation}
 式中， $\vec{x}$ 为扩散方程几何描述空间向量。
 
-% \subsubsection{PINN基本原理与数值计算流程}
+\subsubsection{利用PINN求解扩散方程的关键技术}
+利用PINN基本模型(PINN 网络结构见图 \ref{fig:PINN Network Structure})求解微分方程具有一定的普适性，但将其直接应用于中子学扩散方程， 精度与收敛性上会出现一定的困难，需要针对扩散方程的特点进行改进与完善。
+\subsubsection{扩散方程特征向量加速收敛方法}
 
-% \subsection{利用PINN求解扩散方程的关键技术}
-% \subsubsection{扩散方程特征向量加速收敛方法}
 % \subsubsection{$k_{\text{eff}}$并行搜索方法}
 % \subsubsection{几何空间网格点密度不均匀分布策略}
 % \subsubsection{深度机器学习的超参数设置}
