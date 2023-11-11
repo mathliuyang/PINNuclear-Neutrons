@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  12 NOV 2023 04:14
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  12 NOV 2023 05:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -820,7 +820,14 @@ Package: xeCJK-listings 2022/08/05 v3.9.1 xeCJK patch file for listings
 \c@assumption=\count394
 \c@remark=\count395
 \c@property=\count396
-) (./PINNuclear-Neutrons.aux)
+) (./PINNuclear-Neutrons.aux
+
+LaTeX Warning: Label `eq:单群扩散方程的特征值问题解的无穷性' multiply defined.
+
+
+LaTeX Warning: Label `sec:均匀裸堆的单群扩散方程的解' multiply defined.
+
+)
 \openout1 = `PINNuclear-Neutrons.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
@@ -1072,47 +1079,44 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 (fontspec)             <->"STFangsong/OT:language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
-(./PINNuclear-Neutrons.toc)
+(./PINNuclear-Neutrons.toc [1
+
+])
 \tf@toc=\write4
 \openout4 = `PINNuclear-Neutrons.toc'.
 
+ [2]
+File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
+<use ./figure/PINN网络结构图.pdf>
+ [3] [4]
+File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
+<./figure/链式裂变反应示意图.png>
+ [5] [6] [7]
+File: ./figure/热中子反应堆内的中子平衡.png Graphic file (type bmp)
+<./figure/热中子反应堆内的中子平衡.png>
 
-
-LaTeX Warning: Citation `lagarisArtificialNeuralNetworks1998' on page 1 undefined on input line 89.
-
-
-LaTeX Warning: Citation `raissiPhysicsinformedNeuralNetworks2019' on page 1 undefined on input line 89.
-
-[1
-
-]
-
-LaTeX Warning: Citation `LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022' on page 2 undefined on input line 93.
-
-[2]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-
-LaTeX Warning: Reference `sec:均匀裸堆的单群理论' on page 3 undefined on input line 1191.
-
-
-LaTeX Warning: Reference `eq:均匀裸堆的单群扩散方程1110' on page 3 undefined on input line 1191.
-
-
-LaTeX Warning: Reference `eq:单群扩散方程' on page 3 undefined on input line 1196.
-
-
-LaTeX Warning: Reference `sec:稳态单群扩散方程' on page 3 undefined on input line 1203.
-
-
-LaTeX Warning: Reference `eq:均匀裸堆稳态单群扩散方程' on page 3 undefined on input line 1203.
-
-[3]
-
-LaTeX Warning: Reference `fig:PINN Network Structure' on page 4 undefined on input line 1223.
-
-
-LaTeX Warning: Reference `eq:边界条件' on page 4 undefined on input line 1226.
-
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[8]
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 305.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 305.
+ [9] [10] [11]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[12]
+File: ./figure/在两种介质分界面上的中子扩散.png Graphic file (type bmp)
+<./figure/在两种介质分界面上的中子扩散.png>
+File: ./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png Graphic file (type bmp)
+<./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png>
+ [13] [14]
+File: ./figure/无限平板形反应堆.png Graphic file (type bmp)
+<./figure/无限平板形反应堆.png>
+ [15] [16] [17] [18] [19] [20]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[21] [22]
+Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
+[23]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1244.
@@ -1125,15 +1129,15 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1244.
 
-[4]
+[24]
 File: ./figure/k_eff并行搜索流程图.png Graphic file (type bmp)
 <./figure/k_eff并行搜索流程图.png>
- [5] [6]
+ [25]
 
 Package fontspec Warning: Font "STFangsong" does not contain requested Script
 (fontspec)                "CJK".
 
-[7] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+[26] (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 
@@ -1156,52 +1160,59 @@ Package fontspec Info: Font family 'CourierNew(0)' created for font 'Courier
 (fontspec)             New/BI/OT:script=latn;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
-
-
-LaTeX Warning: Reference `eq:边界条件' on page 8 undefined on input line 1347.
-
-[8]
-Overfull \hbox (30.89587pt too wide) in paragraph at lines 1393--1394
-[][][][] 
- []
-
-[9] [10] [11]
+ [27] [28] [29] [30]
 File: ./figure/算例1/losshistory.png Graphic file (type bmp)
 <./figure/算例1/losshistory.png>
+File: ./figure/算例2/losshistory.png Graphic file (type bmp)
+<./figure/算例2/losshistory.png>
 File: ./figure/算例1/solution_state.png Graphic file (type bmp)
 <./figure/算例1/solution_state.png>
- [12]
+File: ./figure/算例2/solution_state.png Graphic file (type bmp)
+<./figure/算例2/solution_state.png>
+ [31]
 File: ./figure/算例1/y_test.png Graphic file (type bmp)
 <./figure/算例1/y_test.png>
+File: ./figure/算例2/y_test.png Graphic file (type bmp)
+<./figure/算例2/y_test.png>
+ [32]
+File: ./figure/算例2/硬边界/solution_state.png Graphic file (type bmp)
+<./figure/算例2/硬边界/solution_state.png>
+File: ./figure/算例2/硬边界/y_test.png Graphic file (type bmp)
+<./figure/算例2/硬边界/y_test.png>
+ [33]
 
+LaTeX Warning: Reference `eq:瞬态扩散方程解析解10' on page 34 undefined on input line 1695.
 
-LaTeX Warning: Reference `eq:瞬态扩散方程解析解10' on page 13 undefined on input line 1635.
+(./PINNuclear-Neutrons.bbl
+Overfull \vbox (1.10954pt too high) has occurred while \output is active []
 
-[13]
-No file PINNuclear-Neutrons.bbl.
+ [34])
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
-[14]
+
 
 Package caption Warning: Unused \captionsetup[algorithm] on input line 566.
 See the caption package documentation for explanation.
 
-[15] 
+[35] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
-(rerunfilecheck)             Checksum: 85251E53C2EF12E061B7B103823E17C3;1927.
+(rerunfilecheck)             Checksum: F1C50FC1DE33CBA45C16EB28F9C6C6A2;4203.
  ) 
 Here is how much of TeX's memory you used:
- 22522 strings out of 476683
- 474824 string characters out of 5804047
- 2299018 words of memory out of 5000000
- 42280 multiletter control sequences out of 15000+600000
- 534964 words of font info for 193 fonts, out of 8000000 for 9000
+ 22724 strings out of 476683
+ 479628 string characters out of 5804047
+ 2303018 words of memory out of 5000000
+ 42457 multiletter control sequences out of 15000+600000
+ 535968 words of font info for 205 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,13n,111p,1217b,1956s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (15 pages).
+Output written on PINNuclear-Neutrons.pdf (35 pages).

@@ -65,23 +65,27 @@ def pde(x, phi):
     return dphi_xx + B2 * phi
 
 
-# 定义边界条件
-bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
+# # 定义边界条件
+# bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
 # 扩散方程特征向量加速收敛方法验证
 observe_x = np.array([0])
 observe_phi0 = dde.icbc.PointSetBC(observe_x, phi_analytical(observe_x))
 # 定义数据
-data = dde.data.PDE(geom, pde, [bc,observe_phi0], num_domain=898, num_boundary=2, anchors=observe_x, solution=phi_analytical, num_test=900)
+data = dde.data.PDE(geom, pde, [observe_phi0], num_domain=898, num_boundary=2, anchors=observe_x, solution=phi_analytical, num_test=900)
 # 定义神经网络
 layer_size = [1] + [s] * l + [1]
 activation = "tanh"
 # 网络初始值权重采用高斯分布随机采样
 initializer = "Glorot uniform"
 net = dde.nn.PFNN(layer_size, activation, initializer)
+# 定义硬边界条件
+def output_transform(x, y):
+    return (x + a / 2) * (x - a / 2) * y
+net.apply_output_transform(output_transform)
 # 定义模型
 model = dde.Model(data, net)
 # 定义求解器
-model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pb, Pc])
+model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pc])
 # 训练模型
 losshistory, train_state = model.train(epochs=3500)
 # 保存和可视化训练结果
@@ -93,7 +97,7 @@ print("Predicted value at x=0:", model.predict(np.array([0])))
 # ---------------------------------------------------------------------------------------------
 # 可视化
 # 创建保存图像的文件夹
-output_folder = "figure/算例2"
+output_folder = "figure/算例2/硬边界"
 os.makedirs(output_folder, exist_ok=True)
 
 # 设置中文字体

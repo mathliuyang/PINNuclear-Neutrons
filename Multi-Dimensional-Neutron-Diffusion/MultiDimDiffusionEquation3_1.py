@@ -97,7 +97,7 @@ plt.rcParams['axes.unicode_minus'] = False
 loss_train = np.sum(losshistory.loss_train, axis=1)
 loss_test = np.sum(losshistory.loss_test, axis=1)
 
-plt.figure(figsize=(10, 6))  # 设置图像大小
+plt.figure(figsize=(6, 5))  # 设置图像大小
 plt.semilogy(losshistory.steps, loss_train, label="训练损失")
 plt.semilogy(losshistory.steps, loss_test, label="测试损失")
 for i in range(len(losshistory.metrics_test[0])):
@@ -106,7 +106,7 @@ for i in range(len(losshistory.metrics_test[0])):
         np.array(losshistory.metrics_test)[:, i],
         label="测试指标",
     )
-plt.xlabel("# 步骤")
+plt.xlabel("步骤")
 plt.legend()
 # 保存为png
 plt.tight_layout()
@@ -139,7 +139,7 @@ y_dim = best_y.shape[1]
 if train_state.X_test.shape[1] == 1:
     idx = np.argsort(train_state.X_test[:, 0])
     X = train_state.X_test[idx, 0]
-    plt.figure(figsize=(12, 5))  # 设置图像大小
+    plt.figure(figsize=(6, 5))  # 设置图像大小
     for i in range(y_dim):
         if y_train is not None:
             plt.plot(train_state.X_train[:, 0], y_train[:, i], "ok", label="训练点分布")
