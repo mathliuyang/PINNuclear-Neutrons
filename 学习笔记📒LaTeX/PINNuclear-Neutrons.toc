@@ -1,33 +1,12 @@
-\contentsline {section}{\numberline {1}预备知识：PINN 相关理论和技术}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}基于物理信息的神经网络}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}L-BFGS 优化算法}{4}{subsection.1.2}%
-\contentsline {section}{\numberline {2}预备知识：核反应堆物理分析}{5}{section.2}%
-\contentsline {subsection}{\numberline {2.1}裂变能量的释放}{5}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}链式裂变反应}{6}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}热中子反应堆内的中子循环}{8}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}单能中子扩散方程}{10}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}扩散方程边界条件}{13}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}菲克定律和扩散理论的适用范围}{14}{subsubsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.5}均匀裸堆的单群理论}{15}{subsection.2.5}%
-\contentsline {subsubsection}{\numberline {2.5.1}均匀裸堆的单群扩散方程的解}{16}{subsubsection.2.5.1}%
-\contentsline {subsubsection}{\numberline {2.5.2}热中子反应堆的临界条件}{18}{subsubsection.2.5.2}%
-\contentsline {subsubsection}{\numberline {2.5.3}反应堆曲率和临界计算任务}{20}{subsubsection.2.5.3}%
-\contentsline {subsubsection}{\numberline {2.5.4}单群理论的修正}{21}{subsubsection.2.5.4}%
-\contentsline {subsubsection}{\numberline {2.5.5}稳态单群扩散方程}{22}{subsubsection.2.5.5}%
-\contentsline {section}{\numberline {3}学习笔记：基于PINN深度机器学习技术求解多维中子学扩散方程}{23}{section.3}%
-\contentsline {subsection}{\numberline {3.1}理论原理}{23}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}中子学扩散方程模型}{23}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}利用PINN求解扩散方程的关键技术}{24}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}扩散方程特征向量加速收敛方法}{24}{subsubsection.3.1.3}%
-\contentsline {subsubsection}{\numberline {3.1.4}$k_{\text {eff}}$并行搜索方法}{25}{subsubsection.3.1.4}%
-\contentsline {subsubsection}{\numberline {3.1.5}几何空间网格点密度不均匀分布策略}{26}{subsubsection.3.1.5}%
-\contentsline {subsection}{\numberline {3.2}数值验证程序复现}{27}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}深度机器学习的超参数设置}{27}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}临界条件下稳态扩散方程的验证}{27}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}扩散方程特征向量加速收敛方法验证}{28}{subsubsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.4}瞬态条件扩散方程求解及$k_{\text {eff}}$搜索方法验证}{29}{subsubsection.3.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.5}网格点不均匀分布策略验证}{30}{subsubsection.3.2.5}%
-\contentsline {subsubsection}{\numberline {3.2.6}深度神经网络超参数敏感性验证}{31}{subsubsection.3.2.6}%
-\contentsline {subsubsection}{\numberline {3.2.7}边界条件损失函数权重敏感性分析验证}{32}{subsubsection.3.2.7}%
-\contentsline {subsubsection}{\numberline {3.2.8}结论}{32}{subsubsection.3.2.8}%
-\contentsline {section}{\numberline {4}结束语}{33}{section.4}%
+\contentsline {section}{\numberline {1}学习笔记：基于PINN深度机器学习技术求解多维中子学扩散方程}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}理论原理}{2}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}中子学扩散方程模型}{2}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}利用PINN求解扩散方程的关键技术}{4}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}扩散方程特征向量加速收敛方法}{4}{subsubsection.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.4}$k_{\text {eff}}$并行搜索方法}{5}{subsubsection.1.1.4}%
+\contentsline {subsubsection}{\numberline {1.1.5}几何空间网格点密度不均匀分布策略}{6}{subsubsection.1.1.5}%
+\contentsline {subsection}{\numberline {1.2}数值验证程序复现}{7}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}深度机器学习的超参数设置}{7}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}临界条件下稳态扩散方程的验证}{7}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}扩散方程特征向量加速收敛方法验证}{13}{subsubsection.1.2.3}%
+\contentsline {section}{\numberline {2}结束语}{14}{section.2}%
