@@ -73,17 +73,34 @@
 % \comment{\dag~同等贡献}
 %\encomment{\dag~Equal contribution}
 
-\abstract{PINNuclear-Neutrons 项目旨在学习和复现核反应堆中子相关问题的解决方法,使用物理反应神经网络（PINN）和深度机器学习技术.的主要目标是重新实现刘东老师团队发表的“基于PINN深度机器学习技术求解多维中子学扩散方程”,以更准确地模拟中子传输.
-鼓励对核能技术和深度学习感兴趣的研究人员和学生参与到这个项目中.在各个子目录中,您将找到有关每个主题的详细说明和示例.}
+\abstract{PINNuclear-Neutrons项目的主要目标在于学习并复现刘东老师团队的核反应堆物理学论文,该论文通过物理反应神经网络（PINN）和深度学习技术解决多维中子学扩散方程,以实现对中子传输的精确模拟,为核能技术提供高效准确的数值求解方法.
 
-\enabstract{PINNuclear-Neutrons project aims to learn and reproduce the solution of neutron related problems in nuclear reactor, using physical reaction neural network (PINN) and deep machine learning technology. Our main goal is to re-implement the "Solving Multidimensional Neutron Diffusion Equation Based on PINN Deep Machine Learning Technology" published by Liu Dong's team, so as to simulate neutron transport more accurately.}
+在学习过程中,首先深入探讨了PINN和L-BFGS优化算法等核心知识,并系统性学习了核反应堆物理分析的基础知识,包括裂变能量释放、链式裂变反应、热中子反应堆中子循环等,为后续中子学扩散方程的学习奠定了基础.
+
+对刘东老师的论文《基于PINN深度机器学习技术求解多维中子学扩散方程》的深入研读中,全面总结了其中提及的中子学扩散方程模型以及PINN的应用.特别关注了论文提出的特征值方程加速收敛方法、$k_{\text{eff}}$高效并行搜索方法、样本网格点不均匀分布策略等关键技术,并通过数值验证程序的复现验证了这些方法在不同条件下的有效性.
+
+在实际算法程序的复现实践中,通过深度机器学习的超参数设置和临界条件下稳态扩散方程的验证,解决了一系列问题,同时也发现了一些理论上的疑虑.尽管项目中仍存在理解上的挑战,但这一过程为对PINN和深度学习在核反应堆物理中子学领域应用的深刻认识提供了支持.
+
+未来,将进一步深入探讨并拓展这一方法在反应堆物理中子学领域的应用,同时期待将其应用于更广泛的工程实际问题.通过学习这篇论文,对深度学习技术在解决科学与工程问题中的潜力有了更为清晰的认识,为进一步的学术研究提供了新的思路和启示.}
+
+\enabstract{The primary objective of the PINNuclear-Neutrons project is to study and replicate the research conducted by Professor Liu Dong's team in the field of nuclear reactor physics. Their paper explores the application of Physics-Informed Neural Networks (PINN) and deep learning techniques to solve the multi-dimensional neutron diffusion equations. The project aims to achieve accurate simulation of neutron transport, providing an efficient and precise numerical solution for nuclear energy applications.
+During the learning process, a comprehensive exploration of core concepts such as PINN and the L-BFGS optimization algorithm was undertaken. Foundational knowledge in nuclear reactor physics analysis was systematically acquired, encompassing fundamental concepts like fission energy release, chain reaction fission, and neutron circulation in thermal neutron reactors, laying the groundwork for subsequent studies on neutron diffusion equations.
+In the in-depth review of Professor Liu Dong's paper titled "Solving Multi-dimensional Neutron Diffusion Equations using PINN Deep Machine Learning Technology," a thorough summary of the neutron diffusion equation models and the application of PINN was provided. Special attention was given to key techniques proposed in the paper, including the acceleration method for eigenvalue convergence, efficient parallel search for $k_{\text{eff}}$, and strategies for uneven distribution of sample grid points. These techniques were validated through the reproduction of numerical verification procedures under different conditions, confirming their effectiveness.
+In the practical implementation of the algorithm, challenges were addressed through the fine-tuning of hyperparameters in deep machine learning and the validation of steady-state diffusion equations under critical conditions. While certain theoretical ambiguities persisted throughout the project, the process significantly contributed to a profound understanding of the application of PINN and deep learning in the domain of neutron physics in nuclear reactors.
+Looking ahead, there is a commitment to further explore and expand the application of this methodology in the field of neutron physics in reactor physics. Simultaneously, there is an anticipation of its application to a broader spectrum of engineering challenges. Through the study of this paper, a clearer understanding of the immense potential of deep learning techniques in addressing scientific and engineering problems has emerged, providing novel perspectives and insights for future academic research.}
 
 \keywords{基于物理信息指引的神经网络模型; 深度学习; 核反应堆; 中子学扩散方程}
 
 \enkeywords{PINN; Deep Learning; Nuclear Reactor; Neutron Diffusion Equation}
 
 \maketitle
+\newpage
 \tableofcontents  % 生成目录
+\clearpage % 使用\clearpage分页，使图表索引独立于文档目录
+
+\listoffigures % 生成图表索引
+
+\newpage
 \section*{引言}
 随着人工智能技术的迅猛发展,深度学习神经网络（DNNs）在解决复杂偏微分方程（PDE）的领域引起了广泛的兴趣.在核反应堆设计和工程领域,中子学扩散模型是核反应堆工程设计的重要组成部分.传统的中子扩散模型采用有限差分法（FDM）和有限元法（FEM）等数值方法进行求解,这些方法在工程实践中取得了显著的成功.
 然而,随着深度学习技术的不断发展,一种新的方法已经崭露头角,即基于物理信息指导的神经网络模型（PINN）,它在解决微分方程方面展现出巨大潜力.DNNs首次用于解微分方程是在1998年由Lagaris提出的\cite{lagarisArtificialNeuralNetworks1998},后来由Raissi和Karniadakis进一步发展成为基于物理信息的神经网络（PINNs）\cite{raissiPhysicsinformedNeuralNetworks2019},
@@ -91,7 +108,6 @@
 PINN模型充分利用了深度学习神经网络的通用逼近能力,同时能够处理多维高阶复杂微分方程.与传统数值方法相比,PINNs具有多方面的优势,包括无需事先收集大量训练数据、适用于正向和反向问题、无空间几何限制等.因此,PINNs已经引起了广泛的研究兴趣,并在热传递、结构动力学、流体力学、固体力学以及核反应堆动力学等多个领域取得了重要突破.
 
 本PINNuclear-Neutrons项目笔记旨在深入理解PINN模型的原理和应用,通过推导和复现刘东老师的研究工作\cite{LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022},进一步探讨PINN模型在核反应堆设计和工程中的潜在应用.将重点关注PINN模型的工作原理、关键参数的影响以及可能的优化方向,以便更好地理解和应用这一创新方法.通过本学习笔记,希望能够为核反应堆设计和工程领域的研究人员提供有关PINNs的深入见解,以应对复杂问题和挑战.
-
 
 \section{预备知识：PINN 相关理论和技术}
 本章的主要内容是介绍相关理论和技术,首先介绍基于物理信息的神经网络,通过这种方法可以将物理信息引入到神经网络当中,然后介绍了本文方法中所用到的二阶优化函数 L-BFGS,为了网络更快更好的优化.最后介绍了核反应堆物理的相关知识,为后文的方法介绍做好理论上的准备.
@@ -219,16 +235,6 @@ L-BFGS 仍然面临一个问题, 就是当初始点与函数最优解的点相�
 \subsection{热中子反应堆内的中子循环}
 为了讨论反应堆内中子产生和消亡之间的平衡关系, 人为地将中子分成一代一代来处理是有益的.热中子反应堆内每代中子循环, 可以近似地用图 \ref{fig:热中子反应堆内的中子平衡} 表示.下面将对这一循环过程作进一步讨论.从以上的讨论可以知道, 反应堆内中子数目的增减与平衡, 主要取决于下列几个过程.
 
-(1) ${ }^{238} \mathrm{U}$ 的快中子增殖.
-
-(2) 慢化过程中的共振吸收.
-
-(3) 慢化剂以及结构材料等物质的辐射俘获.
-
-(4) 燃料吸收热中子引起的裂变.
-
-（5）中子的泄漏.包括：慢化过程中的泄漏; 热中子扩散过程中的泄漏.
-
 %%% 图文并排
 \begin{wrapfigure}{r}{0.3\textwidth}
     \centering
@@ -238,6 +244,16 @@ L-BFGS 仍然面临一个问题, 就是当初始点与函数最优解的点相�
     \label{fig:热中子反应堆内的中子平衡}
   \end{wrapfigure}
 反应堆内中子数目的变化取决于上述 5 种过程竞争的结果.其中快中子增殖和燃料裂变将使反应堆内的中子数目增加, 其它过程使中子数目减少.为了定量计算, 就以上 5 个过程, 定义以下 5 个参量.
+
+(1) ${ }^{238} \mathrm{U}$ 的快中子增殖.
+
+(2) 慢化过程中的共振吸收.
+
+(3) 慢化剂以及结构材料等物质的辐射俘获.
+
+(4) 燃料吸收热中子引起的裂变.
+
+（5）中子的泄漏.包括：慢化过程中的泄漏; 热中子扩散过程中的泄漏.
 
 (1) 快中子增殖系数 $\varepsilon$ .它的定义: 由一个初始裂变中子所得到的、慢化到 ${ }^{238} \mathrm{U}$ 裂变阈能以下的平均中子数.由于初始裂变中子中, 大约有 $60 \%$ 的中子的能量在 ${ }^{238} \mathrm{U}$ 裂变阈能 (1. $1 \mathrm{MeV})$ 以上, 这些中子与 ${ }^{238} \mathrm{U}$ 核作用时, 有一部分能引起 ${ }^{238} \mathrm{U}$ 裂变而产生快中子, 这一过程称为 ${ }^{238} \mathrm{U}$ 的快中子增殖效应.
 
@@ -569,7 +585,7 @@ k_{\infty}=\frac{\nu \Sigma_{\mathrm{f}} \phi(\boldsymbol{r})}{\Sigma_{\mathrm{a
 
 注意式中出现的 $D$ 和 $\Sigma_{\mathrm{a}}$ 都是对中子能谱平均后的数值.值得指出的是, 在工程实际中, 除了反应堆启动的初期阶段, 由于反应堆内中子通量密度水平很低, 必须考虑外源中子的影响之外, 在大多数情况下都可以忽略外中子源的影响, 认为核裂变是反应堆内中子的唯一来源.
 
-\subsubsection{均匀裸堆的单群扩散方程的解} \label{sec:均匀裸堆的单群扩散方程的解}
+\subsubsection{均匀裸堆的单群扩散方程的解}\label{sec:均匀裸堆的单群扩散方程的解}
 本节以一个长、宽为无限大, 厚度 (包括外推距离在内) 为 $a$ 的平板裸堆为例 (见图 \ref{fig:无限平板形反应堆}),来讨论单群扩散方程所描述的核反应堆特性.选取这种假想的 “平板反应堆” 的主要原因在于一维平板几何条件十分简单, 有利于详细求解单群扩散方程.
 
 %%% 图文并排
@@ -1123,7 +1139,7 @@ D \nabla^2 \phi(\boldsymbol{r})-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r})+k_{\inf
 \label{eq:稳态单群扩散方程450}
 \end{equation}
 
-显然, 它只对于临界系统才成立.由反应堆临界理论, 对于给定的参数 $D 、 \Sigma_{a}$ 和 $\Sigma_{\mathrm{f}}$ (或 $k_{\infty}$ ), 只有在一定几何形状和尺寸的情况下, 系统才能达到稳态, 方程 \eqref{eq:稳态单群扩散方程450} 才能成立, 并且有解.一般来说, 对于同时任意给定的几何形状大小和材料特性的系统, 它不一定处于稳态,方程 \eqref{eq:稳态单群扩散方程450} 不一定都成立.但是, 从物理上, 可以通过引人一个特征参数 $k$ 来进行调整使其达到临界, 即人为地把 $k_{\infty}$ 或每次裂变的中子产额 $\nu$ 除以参数 $k$ .根据具体情况, 改变 $k$ 值的大小便可以使系统达到临界.因为若原来的问题是次临界的, 则将 $k_{\infty}$ 除以一个小于 1 的正数 $k$, 亦即人为地提高裂变产生的中子数.改变 $k$ 值大小必然可以使得系统恰好到达临界.
+显然, 它只对于临界系统才成立.由反应堆临界理论, 对于给定的参数 $D 、 \Sigma_{a}$ 和 $\Sigma_{\mathrm{f}}$ (或 $k_{\infty}$ ), 只有在一定几何形状和尺寸的情况下, 系统才能达到稳态, 方程 \eqref{eq:稳态单群扩散方程450} 才能成立, 并且有解.一般来说, 对于同时任意给定的几何形状大小和材料特性的系统, 它不一定处于稳态,方程 \eqref{eq:稳态单群扩散方程450} 不一定都成立.但是, 从物理上, 可以通过引入一个特征参数 $k$ 来进行调整使其达到临界, 即人为地把 $k_{\infty}$ 或每次裂变的中子产额 $\nu$ 除以参数 $k$ .根据具体情况, 改变 $k$ 值的大小便可以使系统达到临界.因为若原来的问题是次临界的, 则将 $k_{\infty}$ 除以一个小于 1 的正数 $k$, 亦即人为地提高裂变产生的中子数.改变 $k$ 值大小必然可以使得系统恰好到达临界.
 反之, 若系统是超临界的, 则应除以大于 1 的 $k$ 值, 也可以使其达到临界.当系统临界时, $k=1$ .这样, 对于任意系统, 都可以写出它的稳态单群扩散方程如下
 \begin{equation}
 D \nabla^2 \phi(\boldsymbol{r})-\Sigma_{\mathrm{a}} \phi(\boldsymbol{r})+\frac{k_{\infty}}{k} \Sigma_{\mathrm{a}} \phi(\boldsymbol{r})=0
@@ -1150,8 +1166,9 @@ k_{\text {eff }} & =\frac{\int_V \nu \Sigma_f \phi(\boldsymbol{r}) \mathrm{d} V}
 \end{equation}
 这正是前面式 \eqref{eq:有效增殖系数2} 所定义的有效增殖系数.
 
+
 \section{学习笔记：基于PINN深度机器学习技术求解多维中子学扩散方程}
-在前面的学习中，已经掌握了有关物理反应神经网络（PINN）和核反应堆物理的知识。现在，将深入学习刘东老师的论文，该论文使用PINN深度学习技术来解决多维中子学扩散方程的问题。通过对论文内容的分析，将理解深度学习在核反应堆物理中的具体应用，包括模型构建、关键技术、数值验证等方面。
+在前面的学习中,已经掌握了有关物理反应神经网络（PINN）和核反应堆物理的知识.现在,将深入学习刘东老师的论文,该论文使用PINN深度学习技术来解决多维中子学扩散方程的问题.通过对论文内容的分析,将理解深度学习在核反应堆物理中的具体应用,包括模型构建、关键技术、数值验证等方面.
 \subsection{理论原理}
 \subsubsection{中子学扩散方程模型}
 核反应堆工程堆芯中子学设计计算中采用中子扩散模型的方程形式如式 \eqref{eq:多群中子学扩散方程模型} 所示:
@@ -1164,8 +1181,9 @@ k_{\text {eff }} & =\frac{\int_V \nu \Sigma_f \phi(\boldsymbol{r}) \mathrm{d} V}
     \end{aligned}
     \label{eq:多群中子学扩散方程模型}
     \end{equation}
-方程 \eqref{eq:多群中子学扩散方程模型} 是核反应堆中描述中子行为的重要方程，其各项的物理意义(表 \ref{tab:terms_explanation} )对于理解中子守恒和核反应堆的性能至关重要。
+方程 \eqref{eq:多群中子学扩散方程模型} 是核反应堆中描述中子行为的重要方程,其各项的物理意义(表 \ref{tab:terms_explanation} )对于理解中子守恒和核反应堆的性能至关重要.
 \begin{table}[H]
+    \caption{多群中子学扩散方程模型各项解释}
     \centering
     \begin{tabular}{ccc}
     \toprule
@@ -1179,14 +1197,13 @@ k_{\text {eff }} & =\frac{\int_V \nu \Sigma_f \phi(\boldsymbol{r}) \mathrm{d} V}
     \textcolor{brown}{\(\int_0^{\infty} \Sigma_{\mathrm{s}}\left(r, E^{\prime} \rightarrow E\right) \phi\left(r, E^{\prime}, t\right) \mathrm{d} E^{\prime}\)} && \textcolor{brown}{散射项} \\
     \bottomrule
     \end{tabular}
-    \caption{多群中子学扩散方程模型各项解释}
     \label{tab:terms_explanation}
     \end{table}
-式中, $\phi(r, E, t)$ 是 $t$ 时刻在 $r$ 位置处能量为 $E$ 的中子注量率\footnote{在研究辐射和与能量沉积有关的问题时, 相应通量密度的总照射量常用注量 (fluence) 来度量。根据国际辐射单位和测量委员会定义, 在空间 $r$ 处单位时间内进人以该点为中心的单位横截面的小球体内的中子数称为该点的中子注量率 (neutron fluence rate),一般以 $\phi$ 表示,中子 $/\left(\mathrm{m}^2 \cdot \mathrm{s}\right)$ 。因而 $\Delta t$ 时间内的注量 $F(\boldsymbol{r})$ 为
+式中, $\phi(r, E, t)$ 是 $t$ 时刻在 $r$ 位置处能量为 $E$ 的中子注量率\footnote{在研究辐射和与能量沉积有关的问题时, 相应通量密度的总照射量常用注量 (fluence) 来度量.根据国际辐射单位和测量委员会定义, 在空间 $r$ 处单位时间内进人以该点为中心的单位横截面的小球体内的中子数称为该点的中子注量率 (neutron fluence rate),一般以 $\phi$ 表示,中子 $/\left(\mathrm{m}^2 \cdot \mathrm{s}\right)$ .因而 $\Delta t$ 时间内的注量 $F(\boldsymbol{r})$ 为
 $$
 F(\boldsymbol{r})=\int_{t_1}^{t_1+\Delta t} \phi(\boldsymbol{r}, t) \mathrm{d} t
 $$
-根据中子通量密度定义, 显然中子注量率就等于中子通量密度。在我国国家标准( GB/T 3102.10-1993 和 GB/T 4960.2-1996) 中, 这两个名词都是允许使用的。}; $v$ 为中子速率; $D$ 为中子扩散系数; $\vartheta$为每次裂变放出的平均中子数; $x(E)$ 是裂变中子的能谱分布; $\Sigma_{\mathrm{t}} 、 \Sigma_{\mathrm{s}}$ 和 $\Sigma_{\mathrm{f}}$ 分别是总的反应截面、散射截面和裂变截面; $S(r, E, t)$ 为外源。
+根据中子通量密度定义, 显然中子注量率就等于中子通量密度.在我国国家标准( GB/T 3102.10-1993 和 GB/T 4960.2-1996) 中, 这两个名词都是允许使用的.}; $v$ 为中子速率; $D$ 为中子扩散系数; $\vartheta$为每次裂变放出的平均中子数; $x(E)$ 是裂变中子的能谱分布; $\Sigma_{\mathrm{t}} 、 \Sigma_{\mathrm{s}}$ 和 $\Sigma_{\mathrm{f}}$ 分别是总的反应截面、散射截面和裂变截面; $S(r, E, t)$ 为外源.
 
 其单能群存在独立的外中子源 $S_0(\boldsymbol{r}, t)$ 的扩散方程\footnote{推导细节见第\ref{sec:均匀裸堆的单群理论}节式\eqref{eq:均匀裸堆的单群扩散方程1110}}就可以写成
 \begin{align}
@@ -1198,7 +1215,7 @@ $$
 \frac{1}{D v} \frac{\partial \phi(r, t)}{\partial t}=\nabla^2 \phi(r, t)+\frac{k_{\infty}-1}{L^2} \phi(r, t)
 \label{eq:单群扩散方程(lw)}
 \end{equation}
-式中, $L$ 为扩散长度; $k_{\infty}$ 为无限介质增殖系数。
+式中, $L$ 为扩散长度; $k_{\infty}$ 为无限介质增殖系数.
 
 当系统处于稳态\footnote{推导细节见第\ref{sec:稳态单群扩散方程}节式\eqref{eq:均匀裸堆稳态单群扩散方程}}时, 式 \eqref{eq:单群扩散方程(lw)} 形式为:
 \begin{equation}
@@ -1211,19 +1228,19 @@ $$
 \nabla^2 \phi(r)+B_g^2 \phi(r)=0
 \label{eq:均匀裸堆稳态单群扩散方程2(lw)}
 \end{equation}
-式中, $B_g^2$ 为系统临界时的几何曲率, 与系统的几何特性相关，临界时等于材料曲率。
+式中, $B_g^2$ 为系统临界时的几何曲率, 与系统的几何特性相关,临界时等于材料曲率.
 
 式 \eqref{eq:多群中子学扩散方程模型}  $\sim$ 式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 可描述为统一的两阶偏微分方程形式:
 \begin{equation}
 F\left[\vec{x}, \phi(\vec{x}), \nabla \phi(\vec{x}), \nabla^2 \phi(\vec{x})\right]=0
 \end{equation}
-式中， $\vec{x}$ 为扩散方程几何描述空间向量。
+式中, $\vec{x}$ 为扩散方程几何描述空间向量.
 
 \subsubsection{利用PINN求解扩散方程的关键技术}
-利用PINN基本模型(PINN 网络结构见图 \ref{fig:PINN Network Structure})求解微分方程具有一定的普适性，但将其直接应用于中子学扩散方程， 精度与收敛性上会出现一定的困难，需要针对扩散方程的特点进行改进与完善。
+利用PINN基本模型(PINN 网络结构见图 \ref{fig:PINN Network Structure})求解微分方程具有一定的普适性,但将其直接应用于中子学扩散方程, 精度与收敛性上会出现一定的困难,需要针对扩散方程的特点进行改进与完善.
 \subsubsection{扩散方程特征向量加速收敛方法}\label{sec:扩散方程特征向量加速收敛方法}
-当扩散方程是稳态临界状态时，扩散方程为式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)}、式 \eqref{eq:均匀裸堆稳态单群扩散方程2(lw)} 形式，这在数理方法上属于特征值方程。
-对同一特征值来说，特征向量是无穷多个\footnote{细节说明见第\label{sec:均匀裸堆的单群扩散方程的解}节式\eqref{eq:单群扩散方程的特征值问题解的无穷性}}, 对应于其中的任一 $B_n$ 值, 都可以给出满足微分方程 \eqref{eq:单群扩散方程(lw)} 及边界条件 \eqref{eq:边界条件} 的解
+当扩散方程是稳态临界状态时,扩散方程为式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)}、式 \eqref{eq:均匀裸堆稳态单群扩散方程2(lw)} 形式,这在数理方法上属于特征值方程.
+对同一特征值来说,特征向量是无穷多个\footnote{细节说明见第\ref{sec:均匀裸堆的单群扩散方程的解}节式\eqref{eq:单群扩散方程的特征值问题解的无穷性}}, 对应于其中的任一 $B_n$ 值, 都可以给出满足微分方程 \eqref{eq:单群扩散方程(lw)} 及边界条件 \eqref{eq:边界条件} 的解
 \begin{equation}
 \varphi_n(x)=A_n \cos B_n x=A_n \cos \frac{(2 n-1) \pi}{a} x
 \label{eq:单群扩散方程的特征值问题解的无穷性}
@@ -1231,19 +1248,26 @@ F\left[\vec{x}, \phi(\vec{x}), \nabla \phi(\vec{x}), \nabla^2 \phi(\vec{x})\righ
 
 从上面的求解过程可以得出结论, 齐次方程 \eqref{eq:单群扩散方程(lw)} 只对某些特定的特征值 $B_n$ 才有解.相应的解 $\varphi_n(x)$ 称为此问题的特征函数.
 
-实验证明，这种特征值方程解的不确定 性会对神经网络收敛过程造成大幅度振荡，收敛 时间会大幅度增加。
-同时，神经网络初始值的不同会造成收敛特征向量的不同，而且，在同样的初始值下，因为学习率、批处理值的差异等因素， 收敛的特征向量也可能不同，相同的初始值难以重现计算结果。
+实验证明,这种特征值方程解的不确定 性会对神经网络收敛过程造成大幅度振荡,收敛 时间会大幅度增加.
+同时,神经网络初始值的不同会造成收敛特征向量的不同,而且,在同样的初始值下,因为学习率、批处理值的差异等因素, 收敛的特征向量也可能不同,相同的初始值难以重现计算结果.
 
-一种改进的方法是将扩散方程的特殊空间点、 多个区域平均值/积分值与预设值的均方差作为的额外加权因素，采用与初始条件、边界条件相似的处理方法进行加权处理，将大幅度提高机器学习收敛效率，
-即便采用不同的神经网络初始值参数也会收敛到相近的结果。 
+一种改进的方法是将扩散方程的特殊空间点、 多个区域平均值/积分值与预设值的均方差作为的额外加权因素,采用与初始条件、边界条件相似的处理方法进行加权处理,将大幅度提高机器学习收敛效率,
+即便采用不同的神经网络初始值参数也会收敛到相近的结果. 
 
-特定空间点/区域理论上可选择任意注量率不为零的点/区域，实践中推荐选取求解几何域的中心处，或者具有相同注量率对称分布的不同 几何点/区域，预设值可设定为任意固定的归一化注量率值。 
+特定空间点/区域理论上可选择任意注量率不为零的点/区域,实践中推荐选取求解几何域的中心处,或者具有相同注量率对称分布的不同 几何点/区域,预设值可设定为任意固定的归一化注量率值. 
 
-此外，采用已经收敛的神经网络作为类似问题的神经网络初始值，将很大程度加速收敛过程， 这是由于深度神经网络具备一定的迁移学习特性所导致的。
+此外,采用已经收敛的神经网络作为类似问题的神经网络初始值,将很大程度加速收敛过程, 这是由于深度神经网络具备一定的迁移学习特性所导致的.
 
-\subsubsection{$k_{\text{eff}}$并行搜索方法}
-稳态方程式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 需要引人 $k_{\mathrm{eff}}$, 并进行搜索达到临界。由于式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 是特征值方程, 常用的是源迭代方法。基于 PINN 模型的深度学习方程求解方法, 可以直接作为其内迭代环节进行 $k_{\mathrm{eff}}$ 搜索计算。
-但由于内迭代次数较多, 若每一次内迭代均需要完整的机器学习, 迭代计算量比较大, $k_{\text {eff }}$ 的搜索效率很低。
+\subsubsection{$k_{\text{eff}}$并行搜索方法}\label{sec:并行搜索方法}
+稳态方程式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 需要引入 $k_{\mathrm{eff}}$, 并进行搜索达到临界.由于式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 是特征值方程, 常用的是源迭代方法.基于 PINN 模型的深度学习方程求解方法, 可以直接作为其内迭代环节进行 $k_{\mathrm{eff}}$ 搜索计算.
+但由于内迭代次数较多, 若每一次内迭代均需要完整的机器学习, 迭代计算量比较大, $k_{\text {eff }}$ 的搜索效率很低.
+%%% 图文并排
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./figure/k_eff并行搜索流程图.png} % 替换为你的图片文件名
+    \cnenfigcaption{$k_{eff}$ 并行搜索流程图}{Flow chart of $k_{eff}$ parallel search}
+    \label{fig:k_eff并行搜索流程图}
+\end{figure}
 
 本文采用式 \eqref{eq:单群扩散方程(lw)} 进行 $k_{\text {eff }}$ 的搜索, 将式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 写成式 \eqref{eq:单群扩散方程(lw)} 的形式:
 \begin{equation}
@@ -1251,34 +1275,30 @@ F\left[\vec{x}, \phi(\vec{x}), \nabla \phi(\vec{x}), \nabla^2 \phi(\vec{x})\righ
 \label{eq:单群扩散方程(lw)2}
 \end{equation}
 
-给出 $k$ 与 $\phi\left(r, t_0\right)$ 的任意初始值, 考察经过一定时间 $t_t$, 即 $t>t_\tau$ 时, $\phi(r, t)$ 对 $t$ 的偏导数是否接近 0 , 从而进行临界判断。
-可设定合适的 $\varepsilon$, 若 $\partial \phi(r, t) / \partial t>\varepsilon$, 判断为超临界状态, 需要增大 $k$ 值;若 $\partial \phi(r, t) / \partial t<-\varepsilon$, 为次临界状态, 需要减小 $k$ 值。
-当 $-\varepsilon<\partial \phi(r, t) / \partial t<\varepsilon$, 则认为系统已达临界, 此时 $k=k_{\mathrm{eff}}, \phi\left(r, t>t_{\mathrm{r}}\right)$ 即为稳态时系统的 $\phi(r)$ 分布 (式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} )。
+给出 $k$ 与 $\phi\left(r, t_0\right)$ 的任意初始值, 考察经过一定时间 $t_t$, 即 $t>t_\tau$ 时, $\phi(r, t)$ 对 $t$ 的偏导数是否接近 0 , 从而进行临界判断.
+可设定合适的 $\varepsilon$, 若 $\partial \phi(r, t) / \partial t>\varepsilon$, 判断为超临界状态, 需要增大 $k$ 值;若 $\partial \phi(r, t) / \partial t<-\varepsilon$, 为次临界状态, 需要减小 $k$ 值.
+当 $-\varepsilon<\partial \phi(r, t) / \partial t<\varepsilon$, 则认为系统已达临界, 此时 $k=k_{\mathrm{eff}}, \phi\left(r, t>t_{\mathrm{r}}\right)$ 即为稳态时系统的 $\phi(r)$ 分布 (式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} ).
 
-%%% 图文并排
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./figure/k_eff并行搜索流程图.png} % 替换为你的图片文件名
-    \cnenfigcaption{$k_{eff}$ 并行搜索流程图}{Flow chart of $k_{eff}$ parallel search}
-    \label{fig:k_eff并行搜索流程图}
-\end{figure}
+$t_\tau$ 的取值应大于注量率从任意初始状态到达 “稳定”变化状态的时间,根据扩散方程中反应堆类型[表现为式 \eqref{eq:单群扩散方程(lw)2} 中的 $Dv$ ]与初始边界条件形 式会有所不同；
+$k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后,大规模并行搜索,可有效提高效率.$k_{eff}$ 的并行搜索流程如图 \ref{fig:k_eff并行搜索流程图} 所示.
 
+\subsubsection{几何空间网格点密度不均匀分布策略}\label{sec:几何空间网格点密度不均匀分布策略}
+式 \eqref{eq:多群中子学扩散方程模型}  $\sim$ 式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 中空间网格几何点 $i$ 的分布与数量, 对模型精度与机器学习效率的影响很大.通常来说, 网格点的数量越多, 计算精度越高,但计算量越大,收敛效率降低.同时,初始条件、边界条件及 $\phi(\vec{x})$ 变化很大的地方网格点密度对模型的精度与收敛效率影响很大.
 
-$t_\tau$ 的取值应大于注量率从任意初始状态到达 “稳定”变化状态的时间，根据扩散方程中反应堆类型[表现为式 \eqref{eq:单群扩散方程(lw)2} 中的 $Dv$ ]与初始边界条件形 式会有所不同；
-$k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后，大规模并行搜索，可有效提高效率。$k_{eff}$ 的并行搜索流程如图 \ref{fig:k_eff并行搜索流程图} 所示。
+为了平衡机器学习训练精度与效率, 推荐的策略是在相同网格点数量情况下, $\phi(\vec{x})$ 变化大的区域网格点相对紧密, 变化平滑的区域相对稀疏,以 $\phi(\vec{x})$ 在几何空间区域网格点偏导数的变化值作为网格点密度设定的判别依据.
 
-\subsubsection{几何空间网格点密度不均匀分布策略}
-式 \eqref{eq:多群中子学扩散方程模型}  $\sim$ 式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 中空间网格几何点 $i$ 的分布与数量, 对模型精度与机器学习效率的影响很大。通常来说, 网格点的数量越多, 计算精度越高，但计算量越大，收敛效率降低。同时，初始条件、边界条件及 $\phi(\vec{x})$ 变化很大的地方网格点密度对模型的精度与收敛效率影响很大。
+据此,在方程的边界条件和初始条件附近,或者系统 $\phi(\vec{x})$ “畸性” 比较大处 ( 即区域偏导较大处 ), 应加密网格点提高精度, 而在变化平缓处 （即几何区域点偏导较小处）,应减小网格密度以提高收敛效率.
+\subsection{数值验证程序的复现}
 
-为了平衡机器学习训练精度与效率, 推荐的策略是在相同网格点数量情况下， $\phi(\vec{x})$ 变化大的区域网格点相对紧密, 变化平滑的区域相对稀疏,以 $\phi(\vec{x})$ 在几何空间区域网格点偏导数的变化值作为网格点密度设定的判别依据。
+为了便于计算和讨论,在本文中选择了结构相对简单的平板几何形式的扩散方程进行数值验证.这样的选择使得能够更清晰地理解和分析神经网络在特定几何条件下的性能,为进一步的讨论提供基础.
 
-据此，在方程的边界条件和初始条件附近,或者系统 $\phi(\vec{x})$ “畸性” 比较大处 ( 即区域偏导较大处 ), 应加密网格点提高精度, 而在变化平缓处 （即几何区域点偏导较小处），应减小网格密度以提高收敛效率。
-\subsection{数值验证程序复现}
-为了便于计算和讨论，本文选择了结构相对简单的平板几何形式的扩散方程进行数值验证。这样的选择使我们能够更清晰地理解和分析神经网络在特定几何条件下的性能，为进一步的讨论提供基础。
 \subsubsection{深度机器学习的超参数设置}
-为了验证计算结果，我们选择具有解析解的特定几何形式的扩散方程进行数值验证。这些验证结果不仅对当前方程形式有所验证，同时也为其他形式的方程和几何形状提供了参考。
-以下是用到的神经网络的具体超参数设置，如表 \ref{tab:hyperparameter_settings} 所示：
+
+为了验证计算结果,选择了具有解析解的特定几何形式的扩散方程进行数值验证.这些验证结果不仅对当前方程形式进行了验证,同时也为其他形式的方程和几何形状提供了参考.
+
+以下是使用的神经网络的具体超参数设置,详见表 \ref{tab:hyperparameter_settings}：
 \begin{table}[H]
+    \caption{神经网络超参数及相关设置}
     \centering
     \begin{tabular}{ccc}
         \toprule
@@ -1296,16 +1316,16 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
         \textbf{训练停止条件} && 达到设定的训练次数\\
         \bottomrule
     \end{tabular}
-    \caption{神经网络超参数及相关设置}
     \label{tab:hyperparameter_settings}
 \end{table}
-
 \subsubsection{临界条件下稳态扩散方程的验证}
-选取平板几何结构的扩散方程进行验证，该几何结构的解析解为$C\cdot\cos(x\cdot\pi/a)$，其中 $C=0.5$ 为常数，$a=1$ 为平板的长度。我们验证计算神经网络的超参数设置见表 \ref{tab:hyperparameter_settings}。
-这部分将逐步讲解上述描述的泊松方程求解器的实现。作为示例，此处将使用 \texttt{Python} 语言和深度学习框架 \texttt{DeepXDE} \footnote{\texttt{DeepXDE} 是一个用于求解微分方程的 \texttt{Python} 包，其主要特点是使用深度学习技术求解微分方程，其官方网站为 \url{https://deepxde.readthedocs.io}。}
-进行求解。具体代码如下所示：
 
-\noindent 首先，导入 \texttt{DeepXDE} 和 \texttt{numpy} 等必要模块
+选择了平板几何结构的扩散方程进行验证,该几何结构的解析解为$C\cdot\cos(x\cdot\pi/a)$,其中 $C=0.5$ 为常数,$a=1$ 为平板的长度.有关验证计算神经网络的超参数设置,请参见表 \ref{tab:hyperparameter_settings}.
+
+在接下来的内容中,将逐步完成上述描述的扩散方程求解器的实现.作为示例,将使用 \texttt{Python} 语言和深度学习框架 \texttt{DeepXDE}\footnote{\texttt{DeepXDE} 是一个用于求解微分方程的 \texttt{Python} 包,其主要特点是使用深度学习技术求解微分方程,其官方网站为 \url{https://deepxde.readthedocs.io}.} 进行求解.具体的代码如下所示：
+
+\noindent
+首先,导入 \texttt{DeepXDE} 和 \texttt{numpy} 等必要的模块.
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     import deepxde as dde
     import numpy as np
@@ -1329,12 +1349,12 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     def phi_analytical(x):
         return C * np.cos(x * np.pi / a)    
 \end{lstlisting}
-使用内置的 \texttt{Interval} 类定义一个几何求解区域 $[-a/2,a/2]$，如下所示：
+使用内置的 \texttt{Interval} 类定义一个几何求解区域 $[-a/2,a/2]$,如下所示：
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 定义几何网格
     geom = dde.geometry.Interval(-a / 2, a / 2)    
 \end{lstlisting}
-接下来，表达扩散方程\eqref{eq:均匀裸堆稳态单群扩散方程2(lw)}的 PDE 残差函数$\nabla^2 \phi(r)+B_g^2 \phi(r)$，如下所示：
+接下来,表达扩散方程\eqref{eq:均匀裸堆稳态单群扩散方程2(lw)}的 PDE 残差函数$\nabla^2 \phi(r)+B_g^2 \phi(r)$,如下所示：
 
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 定义微分方程
@@ -1342,25 +1362,25 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
         dphi_xx = dde.grad.hessian(phi, x, i=0, j=0)
         return dphi_xx + B2 * phi
 \end{lstlisting}
-\texttt{pde} 的第一个参数是网络输入，即横坐标。第二个参数是网络输出，即解，但这里我们使用$y$作为变量的名称。
+\texttt{pde} 的第一个参数是网络输入,即横坐标.第二个参数是网络输出,即解,但这里使用$y$作为变量的名称.
 
-接下来，考虑平板反应堆的外推边界条件 \eqref{eq:边界条件}，即 $\phi(\pm\frac{a}{2})=0$。我们使用一个简单的 \texttt{Python} 函数，返回一个布尔值，
-来定义平板反应堆的外推边界条件的子域$(\{-a/2,a/2\})$。该函数应该对子域内的点返回\texttt{True}，对于外部的点返回\texttt{False}。
-在我们的情况下，平板反应堆的外推边界条件的点 $x$ 是 $-a/2$ 和 $a/2$。
+接下来,考虑平板反应堆的外推边界条件 \eqref{eq:边界条件},即 $\phi(\pm\frac{a}{2})=0$.使用一个简单的 \texttt{Python} 函数,返回一个布尔值,
+来定义平板反应堆的外推边界条件的子域$(\{-a/2,a/2\})$.该函数应该对子域内的点返回\texttt{True},对于外部的点返回\texttt{False}.
+在的情况下,平板反应堆的外推边界条件的点 $x$ 是 $-a/2$ 和 $a/2$.
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 定义边界条件
     bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
 \end{lstlisting}
-现在，我们已经指定了几何形状、扩散方程的 PDE 残差和外推边界条件。然后，我们定义PDE问题：
+现在,已经指定了几何形状、扩散方程的 PDE 残差和外推边界条件.然后,定义PDE问题：
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 定义数据
     data = dde.data.PDE(geom, pde, bc, num_domain=898, num_boundary=2, solution=phi_analytical, num_test=100)
 \end{lstlisting}
-数字 \texttt{num\_domain=898} 是在域内采样的训练残差点的数量，数字 \texttt{num\_boundary=2} 是在边界上采样的训练点的数量。
-参数 \texttt{solution=phi\_analytical} 是用于计算我们解的误差的参考解，如果我们没有参考解，可以忽略它。
-我们使用 \texttt{num\_test=100} 个残差点来测试PDE残差。
+数字 \texttt{num\_domain=898} 是在域内采样的训练残差点的数量,数字 \texttt{num\_boundary=2} 是在边界上采样的训练点的数量.
+参数 \texttt{solution=phi\_analytical} 是用于计算解的误差的参考解,如果没有参考解,可以忽略它.
+使用 \texttt{num\_test=100} 个残差点来测试PDE残差.
 
-接下来，我们选择网络。在这里，我们使用深度为 $l=16$（即 16 个隐藏层）宽度为 $s=20$ 的全连接神经网络, 其网络初始值权重采用高斯分布随机采样，并选用 $tanh$ 函数作为激活函数：
+接下来,选择网络.在这里,使用深度为 $l=16$（即 16 个隐藏层）宽度为 $s=20$ 的全连接神经网络, 其网络初始值权重采用高斯分布随机采样,并选用 $tanh$ 函数作为激活函数：
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 定义神经网络
     layer_size = [1] + [s] * l + [1]
@@ -1369,15 +1389,15 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     initializer = "Glorot uniform"
     net = dde.nn.PFNN(layer_size, activation, initializer)
 \end{lstlisting}
-现在，有了 PDE 问题和网络。下面构建一个 Model，并选择 Adam 作为优化器和初始学习率 \texttt{lr=0.001}：
+现在,有了 PDE 问题和网络.下面构建一个 Model,并选择 Adam 作为优化器和初始学习率 \texttt{lr=0.001}：
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 定义模型
     model = dde.Model(data, net)
     # 定义求解器
     model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pb])
 \end{lstlisting}
-这里通过 \texttt{loss\_weights=[1, Pb]} 将边界处的损失权重调整为 $100$， 同时还选用 \texttt{metrics=["l2 relative error"]} 计算在测试点上训练好的神经网络输出与对应解析解的 $L_2$ 相对误差作为训练过程中的一个指标。
-然后，对模型进行 3500 次迭代训练, 并使用 \texttt{dde.saveplot} 回调函数在训练期间保存模型和图片, 最后输出在 $x=0$ 处的值(即 C), 以此来显示特征值方程解(特征向量)的不确定性。
+这里通过 \texttt{loss\_weights=[1, Pb]} 将边界处的损失权重调整为 $100$, 同时还选用 \texttt{metrics=["l2 relative error"]} 计算在测试点上训练好的神经网络输出与对应解析解的 $L_2$ 相对误差作为训练过程中的一个指标.
+然后,对模型进行 3500 次迭代训练, 并使用 \texttt{dde.saveplot} 回调函数在训练期间保存模型和图片, 最后输出在 $x=0$ 处的值(即 C), 以此来显示特征值方程解(特征向量)的不确定性.
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 训练模型
     losshistory, train_state = model.train(epochs=3500)
@@ -1388,14 +1408,15 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     print("Predicted value at x=0:", model.predict(np.array([0])))
 \end{lstlisting}
 
-为了深入了解模型的训练过程、监控关键指标的变化，并直观地呈现训练效果，我们采用了以下可视化策略：
+为了深入了解模型的训练过程、监控关键指标的变化,并直观地呈现训练效果,采用了以下可视化策略：
+
+\noindent 创建保存图像的文件夹
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
-    # 可视化
-    # 创建保存图像的文件夹
     output_folder = "figure/算例1"
     os.makedirs(output_folder, exist_ok=True)
-    
-    # 设置中文字体
+\end{lstlisting}
+设置中文字体
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     
     # 替换为您的字体文件路径
     font_path = '/System/Library/Fonts/STHeiti Light.ttc'
@@ -1404,8 +1425,9 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     font_properties = FontProperties(fname=font_path)
     plt.rcParams['font.sans-serif'] = [font_properties.get_name()]
     plt.rcParams['axes.unicode_minus'] = False
-    
-    # 绘制损失函数变化图
+\end{lstlisting}  
+绘制损失函数变化图
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     loss_train = np.sum(losshistory.loss_train, axis=1)
     loss_test = np.sum(losshistory.loss_test, axis=1)
     
@@ -1423,9 +1445,9 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     # 保存为png
     plt.tight_layout()
     plt.savefig(os.path.join(output_folder, "losshistory.png"), format="png", dpi=200)
-    
-    
-    # 绘制训练状态变化图
+\end{lstlisting}  
+绘制训练状态变化图
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]     
     def _pack_data(train_state):
         def merge_values(values):
             if values is None:
@@ -1441,13 +1463,14 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     
     if isinstance(train_state.X_train, (list, tuple)):
         print(
-            "错误：网络有多个输入，尚未实现绘制此类结果。"
+            "错误：网络有多个输入,尚未实现绘制此类结果."
         )
     
     y_train, y_test, best_y, best_ystd = _pack_data(train_state)
     y_dim = best_y.shape[1]
-    
-    # 回归分析图
+\end{lstlisting}  
+回归分析图
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]         
     if train_state.X_test.shape[1] == 1:
         idx = np.argsort(train_state.X_test[:, 0])
         X = train_state.X_test[idx, 0]
@@ -1467,7 +1490,9 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
         plt.ylabel("y")
         plt.legend()
         plt.savefig(os.path.join(output_folder, "solution_state.png"), format="png", dpi=200)
-    # 神经网络输出的残差
+\end{lstlisting}  
+神经网络输出的残差
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     if y_test is not None:
         plt.figure(figsize=(6, 5))  # 设置图像大小
         residual = y_test[:, 0] - best_y[:, 0]
@@ -1477,7 +1502,9 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
         plt.ylabel("残差 = 观测 - 预测")
         plt.tight_layout()
         plt.savefig(os.path.join(output_folder, "y_test.png"), format="png", dpi=200)
-    # 神经网络输出的标准差
+\end{lstlisting}  
+神经网络输出的标准差
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]
     if best_ystd is not None:
         plt.figure(figsize=(6, 5))  # 设置图像大小
         for i in range(y_dim):
@@ -1493,8 +1520,9 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
         plt.ylabel("std(y)")
         plt.tight_layout()
         plt.savefig(os.path.join(output_folder, "best_ystd.png"), format="png", dpi=200)
-    
-    # 绘制数值解与解析解的图像并比较误差
+\end{lstlisting}  
+绘制数值解与解析解的图像并比较误差
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]
     x = np.linspace(-a / 2, a / 2, 100).reshape((-1, 1))
     y_pred = model.predict(x)
     y_exact = phi_analytical(x)
@@ -1520,11 +1548,9 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     
     plt.show()
 \end{lstlisting}
+通过深度学习网络训练的结果进行可视化展示,包括训练过程中的损失函数变化和最终效果.首先,关注损失函数变化图,如图~\ref{fig:losshistory} 所示.图中横轴表示训练步骤,纵轴表示误差数量级,分别展示了训练损失和测试损失的变化情况.从图中可以清晰地观察到,随着训练的进行,训练损失逐渐降低,而测试损失也呈现下降趋势,这表明网络在学习过程中取得了良好的效果.
 
-通过深度学习网络训练的结果可视化展示了在训练过程和最终效果。首先，我们关注损失函数变化图，如图~\ref{fig:losshistory} 所示。图中横轴表示训练步骤，纵轴表示误差数量级，分别展示了训练损失和测试损失的变化情况。
-从图中可以清晰地观察到随着训练的进行，训练损失逐渐降低，而测试损失也呈现下降趋势，这表明网络在学习过程中取得了良好的效果。
-此外，图中还展示了测试阶段的指标（数值解与解析解比较）变化，图中显示，随着训练的进行，测试指标几乎保持稳定，且其值相对较大，这表明数值解与解析解始终保持较大误差。
-这为我们提供了对网络性能的更全面认识。
+此外,图中还展示了测试阶段的指标（数值解与解析解比较）变化.图中显示,随着训练的进行,测试指标几乎保持稳定,且其值相对较大,这表明数值解与解析解始终保持较大误差.这为提供了对网络性能的更全面认识.
 
 \begin{figure}[H]
     \centering
@@ -1550,9 +1576,7 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     \end{minipage}
     \end{figure}
 
-接下来，我们关注回归分析图，图~\ref{fig:Regression analysis} 展示了神经网络训练点的采样分布情况，真实数据的曲线以及网络的预测曲线。
-从图中可以看出，网络预测曲线与真实曲线趋势相差很大。
-
+    接下来,关注回归分析图,图~\ref{fig:Regression analysis} 展示了神经网络训练点的采样分布情况、真实数据的曲线以及网络的预测曲线.从图中可以看出,网络预测曲线与真实曲线趋势相差很大.
 \begin{figure}[H]
     \centering
     \begin{minipage}[c]{0.48\textwidth}
@@ -1576,12 +1600,9 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     \label{fig:Regression analysis2}
     \end{minipage}
     \end{figure}
+    另外,通过图~\ref{fig:Residual analysis} 进行的针对测试数据的残差分析显示,残差的分布情况较为随机,且残差的绝对值相对较大,这表明网络的预测效果并不理想.这一现象可以部分归因于特征值方程的特征向量存在不确定性,导致收敛得到的特征向量是不同的（表现为收敛时 $C$ 值不同）,且很难取得一致的收敛结果.
 
-另外，我们还通过图~\ref{fig:Residual analysis} 展示了针对测试数据的残差分析。
-从图中可以看出，残差的分布情况较为随机，且残差的绝对值较大，这表明网络的预测效果并不理想。
-这些现象归因于由于特征值方程的特征向量不确定性, 收敛得到的特征向量是不同的 ( 表现为收敛时 $C$ 值不同), 且不易收敛。
-同时可以发现，通过神经网络的输出值几乎全为$0$, 这表明神经网络从众多解中选择了一个近似为 $0$ 的解，这复合神经网络优先偏好学习低频解的特性。
-
+    此外,注意到通过神经网络的输出值几乎全为$0$,这表明神经网络可能倾向于选择一个近似为 $0$ 的解.这种行为符合神经网络在学习过程中对低频解的优先偏好.
 \begin{figure}[H]
     \centering
     \begin{minipage}[c]{0.48\textwidth}
@@ -1606,8 +1627,7 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     \end{minipage}
     \end{figure}
 
-为了解决此问题，我们采用 \ref{sec:扩散方程特征向量加速收敛方法} 节中提到的改进方法：将扩散方程的特殊空间点、 多个区域平均值/积分值与预设值的均方差作为的额外加权因素，采用与初始条件、边界条件相似的处理方法进行加权处理。
-代码段如下所示：
+    为了解决上述问题,采用了 \ref{sec:扩散方程特征向量加速收敛方法} 节中提到的改进方法,具体而言,将扩散方程的特殊空间点、多个区域平均值/积分值与预设值的均方差作为额外的加权因素,并采用类似于初始条件、边界条件的处理方法进行加权处理.相关代码段如下：
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 扩散方程特征向量加速收敛方法验证
     observe_x = np.array([0])
@@ -1615,19 +1635,18 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     # 定义数据
     data = dde.data.PDE(geom, pde, [bc,observe_phi0], num_domain=898, num_boundary=2, anchors=observe_x, solution=phi_analytical, num_test=100)
 \end{lstlisting}
+首先,聚焦于添加了额外加权因素的损失函数变化图,如图~\ref{fig:losshistory2} 所示.从图中清晰可见,随着训练的进行,三种损失均呈现下降趋势,这表明网络在学习过程中取得了良好的效果.
 
-首先，我们关注添加了额外加权因素损失函数变化图，如图~\ref{fig:losshistory2} 所示，从图中可以清晰地观察到随着训练的进行，三种损失均呈现下降趋势，这表明网络在学习过程中取得了良好的效果。
-接下来，我们关注回归分析图~\ref{fig:Regression analysis2} 以及测试数据的残差分析图 \ref{fig:Residual analysis2}，从图中可以看出，预测曲线与真实曲线趋势相符。
+接着,研究回归分析图~\ref{fig:Regression analysis2} 以及测试数据的残差分析图~\ref{fig:Residual analysis2},从图中可以看出,预测曲线与真实曲线趋势相符.
 
-此外，我们注意到如图~\ref{fig:Residual analysis2} 所示预测曲线与真实曲线在边界处的残差很大。
-这直接使用经典 PINN 对边界条件的约束方法并不理想，于是考虑通过硬边界约束的方法来改进。
-具体做法是定义神经网络输出的转换
+此外,注意到如图~\ref{fig:Residual analysis2} 所示,预测曲线与真实曲线在边界处的残差很大.这表明直接使用经典 PINN 对边界条件进行约束的方法并不理想,因此考虑采用硬边界约束的方法进行改进.
+
+具体做法是定义神经网络输出的转换：
 \begin{equation}
     \phi(\vec{x})=\vec{x} \cdot(\pi-\vec{x}) \cdot y+\vec{x}
 \end{equation}
+并将其应用于网络.当 $\vec{x}=\pm \frac{a}{2}$ 时,边界条件 $\phi(\pm \frac{a}{2})=0$ 得到满足.这表明边界约束的两端都是硬条件.相关代码段如下所示：
 
-并将其应用于网络。当 $\vec{x}=\pm \frac{a}{2}$ 时，边界条件 $\phi(\pm \frac{a}{2})=0$ 得到满足。
-这表明边界约束的两端都是硬条件。代码段如下所示：
 \begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
     # 定义硬边界条件
     def output_transform(x, y):
@@ -1635,13 +1654,11 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     net.apply_output_transform(output_transform)
 \end{lstlisting}
 
-在这段代码中，我们定义了一个名为 \texttt{output\_transform} 的函数，它对输出进行了转换。具体而言，对于给定的输入 \texttt{x} 和输出 \texttt{y}，转换后的输出是 $\vec{x} \cdot(\pi-\vec{x}) \cdot y+\vec{x}$。
+在这段代码中,定义了一个名为 \texttt{output\_transform} 的函数,它对输出进行了转换.具体而言,对于给定的输入 \texttt{x} 和输出 \texttt{y},转换后的输出是 $\vec{x} \cdot (\pi - \vec{x}) \cdot y + \vec{x}$.
 
-然后，通过 \texttt{net.apply\_output\_transform(output\_transform)} 将这个输出转换函数应用于网络。这表示我们通过这个转换函数考虑了边界条件的硬约束，确保网络的输出满足问题的物理边界条件。
+然后,通过 \texttt{net.apply\_output\_transform(output\_transform)} 将这个输出转换函数应用于网络.这表示通过这个转换函数考虑了边界条件的硬约束,确保网络的输出满足问题的物理边界条件.
 
-最后，我们再次关注回归分析图~\ref{fig:Regression analysis3} 以及测试数据的残差分析图 \ref{fig:Residual analysis3}，从图中可以看出，预测曲线与真实曲线趋势相符，残差的绝对值较小，且在边界处误差为$0$，
-这表明使用硬边界条件的网络的预测效果最好，且实验发现在本文的其他算例中存在类似的现象。鉴于此，我们将在后边的算例中使用硬边界条件的网络进行计算。
-
+最后,再次研究回归分析图~\ref{fig:Regression analysis3} 以及测试数据的残差分析图~\ref{fig:Residual analysis3},从图中可以看出,预测曲线与真实曲线趋势相符,残差的绝对值较小,且在边界处误差为 $0$.这表明采用硬边界条件的网络的预测效果最佳.实验证明在本文的其他算例中也存在类似的现象,因此将在后续的算例中继续采用硬边界条件的网络进行计算.
 \begin{figure}[H]
     \centering
     \begin{minipage}[c]{0.48\textwidth}
@@ -1667,7 +1684,7 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
     \end{figure}
     
 
-% 具体求解结果如表 \ref{tab:verification_results} 所示。
+% 具体求解结果如表 \ref{tab:verification_results} 所示.
 
 % \begin{table}[H]
 %     \centering
@@ -1682,150 +1699,419 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
 %     \label{tab:verification_results}
 % \end{table}
 
-% $\sigma_{\mathrm{MSE}, 1}$ 为学习好的神经网络函数 $\mathcal{N}(\vec{x})$ 在所有网格点上泛化计算结果与解析解的均方差; $\sigma_{\mathrm{SE} i \text { max }}$ 是网格点集合中每个点处的 $\mathcal{N}(\vec{x})$ 与解析解的方差最大值; $\sigma_{\mathrm{MSE}, \mathrm{mc}}$ 是蒙特卡洛方法软件 RMC 计算结果与解析解均方差。
+% $\sigma_{\mathrm{MSE}, 1}$ 为学习好的神经网络函数 $\mathcal{N}(\vec{x})$ 在所有网格点上泛化计算结果与解析解的均方差; $\sigma_{\mathrm{SE} i \text { max }}$ 是网格点集合中每个点处的 $\mathcal{N}(\vec{x})$ 与解析解的方差最大值; $\sigma_{\mathrm{MSE}, \mathrm{mc}}$ 是蒙特卡洛方法软件 RMC 计算结果与解析解均方差.
 
-% 从结果可知，整体上机器学习模型具有相当高的精度。然而，随着扩散方程的输入维度和复杂程度增加，系统的精度略有降低。模型与解析解的均方差分布具有一定程度的随机性，存在个别误差较高的畸点。这些现象部分归因于深度神经网络本身的不可解释性特性。同时，在计算效率方面，虽然整体训练时间通常大于传统数值计算方法，但在训练完成后，神经网络进行预测的时间极短，几乎可以忽略不计。
+% 从结果可知,整体上机器学习模型具有相当高的精度.然而,随着扩散方程的输入维度和复杂程度增加,系统的精度略有降低.模型与解析解的均方差分布具有一定程度的随机性,存在个别误差较高的畸点.这些现象部分归因于深度神经网络本身的不可解释性特性.同时,在计算效率方面,虽然整体训练时间通常大于传统数值计算方法,但在训练完成后,神经网络进行预测的时间极短,几乎可以忽略不计.
 
-\subsubsection{扩散方程特征向量加速收敛方法验证}
+\subsubsection{验证扩散方程特征向量加速收敛方法}
 
-为了验证扩散方程特征向量加速收敛方法的有效性，我们选取了平板几何结构的扩散方程进行验证，该几何结构的解析解为$C\cdot\cos(x\cdot\pi/a)$，其中 $C=0.5$ 为常数，$a$ 为平板的长度。我们验证计算神经网络的超参数设置见表 \ref{tab:hyperparameter_settings}。
+为验证扩散方程特征向量加速收敛方法的有效性,选择了平板几何结构的扩散方程进行验证.该几何结构的解析解为$C\cdot\cos(x\cdot\pi/a)$,其中 $C=0.5$ 为常数,$a$ 为平板的长度.验证计算神经网络的超参数设置见表 \ref{tab:hyperparameter_settings}.
 
-验证计算的目标是: 统计并分析不同初始权重值 $\{\vec{w}, \vec{b}\}$ 的神经网络 $\mathcal{N}(\vec{x})$, 在训练到相似精度时,所需要的收敛时间。
+\noindent 以下是加速收敛的代码段：
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
+    # 扩散方程特征向量加速收敛方法验证
+    observe_x = np.array([0])
+    observe_phi0 = dde.icbc.PointSetBC(observe_x, phi_analytical(observe_x))
+    # 定义数据
+    data = dde.data.PDE(geom, pde, [bc,observe_phi0], num_domain=898, num_boundary=2, anchors=observe_x, solution=phi_analytical, num_test=100)
+\end{lstlisting}
+验证计算的目标是统计并分析不同初始权重值 ${\vec{w}, \vec{b}}$ 的神经网络 $\mathcal{N}(\vec{x})$ 在训练相同次数时模型所达到的精度.
 
-算例 1、算例 2 网络初始值权重 $\{\vec{w}, \vec{b}\}$ 随机选择; 算例 3 也选择随机初始值, 但将 $x=0$ 时, $\phi(0)$ 值 [ \eqref{eq:瞬态扩散方程解析解10} 解析解中的 $C$ 值 ] 设定为 0.5.
-算例 4、算例 5 、算例 6 初始状态为具有不同 $C_0$ 值、已经事先训练好的精度小于 $10^{-7}$ 网络, 训练方式与算例 3 类似, 将 $\phi(0)=0.5$ 作为加权损失函数组成部分进行训练。各算例训练精度小于 $10^{-7}$ 即停止, 记录所需要的训练次数及精度等相关参数, 结果如表 \ref{tab:sensitivity_analysis_results} 所示。
+在算例 1 和算例 2 中,网络初始值权重 ${\vec{w}, \vec{b}}$ 被随机选择.在算例 3 中,同样选择随机初始值,但将 $x=0$ 时的 $\phi(0)$ 值设定为解析解中的 $C$ 值,即0.5.在算例 4、算例 5、算例 6、算例 7 中,初始状态为具有不同 $C_0$ 值且已经事先训练好的精度小于 $10^{-3}$ 的网络.训练方式与算例 3 类似,将 $\phi(0)=0.5$ 作为加权损失函数的组成部分进行训练.各算例均训练1000次即停止,记录精度及学习完成时的 $C$ 值等相关参数,结果如表 \ref{tab:sensitivity_analysis_results} 所示.
 \begin{table}[H]
+    \caption{神经网络初始值敏感性分析结果}
     \centering
     \begin{tabular}{cccccc}
         \toprule
-        \textbf{算例} & \textbf{网络初始值 $/ C_0$ 值} & \textbf{目标 $C$ 值设定} & $\sigma_{\mathrm{MSE}, 1} / 10^{-8}$ & \textbf{学习次数 $(n)$} & \textbf{学习完成时 $C$ 值} \\
+        \textbf{算例} & \textbf{网络初始值 $/ C_0$ 值} & \textbf{目标 $C$ 值设定} & 残差 & \textbf{学习次数 $(n)$} & \textbf{学习完成时 $C$ 值} \\
         \midrule
-        1 & 随机/随机 & 无 & 9.9998 & 2405 & 0.015 \\
-        2 & 随机/随机 & 无 & 9.1095 & 1606 & 0.0022 \\
-        3 & 随机/随机 & 0.5 & 9.6124 & 379 & 0.4995 \\
-        4 & 已训练 $/ C_0=0.01$ & 0.5 & 9.1010 & 211 & 0.4996 \\
-        5 & 已训练 $/ C_0=0.05$ & 0.5 & 9.3309 & 55 & 0.4996 \\
-        6 & 已训练 $/ C_0=0.1$ & 0.5 & 9.5475 & 39 & 0.4995 \\
+        1 & 随机/随机 & 无 &  & 1000 & 0.000000 \\
+        2 & 随机/随机 & 无 &  & 1000 & 0.000000 \\
+        3 & 随机/随机 & 0.5 & $1.96e-04$ & 1000 & 0.499856 \\
+        4 & 已训练 $/ C_0=0.01$ & 0.5 & $9.87e-05$ & 1000 & 0.499986 \\
+        5 & 已训练 $/ C_0=0.05$ & 0.5 & $5.37e-05$ & 1000 & 0.499994 \\
+        6 & 已训练 $/ C_0=0.1$ & 0.5 & $2.52e-05$ & 1000 & 0.499999 \\
+        7 & 已训练 $/ C_0=0.5$ & 0.5 & $6.90e-06$ & 1000 & 0.500000 \\
         \bottomrule
     \end{tabular}
-    \caption{神经网络初始值敏感性分析结果}
     \label{tab:sensitivity_analysis_results}
 \end{table}
-
-可见，算例 1、算例 2 分别收敛到不同的$C$ 值, 训练次数较多, 这说明了若不给定目标 $C$值作为训练的加权 $Loss$, 由于特征值方程的特征向量不确定性, 收敛得到的特征向量是不同的 ( 表现为收敛时 $C$ 值不同), 且不易收敛。算例 3 训练次数大幅度下降, 而算例 4、算例 5 、算例 6 由于有预训练初始值, 最终训练次数进一步降低, 且初始 $C$ 值越接近目标值 $C=0.5$, 收敛越快, 这表明了采用已训练好的神经网络作为相似问题神经网络初始值, 具有良好的迁移学习特性, 可大幅度加快收敛进程。
-
-% \subsubsection{瞬态条件扩散方程求解及$k_{\text{eff}}$搜索方法验证}
-
-% 瞬态方程式 (2) 在平板几何真空边界条件下解析解为 ${ }^{[1]}$ :
-% \begin{equation}
-% \begin{aligned}
-% \phi(x, t)= & \sum_{n=1}^{\infty} \frac{2}{a}\left[\int_{-a / 2}^{a / 2} \phi_0\left(x^{\prime}\right) \cos \frac{(2 n-1) \pi}{a} x^{\prime} \mathrm{d} x^{\prime}\right] \times \\
-% & \cos \frac{(2 n-1) \pi}{a} x \mathrm{e}^{\left(k_n-1\right) t / l_n}
-% \end{aligned}\label{eq:瞬态扩散方程解析解10}
-% \end{equation}
-
-% 验证模型方程参数: $v=2.2 \times 10^3 \mathrm{~m} / \mathrm{s}, D=0.211 \times$ $10^{-2} \mathrm{~m}, L^2=2.1037 \times 10^{-4} \mathrm{~m}^2, a=1 \mathrm{~m}$, 几何网格点数共 6000 , 其中 3000 点均匀分布, 其余 3000 网格点在边界条件区域、初始条件区域进行局部加密, 其他超参数选择与表 \ref{tab:hyperparameter_settings} 一致。不同的 $k_{\infty}$值与不同初始条件下, 训练 1500 次后, 验证计算结果如表 \ref{tab:error_distribution} 所示。 4 个算例在定义区域内 $\{D \mid$ $-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.015\}$ 的神经网络模型泛化计算结果 $\mathcal{N}(\vec{x})$ 的散点图, 如图 2 所示。
-
 % \begin{table}[H]
 %     \centering
-%     \begin{tabular}{cccc}
+%     \begin{tabular}{cccccc}
 %         \toprule
-%         \textbf{算例} & \textbf{$k_{\infty}$} & \textbf{初始条件} & $\sigma_{\mathrm{MSE}, 1}$ \\
+%         \textbf{算例} & \textbf{网络初始值 $/ C_0$ 值} & \textbf{目标 $C$ 值设定} & $\sigma_{\mathrm{MSE}, 1} / 10^{-8}$ & \textbf{学习次数 $(n)$} & \textbf{学习完成时 $C$ 值} \\
 %         \midrule
-%         1 & 1.0041 & $\cos (\pi \cdot x / a)-0.4 \cos (2 \pi \cdot x / a)-0.4$ & $3.8005 \times 10^{-7}$ \\
-%         2 & 1.0001 & $\cos (\pi \cdot x / a)-0.4 \cos (2 \pi \cdot x / a)-0.4$ & $6.3758 \times 10^{-7}$ \\
-%         3 & 1.0041 & $0.5[\cos (2 \pi \cdot x / a)+1]$ & $1.5564 \times 10^{-6}$ \\
-%         4 & 1.0001 & $0.5[\cos (2 \pi \cdot x / a)+1]$ & $1.2230 \times 10^{-6}$ \\
+%         1 & 随机/随机 & 无 & 9.9998 & 2405 & 0.015 \\
+%         2 & 随机/随机 & 无 & 9.1095 & 1606 & 0.0022 \\
+%         3 & 随机/随机 & 0.5 & 9.6124 & 379 & 0.4995 \\
+%         4 & 已训练 $/ C_0=0.01$ & 0.5 & 9.1010 & 211 & 0.4996 \\
+%         5 & 已训练 $/ C_0=0.05$ & 0.5 & 9.3309 & 55 & 0.4996 \\
+%         6 & 已训练 $/ C_0=0.1$ & 0.5 & 9.5475 & 39 & 0.4995 \\
 %         \bottomrule
 %     \end{tabular}
-%     \caption{稳态扩散方程数值解误差分布}
-%     \label{tab:error_distribution}
+%     \caption{神经网络初始值敏感性分析结果}
+%     \label{tab:sensitivity_analysis_results}
 % \end{table}
+可见,算例 1 和算例 2 均收敛到 $C=0$,这说明了若不给定目标 $C$ 值作为训练的加权 $Loss$,由于特征值方程的特征向量不确定性,收敛得到的特征向量符合神经网络优先偏好学习低频解的特性.
 
-% 由图 2 可见, 随着时间的变化, 注量率值发生明显的变化, 表明算例 1 和算例 3 处于超临界,算例 2 和算例 4 处于次临界状态。
+在算例 3 中,由于设定了目标 $C$ 值,能够收敛到正确的解空间.而算例 4、算例 5、算例 6、算例 7 由于有预训练初始值,最终模型精度进一步提高.此外,初始 $C$ 值越接近目标值 $C=0.5$,精度越高.特别地,当初始 $C=0.5$ 时,其学习完成时的 $C$ 将完全等于目标值.这表明采用已训练好的神经网络作为相似问题神经网络初始值具有良好的迁移学习特性,可大幅度加快收敛进程.
 
-% 按照 2.2 节所述, 式 (9) 采用二分法对上述算例 1 、算例 4 进行 $k_{\text {eff }}$ 搜索, $\varepsilon$ 值从 0.01 开始,逐渐减小。计算结果如表 \ref{tab:k_eff_error} 所示。
+\subsubsection{瞬态条件扩散方程求解及$k_{\text{eff}}$搜索方法验证}
 
-% \begin{table}[H]
-%     \centering
-%     \begin{tabular}{cccc}
-%         \toprule
-%         \textbf{算例} & \textbf{算例 5} & \textbf{算例 6} \\
-%         \midrule
-%         $k_{\infty}$ & 1.00410 & 1.00010 \\
-%         $k_{\mathrm{eff}}$ & 1.00202 & 0.99803 \\
-%         初始条件 & $\cos (\pi \cdot x / a)-0.4 \cos (2 \pi \cdot x / a)-0.4$ & $0.5 \cos (2 \pi \cdot x / a)+0.5$ \\
-%         $\sigma_{\mathrm{MSE}, \mathrm{a}}$ & $8.9108 \times 10^{-7}$ & $4.4229 \times 10^{-6}$ \\
-%         $\sigma_{\mathrm{MSE}, \mathrm{b}}$ & $3.8236 \times 10^{-6}$ & $1.8132 \times 10^{-5}$ \\
-%         $\sigma_{\mathrm{MSE}, \mathrm{c}}$ & $3.6584 \times 10^{-7}$ & $8.9051 \times 10^{-6}$ \\
-%         \bottomrule
-%     \end{tabular}
-%     \caption{$k_{\text{eff}}$ 搜索计算结果误差}
-%     \label{tab:k_eff_error}
-% \end{table}
+根据 \ref{sec:均匀裸堆的单群扩散方程的解} 节中的讨论,瞬态方程式 (2) 在平板几何真空边界条件下解析解为:
+\begin{equation}
+\begin{aligned}
+\phi(x, t)= & \sum_{n=1}^{\infty} \frac{2}{a}\left[\int_{-a / 2}^{a / 2} \phi_0\left(x^{\prime}\right) \cos \frac{(2 n-1) \pi}{a} x^{\prime} \mathrm{d} x^{\prime}\right] \times \\
+& \cos \frac{(2 n-1) \pi}{a} x \mathrm{e}^{\left(k_n-1\right) t / l_n}
+\end{aligned}\label{eq:瞬态扩散方程解析解10}
+\end{equation}
+其中
+\begin{align}
+l_n&=\frac{L^2}{Dv\left(1+L^2 B_n^2\right)}=\frac{l_{\infty}}{1+L^2 B_n^2}\\
+k_n&=\frac{k_{\infty}}{1+L^2 B_n^2}\\
+B_n&=\frac{(2 n-1) \pi}{a} \quad n=1,2,3, \cdots
+\end{align}
 
-% $\sigma_{\mathrm{MSE}, \mathrm{a}}-N(x, t)$ 在全域 $\{D \mid-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.015\}$ 计算结果与解析解式 ( 10$)$ 的均方差; $\sigma_{\mathrm{MSE}, b}-N(x, 0.015)$ 在 $\{x \mid-0.5 \leqslant x \leqslant 0.5\}$ 上与解析解式 ( 10$)$ 的均方差; $\sigma_{\mathrm{MSE}, \mathrm{c}}-N(x, 0.015)$ 在 $\{x \mid-0.5 \leqslant x \leqslant 0.5\}$ 上与平板解析解的均方差
+\noindent 解析解计算代码段：
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
+    # 模型方程的参数
+    v = 2.2e3  # m/s
+    D = 0.211e-2  # m
+    L_square = 2.1037e-4  # m^2
+    a = 1  # m
+    k_infinity = 1.0041
 
-% 算例 5 和算例 6 神经网络函数 $N(x, t)$ 全域计算结果如图 3 所示。
-% 上述过程，逐渐调整$k$值到系统临界状态。 若系统已接近临界状态，由于没有考虑缓发中子， 不同边界条件下，系统都会在非常短的时间
-% ( 5 8 ms ) 收敛到临界状态, 系统此时 $\mathcal{N}(\vec{x})$ 值逼近平板稳态解析解, 误差如表 4 中 $\sigma_{\mathrm{MSE}, 3}$ 所示。若系统不临界, 如图 2 所示, 也会在很短时间内 $\partial N(x, t) / \partial t$ 值有明显变化。由此特性, 可实现式 (3) 的 $k_{\text {eff }}$ 的搜索。
-% \subsubsection{网格点不均匀分布策略验证}
+    # 初始条件
+    def phi_0(x):
+        return np.cos(np.pi * x / a) - 0.4 * np.cos(2 * np.pi * x / a) - 0.4
+    
+    # 解析解的计算
+    def phi(x, t):
+        summation = 0
+        B_n = lambda n: (2 * n - 1) * np.pi / a
+        for n in range(1, 10):  # 选择一个足够大的上限来近似无穷级数
+            l_n = L_square / (D * v * (1 + L_square * B_n(n) ** 2))
+            k_n = k_infinity / (1 + L_square * B_n(n) ** 2)
+    
+            integrand = lambda x_prime: phi_0(x_prime) * np.cos(B_n(n) * x_prime)
+            integral_result, _ = quad(integrand, -a / 2, a / 2)
+            summation += (2 / a) * integral_result * np.cos(B_n(n) * x) * np.exp((k_n - 1) * t / l_n)
+    
+        return summation
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/AnalyticalSolution1.png}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/AnalyticalSolution2.png}
+    \end{minipage}\\[3mm]
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例1解析解}{Analytical solution of case 1}
+    \label{fig:算例1解析解}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例2解析解}{Analytical solution of case 2}
+    \label{fig:算例2解析解}
+    \end{minipage}
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/AnalyticalSolution3.png}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/AnalyticalSolution4.png}
+    \end{minipage}\\[3mm]
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例3解析解}{Analytical solution of case 3}
+    \label{fig:算例3解析解}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例4解析解}{Analytical solution of case 4}
+    \label{fig:算例4解析解}
+    \end{minipage}
+    \end{figure}
+    
+验证模型方程参数: $v=2.2 \times 10^3 \mathrm{~m} / \mathrm{s}, D=0.211 \times$ $10^{-2} \mathrm{~m}, L^2=2.1037 \times 10^{-4} \mathrm{~m}^2, a=1 \mathrm{~m}$, 
+几何网格点数共 2000 , 其中 1000 点均匀分布, 其余 1000 网格点在边界条件区域、初始条件区域进行局部加密, 神经网络深度 $l=6$, 其他超参数选择与表 \ref{tab:hyperparameter_settings} 一致.不同的 $k_{\infty}$值与不同初始条件下, 
+所涉及算例的解析解如图 \ref{fig:算例1解析解} $\sim$ 图 \ref{fig:算例4解析解} 所示. 训练 10000 次后, 验证计算结果如表 \ref{tab:error_distribution} 所示. 
 
-% 对 2.3 节所述网格点分布影响进行验证, 选择表 4 中算例 5 作为对象, 学习参数保持与原算例一致, 训练 1000 次, 网格点总数 2000 , 不同验证算例仅调整网格点分布。设为 5 个区域:
-% $$
-% \begin{array}{ll}
-% D_0: & \{(x, t) \mid-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.01\} \\
-% D_{\mathrm{C} 1}: & \{(x, t) \mid-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.002\} \\
-% D_{\mathrm{C} 2}: & \{(x, t) \mid-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.005\} \\
-% D_{\mathrm{B} 1}: & \{(x, t) \mid-0.5 \leqslant x \leqslant-0.45,0 \leqslant t \leqslant 0.01\} \\
-% D_{\mathrm{B} 2}: & \{(x, t) \mid 0.45 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.01\}
-% \end{array}
-% $$
+\begin{table}[H]
+    \caption{稳态扩散方程数值解误差分布}
+    \centering
+    \begin{tabular}{cccc}
+        \toprule
+        \textbf{算例} & \textbf{$k_{\infty}$} & \textbf{初始条件} & $Loss$ \\
+        \midrule
+        1 & 1.0041 & $\cos (\pi \cdot x / a)-0.4 \cos (2 \pi \cdot x / a)-0.4$ & $2.64e-03$ \\
+        2 & 1.0001 & $\cos (\pi \cdot x / a)-0.4 \cos (2 \pi \cdot x / a)-0.4$ & $1.25e-03$ \\
+        3 & 1.0041 & $0.5[\cos (2 \pi \cdot x / a)+1]$ & $4.97e-03$ \\
+        4 & 1.0001 & $0.5[\cos (2 \pi \cdot x / a)+1]$ & $6.32e-04$ \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:error_distribution}
+\end{table}
 
-% 各区域内的网格点随机分布。4 种算例计算结果 $\mathcal{N}(\vec{x})$ 与解析解\eqref{eq:瞬态扩散方程解析解10} 均方差如表 5 所示。
-% 表 \ref{tab:grid_sensitivity_analysis} 网格点分布敏感性分析结果
-% \begin{table}[H]
-%     \centering
-%     \begin{tabular}{ccc}
-%         \toprule
-%         \textbf{算例} & \textbf{网格点分布} & $\sigma_{\mathrm{MSE}, 1}$ \\
-%         \midrule
-%         1 & $D=D_0, \operatorname{card}\left(D_0\right)=2000$ & $5.1604 \times 10^{-6}$ \\
-%         \hline
-%         2 & \begin{tabular}{@{}c@{}}
-%          $D=D_0 \cup D_{\mathrm{C} 1}, \operatorname{card}\left(D_0\right)=1500,$\\ 
-%          $\operatorname{card}\left(D_{\mathrm{C} 1}\right)=500$ 
-%         \end{tabular} & $2.8265 \times 10^{-6}$\\
-%         \hline
-%         3 & \begin{tabular}{@{}c@{}}
-%             $D=D_0 \cup D_{\mathrm{C} 2}, \operatorname{card}\left(D_0\right)=1500,$\\ 
-%             $\operatorname{card}\left(D_{\mathrm{C} 2}\right)=500$ 
-%            \end{tabular}& $1.2731 \times 10^{-6}$\\
-%         \hline
-%         4 & \begin{tabular}{@{}c@{}}
-%             $D=D_0 \cup D_{\mathrm{C} 2} \cup D_{\mathrm{B} 1} \cup D_{\mathrm{B} 2}$\\
-%             $\operatorname{card}\left(D_0\right)=1000, \operatorname{card}\left(D_{\mathrm{C} 2}\right)=500$, \\
-%             $\operatorname{card}\left(D_{\mathrm{B} 1}\right)=250, \operatorname{card}\left(D_{\mathrm{B} 2}\right)=250$
-%         \end{tabular} & $8.4288 \times 10^{-7}$ \\
-%         \bottomrule
-%     \end{tabular}
-%     \caption{网格点分布敏感性分析结果}
-%     \label{tab:grid_sensitivity_analysis}
-% \end{table}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/散点图/1/solution_state.png}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/散点图/2/solution_state.png}
+    \end{minipage}\\[3mm]
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例1散点图}{Scatter plot of case 1}
+    \label{fig:算例1散点图}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例2散点图}{Scatter plot of case 2}
+    \label{fig:算例2散点图}
+    \end{minipage}
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/散点图/3/solution_state.png}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/散点图/4/solution_state.png}
+    \end{minipage}\\[3mm]
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例3散点图}{Scatter plot of case 3}
+    \label{fig:算例3散点图}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例4散点图}{Scatter plot of case 4}
+    \label{fig:算例4散点图}
+    \end{minipage}
+    \end{figure}
 
-% card一范围内的网格点数目
+4 个算例在定义区域内 $\{D \mid$ $-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.015\}$ 的神经网络模型泛化计算结果 $\mathcal{N}(\vec{x})$ 的散点图, 如图 \ref{fig:算例1散点图} $\sim$ 图 \ref{fig:算例4散点图}所示.
+
+由图 \ref{fig:算例1散点图} $\sim$ 图 \ref{fig:算例4散点图} 可见, 随着时间的变化, 注量率值发生明显的变化, 表明算例 1 和算例 3 处于超临界,算例 2 和算例 4 处于次临界状态.
+
+按照 \ref{sec:并行搜索方法} 节所述, 式 \eqref{fig:k_eff并行搜索流程图} 采用二分法对上述算例 1 、算例 4 进行 $k_{\text {eff }}$ 搜索, $\varepsilon$ 值从 0.01 开始,逐渐减小.
+实验发现,这种策略在实际操作中可能是存在缺陷的,由于神经网络的搜索结果并不稳定,并不能保证每次搜索都能收敛到正确的结果.
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
+    # m 等分法搜索 k_eff
+    m = 10  # 将 k_eff 分为 m 份
+    k_eff_min = 0.8  # 最小可能的 k_eff
+    k_eff_max = 1.2  # 最大可能的 k_eff
+\end{lstlisting}
+注意,$0.8$ 到 $1.2$ 等分为 10 份的结果为:
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
+    [0.8, 0.84444444, 0.88888889, 0.93333333, 0.97777778, 1.02222222, 1.06666667, 1.11111111, 1.15555556, 1.2]
+\end{lstlisting}
+而第一次并行搜索的 $\partial \Phi(r, t) / \partial t$ 输出结果为
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
+    mean_result: [[-0.00158034], [-0.00279588], [-0.00558953], [-0.01358621], [0.00496244], [-0.6533282], [-0.04437277], [-0.01511137], [-0.00776665], [-0.00494544]]  
+    k_max: 0.8
+    k_min: 0.9777777777777777
+\end{lstlisting}
+从输出可以看到,出现了当选取的满足 $\partial \Phi(r, t) / \partial t<-\varepsilon$ 的所有 $k$ 中最小 $k$ 为 $k_{\max }$
+选取的满足 $\partial \Phi(r, t) / \partial t>\varepsilon$ 的所有 $k$ 中最大 $k$ 为 $k_{min}$,
+而 $k_{min} > k_{\max }$ 的情况出现,当然,由于算力有限,并不排除是由于网络训练不充分导致的.甚至可能是因为编程错误导致的.
+
+为解决问题,本文采用了一新搜索策略,将其视为一个反问题.利用人工智能深度学习方法求解 $k_{eff}$,基本原理是在神经网络结构中引入特征参数 $k$,该参数用于表征扩散方程中的 $k_{eff}$.
+将人工神经网络函数作为注量率的试函数,将其代入神经网络中,形成统一加权自定义损失函数.神经网络的神经元连接权重和特征参数 $k$ 作为可以调节的优化参数,
+通过降低加权损失函数值为目标进行深度机器学习\cite{LiuDongHeFanYingDuiYouXiaoZengZhiXiShuShenDuXueXiZhiJieSouSuoQiuJieFangFa}.当损失函数值趋近于无穷小时,神经网络函数表征的注量率逼近中子学扩散方程的数值解,同时特征参数 $k$ 也趋近于 $k_{eff}$.
+
+详细的计算结果见表 \ref{tab:k_eff_error}.
+
+\begin{table}[H]
+    \caption{$k_{\text{eff}}$ 搜索计算结果误差}
+    \centering
+    \begin{tabular}{cccc}
+        \toprule
+        \textbf{算例} & \textbf{算例 5} & \textbf{算例 6} \\
+        \midrule
+        $k_{\infty}$ & 1.00410 & 1.00010 \\
+        $k_{\mathrm{eff}}$ & 1.00202 & 0.99803 \\
+        初始条件 & $\cos (\pi \cdot x / a)-0.4 \cos (2 \pi \cdot x / a)-0.4$ & $0.5 \cos (2 \pi \cdot x / a)+0.5$ \\
+        $Loss$ & $5.92e-03$ & $1.15e-03$ \\
+      \bottomrule
+    \end{tabular}
+    \label{tab:k_eff_error}
+\end{table}
+
+算例 5 和算例 6 神经网络函数 $N(x, t)$ 全域计算结果如图 \ref{fig:算例5散点图} 和 图 \ref{fig:算例6散点图} 所示.
+上述过程,逐渐调整$k$值到系统临界状态. 若系统已接近临界状态,由于没有考虑缓发中子, 不同边界条件下,系统都会在非常短的时间
+( 5 $\sim$ 8 ms ) 收敛到临界状态, 系统此时 $\mathcal{N}(\vec{x})$ 值逼近平板稳态解析解, 误差如表 \ref{tab:k_eff_error} 中 $Loss$ 所示.
+% 若系统不临界, 如图 \ref{fig:算例1散点图} 和 图 \ref{fig:算例4散点图}所示, 也会在很短时间内 $\partial N(x, t) / \partial t$ 值有明显变化.
+% 由此特性, 可实现式 \eqref{eq:均匀裸堆稳态单群扩散方程(lw)} 的 $k_{\text {eff }}$ 的搜索.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/散点图/5/solution_state.png}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例3/散点图/6/solution_state.png}
+    \end{minipage}\\[3mm]
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例5散点图}{Scatter plot of case 5}
+    \label{fig:算例5散点图}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例6散点图}{Scatter plot of case 6}
+    \label{fig:算例6散点图}
+    \end{minipage}
+    \end{figure}
+
+\indent 反问题代码段:
+\begin{lstlisting}[style=python,basicstyle=\footnotesize\fontspec{Courier New},]  
+    # 有效增殖系数
+    k_eff = dde.Variable(1.0)
+    observe_x = np.vstack((np.linspace(-a/2, a/2, num=10), np.full((10), 0.01))).T
+    observe_y = dde.icbc.PointSetBC(observe_x, phi_analytical(observe_x))
+    # 定义数据
+    merged_data = np.concatenate((observe_x, np.vstack((x, t)).T), axis=0)
+
+    data = dde.data.TimePDE(geomtime, pde, [ic, observe_y], num_domain=num_points_D0, num_boundary=200, num_initial=200,
+                            solution=phi_analytical,
+                            anchors=merged_data)
+    # 定义求解器
+    model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pi, Pc], external_trainable_variables=[k_eff])
+    variable = dde.callbacks.VariableValue(k_eff, period=1000)
+    # 训练模型
+    losshistory, train_state = model.train(epochs=5000, callbacks=[variable])
+\end{lstlisting}
+    
+\subsubsection{网格点不均匀分布策略验证}
+
+对 \ref{sec:几何空间网格点密度不均匀分布策略} 节所述网格点分布影响进行验证, 选择表 \ref{tab:k_eff_error} 中算例 5 作为对象, 
+学习参数保持与原算例一致, 训练 1000 次, 网格点总数 2000 , 不同验证算例仅调整网格点分布.设为 5 个区域:
+$$
+\begin{array}{ll}
+D_0: & \{(x, t) \mid-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.01\} \\
+D_{\mathrm{C} 1}: & \{(x, t) \mid-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.002\} \\
+D_{\mathrm{C} 2}: & \{(x, t) \mid-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.005\} \\
+D_{\mathrm{B} 1}: & \{(x, t) \mid-0.5 \leqslant x \leqslant-0.45,0 \leqslant t \leqslant 0.01\} \\
+D_{\mathrm{B} 2}: & \{(x, t) \mid 0.45 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.01\}
+\end{array}
+$$
+
+各区域内的网格点随机分布.区域分布示意图如图 \ref{fig:算例1网格点分布图} $\sim$ 图 \ref{fig:算例4网格点分布图}所示.
+
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例4/1/散点.png}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例4/2/散点.png}
+    \end{minipage}\\[3mm]
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例1网格点分布图}{Grid Point Distribution Plot for Case 1}
+    \label{fig:算例1网格点分布图}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例2网格点分布图}{Grid Point Distribution Plot for Case 2}
+    \label{fig:算例2网格点分布图}
+    \end{minipage}
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例4/3/散点.png}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figure/算例4/4/散点.png}
+    \end{minipage}\\[3mm]
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例3网格点分布图}{Grid Point Distribution Plot for Case 3}
+    \label{fig:算例3网格点分布图}
+    \end{minipage}
+    \hspace{0.02\textwidth}
+    \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \cnenfigcaption{算例4网格点分布图}{Grid Point Distribution Plot for Case 4}
+    \label{fig:算例4网格点分布图}
+    \end{minipage}
+\end{figure}
+
+4 种算例计算结果 $\mathcal{N}(\vec{x})$ 与解析解\eqref{eq:瞬态扩散方程解析解10} 均方差如表 \ref{tab:grid_sensitivity_analysis} 所示.
+
+\begin{table}[H]
+    \caption{网格点分布敏感性分析结果\\card一范围内的网格点数目}
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        \textbf{算例} & \textbf{网格点分布} & $\sigma_{\mathrm{MSE}, 1}$ \\
+        \midrule
+        1 & $D=D_0, \operatorname{card}\left(D_0\right)=2000$ & $7.06e-03$ \\
+        \hline
+        2 & \begin{tabular}{@{}c@{}}
+         $D=D_0 \cup D_{\mathrm{C} 1}, \operatorname{card}\left(D_0\right)=1500,$\\ 
+         $\operatorname{card}\left(D_{\mathrm{C} 1}\right)=500$ 
+        \end{tabular} & $5.72e-03$\\
+        \hline
+        3 & \begin{tabular}{@{}c@{}}
+            $D=D_0 \cup D_{\mathrm{C} 2}, \operatorname{card}\left(D_0\right)=1500,$\\ 
+            $\operatorname{card}\left(D_{\mathrm{C} 2}\right)=500$ 
+           \end{tabular}& $2.09e-03$\\
+        \hline
+        4 & \begin{tabular}{@{}c@{}}
+            $D=D_0 \cup D_{\mathrm{C} 2} \cup D_{\mathrm{B} 1} \cup D_{\mathrm{B} 2}$\\
+            $\operatorname{card}\left(D_0\right)=1000, \operatorname{card}\left(D_{\mathrm{C} 2}\right)=500$, \\
+            $\operatorname{card}\left(D_{\mathrm{B} 1}\right)=250, \operatorname{card}\left(D_{\mathrm{B} 2}\right)=250$
+        \end{tabular} & $6.38e-04$ \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:grid_sensitivity_analysis}
+\end{table}
+
 % \subsubsection{深度神经网络超参数敏感性验证}
 
-% 采用 3.1 节中平板几何算例进行神经网络深度、隐藏神经元数量、初始值关键超参数敏感性验证计算。验证过程中, 除特别说明, 其他参数取值与 3.1 节相同。
+% 采用 3.1 节中平板几何算例进行神经网络深度、隐藏神经元数量、初始值关键超参数敏感性验证计算.验证过程中, 除特别说明, 其他参数取值与 3.1 节相同.
 
 % \subsubsection*{神经网络深度 (网络层数) 敏感性分析验证} 
 
-% 网络隐藏神经单元 $s=20$, 迭代 2000 次,网格点 $i=500$ (均匀分布), 对不同网络深度验证结果如表 \ref{tab:depth_sensitivity_analysis} 所示。
+% 网络隐藏神经单元 $s=20$, 迭代 2000 次,网格点 $i=500$ (均匀分布), 对不同网络深度验证结果如表 \ref{tab:depth_sensitivity_analysis} 所示.
 
-% 可见, 随着网络深度加深, 神经网络模型精度明显提升, 但网络过深, 会出现梯度消失情况,网络无法收敛。
+% 可见, 随着网络深度加深, 神经网络模型精度明显提升, 但网络过深, 会出现梯度消失情况,网络无法收敛.
 % \subsubsection*{隐藏神经元数量敏感性分析验证} 
 
-% 神经网络深度 $l=5$, 其余参数同 3.5.1 节, 对神经网络中间层不同数量隐藏单元验证计算结果如表 \ref{tab:hidden_neurons_sensitivity_analysis} 所示。
+% 神经网络深度 $l=5$, 其余参数同 3.5.1 节, 对神经网络中间层不同数量隐藏单元验证计算结果如表 \ref{tab:hidden_neurons_sensitivity_analysis} 所示.
 % \begin{table}[H]
 %     \centering
 %     \begin{minipage}[t]{0.45\textwidth}
@@ -1864,15 +2150,15 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
 % \end{table}
 
 
-% 可见, 随着隐藏神经元数量增加, 神经网络模型精度也明显提升, 但增加到一定数量, 精度不再提高, 而带来训练时间开销会大幅度增加的负面效应。
+% 可见, 随着隐藏神经元数量增加, 神经网络模型精度也明显提升, 但增加到一定数量, 精度不再提高, 而带来训练时间开销会大幅度增加的负面效应.
 % \subsubsection{边界条件损失函数权重敏感性分析验证}
 
 
-% 验证算例采用 3.1 节中的平板算例, 神经网络深度 $l=5$, 网络隐藏神经单元 $s=20$, 每次计算均选择相同的随机初始函数, 除了式 (8) 中边界条件损失函数权重 $P_{\mathrm{b}}$, 算例其他参数、初始网络设置均相同。验证计算不同权重 $P_{\mathrm{b}}$ 条件下,训练达到 4 种精度所需要的训练次数 $n$, 结果如\ref{tab:boundary_condition_weight_training} 所示。
+% 验证算例采用 3.1 节中的平板算例, 神经网络深度 $l=5$, 网络隐藏神经单元 $s=20$, 每次计算均选择相同的随机初始函数, 除了式 (8) 中边界条件损失函数权重 $P_{\mathrm{b}}$, 算例其他参数、初始网络设置均相同.验证计算不同权重 $P_{\mathrm{b}}$ 条件下,训练达到 4 种精度所需要的训练次数 $n$, 结果如\ref{tab:boundary_condition_weight_training} 所示.
 
-% 将\ref{tab:boundary_condition_weight_training} 训练次数取对数后，权重敏感性分析特性如图 4 所示。
+% 将\ref{tab:boundary_condition_weight_training} 训练次数取对数后,权重敏感性分析特性如图 4 所示.
 
-% 由此可见, $P_{\mathrm{b}}$ 值的大小对收敛速度的影响是明显的, 适当增加 $P_{\mathrm{b}}$ 值, 可以加速收敛, 但 $P_{\mathrm{b}}$值过大, 训练收敛次数反而变大。在不同精度水平, 引起最快收敛速度的 $P_{\mathrm{b}}$ 值也不同, 总体呈现随着精度水平增加, 逐渐增大趋势, 但精度高到一定程度, 会出现震荡。图 4 表明存在有规律的最佳权重区, $P_{\mathrm{b}}$ 最佳值随着学习精度的提升逐渐加大。
+% 由此可见, $P_{\mathrm{b}}$ 值的大小对收敛速度的影响是明显的, 适当增加 $P_{\mathrm{b}}$ 值, 可以加速收敛, 但 $P_{\mathrm{b}}$值过大, 训练收敛次数反而变大.在不同精度水平, 引起最快收敛速度的 $P_{\mathrm{b}}$ 值也不同, 总体呈现随着精度水平增加, 逐渐增大趋势, 但精度高到一定程度, 会出现震荡.图 4 表明存在有规律的最佳权重区, $P_{\mathrm{b}}$ 最佳值随着学习精度的提升逐渐加大.
 % \begin{table}[H]
 %     \centering
 %     \begin{tabular}{c|cccc}
@@ -1896,15 +2182,21 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
 %     \label{tab:boundary_condition_weight_training}
 % \end{table}
 
-% \subsubsection{结论}
-% 本文结合 PINN 深度机器技术求解微方程的基本原理, 实现了多种形式中子学扩散方程的数值求解, 数值计算验证结果表明该方法具有良好的精度。同时, 针对扩散方程的特点, 提出了特征值方程加速收敛方法、 $k_{\mathrm{eff}}$ 高效并行搜索方法、样本网格点不均匀分布策略等关键技术，并针对神经网络结构、边界条件损失函数权重等关键参数进行了敏感性分析, 验证计算结果表明这些关键技术具有显著的效果。研究工作为中子学扩散方程的数值求解提供了新的技术途径, 并可为进一步求解复杂几何多群多维扩散问题、中子学输运方程问题等更加复杂的反应堆物理中子学偏微分方程奠定良好的技术基础。
-
+\subsubsection{结论}
+本文结合 PINN 深度机器技术求解微方程的基本原理, 实现了多种形式中子学扩散方程的数值求解, 数值计算验证结果表明该方法具有良好的精度.同时, 针对扩散方程的特点, 提出了特征值方程加速收敛方法、 $k_{\mathrm{eff}}$ 高效并行搜索方法、样本网格点不均匀分布策略等关键技术,并针对神经网络结构、边界条件损失函数权重等关键参数进行了敏感性分析, 验证计算结果表明这些关键技术具有显著的效果.研究工作为中子学扩散方程的数值求解提供了新的技术途径, 并可为进一步求解复杂几何多群多维扩散问题、中子学输运方程问题等更加复杂的反应堆物理中子学偏微分方程奠定良好的技术基础.
 
 % \newpage
 
 \section{结束语}
-本文主要介绍了PINNuclear-Neutrons项目的学习笔记,主要是对PINNuclear-Neutrons项目的学习过程进行了总结,复习了论文中的算例代码,并对项目中的一些关键代码进行了解读,对项目中的一些关键参数进行了调整,以便更好地理解论文中的算法.
+PINNuclear-Neutrons项目是我对刘东老师团队论文学习与复现过程的总结与反思.该项目以学习物理反应神经网络（PINN）和深度学习技术为主线,旨在准确模拟中子传输问题.
 
+在学习并复现刘东老师的论文过程中,我深切认识到深度学习技术在解决中子学扩散方程数值求解问题上的卓越潜力.通过融合PINN深度机器学习技术和微分方程的基本原理,论文成功应用了这一方法,并通过数值计算验证了其在多种形式中子学扩散方程中的有效性和高精度性能.
+
+论文的独特之处在于不仅关注方法的应用层面,还深入提出了特征值方程加速收敛方法、$k_{\mathrm{eff}}$高效并行搜索方法、样本网格点不均匀分布策略等关键技术.这一系列关键技术的引入不仅提高了算法的效率,也扩展了其在更为复杂问题中的适用性.
+
+在算法程序复现过程中,通过对深度机器学习的超参数设置和临界条件下稳态扩散方程的验证,我成功解决了多个问题,同时也发现了一些理论上的疑惑.尽管在项目中存在理解上的瓶颈,但通过这一过程,我对PINN和深度学习在核反应堆物理中子学领域的应用有了更为深刻的认识.
+
+未来,我将继续深入研究该方法在反应堆物理中子学领域的应用,并期待将其应用于更广泛的实际工程问题.通过学习这篇论文,我对深度学习技术在解决科学与工程问题中的潜力有了更为清晰的认识,为我的学术研究提供了新的方向和启示.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% 致谢
@@ -1997,6 +2289,8 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后�
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% 自动生成英文标题部分
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
 \makeentitle
 
 

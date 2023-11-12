@@ -1,25 +1,3 @@
-'''
-基于PINN深度机器学习技术求解 多维中子学扩散方程
-本文采用下式进行 $k_{\text {eff }}$ 的搜索:
-$$
-\frac{1}{D v} \frac{\partial \phi(r, t)}{\partial t}=\nabla^2 \phi(r, t)+\frac{k_{\infty} / k-1}{L^2} \phi(r, t)
-$$
-
-给出 $k$ 与 $\phi\left(r, t_0\right)$ 的任意初始值, 考察经过一定时间 $t_\tau$, 即 $t>t_\tau$ 时, $\phi(r, t)$ 对 $t$ 的偏导数是否接近 0 ,
- 从而进行临界判断。可设定合适的 $\varepsilon$, 若 $\partial \phi(r, t) / \partial t>\varepsilon$, 判断为超临界状态, 需要增大 $k$ 值;
- 若 $\partial \phi(r, t) / \partial t<-\varepsilon$, 为次临界状态, 需要减小 $k$ 值。当 $-\varepsilon<\partial \phi(r, t) / \partial t<\varepsilon$,
- 则认为系统已达临界, 此时 $k=k_{\text {eff }}, \phi\left(r, t>t_\tau\right)$ 即为稳态时系统的 $\phi(r)$ 分布
-
- | 算例 | 算例 5 | 算例 6 |
-| :---: | :---: | :---: |
-| $k_{\infty}$ | 1.00410 | 1.00010 |
-| $k_{\mathrm{eff}}$ | 1.00202 | 0.99803 |
-| 初始条件 | $\cos (\pi \cdot x / a)-0.4 \cos (2 \pi \cdot x / a)-0.4$ | $0.5 \cos (2 \pi \cdot x / a)+0.5$ |
-| $\sigma_{\mathrm{MSE}, \mathrm{a}}$ | $8.9108 \times 10^{-7}$ | $4.4229 \times 10^{-6}$ |
-| $\sigma_{\mathrm{MSE}, \mathrm{b}}$ | $3.8236 \times 10^{-6}$ | $1.8132 \times 10^{-5}$ |
-| $\sigma_{\mathrm{MSE,c}}$ | $3.6584 \times 10^{-7}$ | $8.9051 \times 10^{-6}$ |
-| $\sigma_{\mathrm{MEE}, a}-N(x, t)$ 在全域 $\{D \mid-0.5 \leqslant x \leqslant 0.5,0 \leqslant t \leqslant 0.015\}$ |
-'''
 
 import deepxde as dde
 import numpy as np

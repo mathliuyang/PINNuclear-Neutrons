@@ -1,123 +1,187 @@
-'''
-基于PINN深度机器学习技术求解 多维中子学扩散方程
-临界条件下稳态扩散方程的验证
-当系统处于稳态时, 形式为:
-$$
-\nabla^2 \phi(r)+\frac{k_{\infty} / k_{\text {eff }}-1}{L^2} \phi(r)=0
-$$
-
-当系统处于临界状态 $\left(k_{\mathrm{eff}}=1\right)$ 时, 为:
-$$
-\nabla^2 \phi(r)+B_g^2 \phi(r)=0
-$$
-
-式中, $B_g^2$ 为系统临界时的几何曲率, 与系统的几何特性相关，临界时等于材料曲率。
-
-为了验证计算结果, 选取针对特定几何有解析解的扩散方程进行数值验证, 相关结论也可供其他形式的方程与几何形式参考。
-验证计算神经网络架构均采用全连接方式, 激活函数选取具有高阶导数连续特点的双曲正切函数 $\mathrm{tanh}$,
-其形式为 $\tanh (x)=\left(\mathrm{e}^x-\mathrm{e}^{-x}\right) /\left(\mathrm{e}^x+\mathrm{e}^{-x}\right)$,
-网络初始值权重 $\{\vec{w}, \vec{b}\}$采用高斯分布随机采样 。
-
-平板的解析解为: $C \cdot \cos (x \cdot \pi / a)$;球的解析解为: $C / r \cdot \sin (\pi \cdot r / R)$;
-
-验证计算神经网络的超参数设定为: 深度 $l=16$, 中间层隐藏神经单元数量 $s=20$, 边界权重 $P_{\mathrm{b}}=100, C=0.5$,
-几何网格点随机均布, 学习率从 0.001 开始, 训练至损失函数值 $f_{\text {Loss }}$ 在 100 次学习内不再下降结束.
-
-3.2 扩散方程特征向量加速收敛方法验证
-
-验证计算的目标是：统计并分析不同初始权重值 $\{\vec{w}, \vec{b}\}$ 的神经网络 $N(\vec{x})$, 在训练到相似精度时,所需要的收敛时间。
-
-算例 1、算例 2 网络初始值权重 $\{\vec{w}, \vec{b}\}$ 随机选择 ${ }^{[12]}$; 算例 3 也选择随机初始值,
-但将 $x=0$ 时, $\phi(0)$ 值 [ 式 (10) 解析解中的 $C$ 值 ] 设定为 0.5 ,如 2.1 节所述作为 $f_{\text {Loss }}$ 的组成部分;
-算例 4 、算例 5、算例 6 初始状态为具有不同 $C_0$ 值、已经事先训练好的精度小于 $10^{-7}$ 网络, 训练方式与算例 3 类似,
-将 $\phi(0)=0.5$ 作为加权损失函数组成部分进行训练。各算例训练精度小于 $10^{-7}$ 即停止, 记录所需要的训练次数及精度等相关参数, 结果如表 2 所示。
-'''
-
+"""Backend supported: tensorflow.compat.v1, tensorflow, pytorch, paddle"""
 import deepxde as dde
 import numpy as np
-import torch
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from scipy.integrate import quad
 import os
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 
+# 定义各个区域的边界和点的数量
+# 算例 1
+# num_points_D0 = 2000
+# num_points_DC1 = 0
+# num_points_DC2 = 0
+# num_points_DB1 = 0
+# num_points_DB2 = 0
+# 算例 2
+# num_points_D0 = 1500
+# num_points_DC1 = 500
+# num_points_DC2 = 0
+# num_points_DB1 = 0
+# num_points_DB2 = 0
+# 算例 3
+# num_points_D0 = 1500
+# num_points_DC1 = 0
+# num_points_DC2 = 500
+# num_points_DB1 = 0
+# num_points_DB2 = 0
+# 算例 4
+num_points_D0 = 1000
+num_points_DC1 = 500
+num_points_DC2 = 0
+num_points_DB1 = 250
+num_points_DB2 = 250
+
+# 生成D0区域的随机点
+x_D0 = np.random.uniform(-0.5, 0.5, num_points_D0)
+t_D0 = np.random.uniform(0, 0.01, num_points_D0)
+
+# 生成DC1区域的随机点
+x_DC1 = np.random.uniform(-0.5, 0.5, num_points_DC1)
+t_DC1 = np.random.uniform(0, 0.002, num_points_DC1)
+
+# 生成DC2区域的随机点
+x_DC2 = np.random.uniform(-0.5, 0.5, num_points_DC2)
+t_DC2 = np.random.uniform(0, 0.005, num_points_DC2)
+
+# 生成DB1区域的随机点
+x_DB1 = np.random.uniform(-0.5, -0.45, num_points_DB1)
+t_DB1 = np.random.uniform(0, 0.01, num_points_DB1)
+
+# 生成DB2区域的随机点
+x_DB2 = np.random.uniform(0.45, 0.5, num_points_DB2)
+t_DB2 = np.random.uniform(0, 0.01, num_points_DB2)
+
+# 合并各个区域的点
+x = np.concatenate((x_DC1, x_DC2, x_DB1, x_DB2))
+t = np.concatenate((t_DC1, t_DC2, t_DB1, t_DB2))
+
+# 打印生成的点的数量
+print(f"Total Points: {len(x)}")
+
+# 绘制D0区域的点
+plt.scatter(x_D0, t_D0, label='D0', s=8, alpha=0.5)
+
+# 绘制DC1区域的点
+plt.scatter(x_DC1, t_DC1, label='DC1', s=8, alpha=0.5)
+
+# 绘制DC2区域的点
+plt.scatter(x_DC2, t_DC2, label='DC2', s=8, alpha=0.5)
+
+# 绘制DB1区域的点
+plt.scatter(x_DB1, t_DB1, label='DB1', s=8, alpha=0.5)
+
+# 绘制DB2区域的点
+plt.scatter(x_DB2, t_DB2, label='DB2', s=8, alpha=0.5)
+
+# 添加标签和标题
+plt.xlabel('x')
+plt.ylabel('t')
+plt.title('Grid Point Distribution')
+plt.legend()
+plt.grid(True)
+
+# 显示图像
+plt.show()
+
 # 初始化参数
-k_eff = 1  # 有效增殖系数
+# k_eff = 1  # 有效增殖系数
+k_inf = 1.0001  # 无穷增殖系数
 a = 1  # 平板的宽度
-B2 = (np.pi / a) ** 2  # 系统临界时的几何曲率
-l = 16  # 神经网络的深度
+D = 0.211e-2  # 扩散系数
+v = 2.2e3  # 中子速度
+L_square = 2.1037e-4  # 系统临界时的扩散长度
+l = 6  # 神经网络的深度
 s = 20  # 神经网络的中间层隐藏神经单元数量
+Pi = 100  # 初值权重
 Pb = 100  # 边界权重
-Pc = 100 # 额外配置点权重
+Pc = 100  # 额外配置点权重
 C = 0.5  # 解析解参数
+k_n = 1.0
+l_n = 1.0
+num_terms = 10  # 考虑的项数
 
 
-# 定义解析解
+# 定义初值条件
+def phi_0(x):
+    return 0.5 * (np.cos(2 * np.pi * x[:, 0:1] / a) + 1)
+
+
+# 解析解的计算
 def phi_analytical(x):
-    return C * np.cos(x * np.pi / a)
+    summation = 0
+    B_n = lambda n: (2 * n - 1) * np.pi / a
+    for n in range(1, 10):  # 选择一个足够大的上限来近似无穷级数
+        l_n = L_square / (D * v * (1 + L_square * B_n(n) ** 2))
+        k_n = k_inf / (1 + L_square * B_n(n) ** 2)
+        phi_0 = lambda x_prime: 0.5 * (np.cos(2 * np.pi * x_prime / a) + 1)
+        integrand = lambda x_prime: phi_0(x_prime) * np.cos(B_n(n) * x_prime)
+        integral_result, _ = quad(integrand, -a / 2, a / 2)
+        summation += (2 / a) * integral_result * np.cos(B_n(n) * x[:, 0:1]) * np.exp((k_n - 1) * x[:, 1:2] / l_n)
+
+    return summation
 
 
 # 定义几何网格
 geom = dde.geometry.Interval(-a / 2, a / 2)
+timedomain = dde.geometry.TimeDomain(0, 0.01)
+geomtime = dde.geometry.GeometryXTime(geom, timedomain)
 
+# 有效增殖系数
+k_eff = dde.Variable(1.0)
+observe_x = np.vstack((np.linspace(-a/2, a/2, num=10), np.full((10), 0.01))).T
+observe_y = dde.icbc.PointSetBC(observe_x, phi_analytical(observe_x))
 
 # 定义微分方程
 def pde(x, phi):
     dphi_xx = dde.grad.hessian(phi, x, i=0, j=0)
-    return dphi_xx + B2 * phi
+    dphi_t = dde.grad.jacobian(phi, x, i=0, j=1)
+    return 1 / (D * v) * dphi_t - dphi_xx - (k_inf - 1) / L_square * phi
 
 
-# # 定义边界条件
+# 定义边界条件
 # bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
-# 扩散方程特征向量加速收敛方法验证
-observe_x = np.array([0])
-observe_phi0 = dde.icbc.PointSetBC(observe_x, phi_analytical(observe_x))
+# 定义初值条件
+ic = dde.IC(geomtime, lambda x: phi_0(x), lambda _, on_initial: on_initial)
+
 # 定义数据
-data = dde.data.PDE(geom, pde, [observe_phi0], num_domain=898, num_boundary=2, anchors=observe_x, solution=phi_analytical, num_test=900)
+merged_data = np.concatenate((observe_x, np.vstack((x, t)).T), axis=0)
+
+data = dde.data.TimePDE(geomtime, pde, [ic, observe_y], num_domain=num_points_D0, num_boundary=200, num_initial=200,
+                        solution=phi_analytical,
+                        anchors=merged_data)
+
 # 定义神经网络
-layer_size = [1] + [s] * l + [1]
+layer_size = [2] + [s] * l + [1]
 activation = "tanh"
 # 网络初始值权重采用高斯分布随机采样
 initializer = "Glorot uniform"
 net = dde.nn.PFNN(layer_size, activation, initializer)
 
+
 # 定义硬边界条件
 def output_transform(x, y):
-    return (x + a / 2) * (x - a / 2) * y
+    return (x[:, 0:1] + a / 2) * (x[:, 0:1] - a / 2) * y
+
+
 net.apply_output_transform(output_transform)
 # 定义模型
 model = dde.Model(data, net)
 # 定义求解器
-model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pc])
-# 修改网络的偏置项，调整初始C值
-for module in net.modules():
-    if isinstance(module, torch.nn.Linear):
-        module.bias.data = torch.tensor([1.], requires_grad=True)
-
-# 输出在 x=0 处的值(即 C)
-print("Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
-
+model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pi, Pc], external_trainable_variables=[k_eff])
+variable = dde.callbacks.VariableValue(k_eff, period=1000)
 # 训练模型
-losshistory, train_state = model.train(epochs=50)
-# # 保存和可视化训练结果
-# dde.saveplot(losshistory, train_state, issave=True, isplot=True)
-# 输出在 x=0 处的值(即 C)
-print("Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
-# 确保文件夹路径存在
-output_folder = "model/算例2/model1"
-os.makedirs(output_folder, exist_ok=True)
-
-# 保存模型
-torch.save(model.net.state_dict(), "model/算例2/model1.pth")
-# 定义模型
-loaded_model = dde.Model(data, net)
-
-# 加载模型的状态字典
-loaded_model.net.load_state_dict(torch.load("model/算例2/model1.pth"))
+losshistory, train_state = model.train(epochs=5000, callbacks=[variable])
+print("k_inf:", k_inf)
+print("k_eff: {:f}".format(k_eff))
+dde.saveplot(losshistory, train_state, issave=True, isplot=True)
 
 # ---------------------------------------------------------------------------------------------
 # 可视化
 # 创建保存图像的文件夹
-output_folder = "figure/算例2/硬边界"
+output_folder = "figure/算例3/散点图/5"
 os.makedirs(output_folder, exist_ok=True)
 
 # 设置中文字体
@@ -192,6 +256,56 @@ if train_state.X_test.shape[1] == 1:
     plt.ylabel("y")
     plt.legend()
     plt.savefig(os.path.join(output_folder, "solution_state.png"), format="png", dpi=200)
+# 2D
+# 2D
+elif train_state.X_test.shape[1] == 2:
+    for i in range(y_dim):
+        plt.figure(figsize=(8, 6))  # 调整图像大小
+        ax = plt.axes(projection=Axes3D.name)
+        ax.plot3D(
+            train_state.X_test[:, 0],
+            train_state.X_test[:, 1],
+            best_y[:, i],
+            ".",
+        )
+        ax.set_xlabel("$x$")
+        ax.set_ylabel("$t$")
+        ax.set_zlabel("$\phi(x, t)$")
+
+        # 移除网格
+        ax.xaxis.pane.fill = False
+        ax.yaxis.pane.fill = False
+        ax.zaxis.pane.fill = False
+        ax.grid(False)
+
+        # 移动坐标轴到左边 supported values are 'lower', 'upper', 'both', 'default', 'none'
+        # ax.yaxis.set_ticks_position('left')
+        # ax.xaxis.set_ticks_position('none')
+        # ax.zaxis.set_ticks_position('left')
+
+        # 隐藏x轴标签
+        ax.set_xticks([])
+
+        # 自定义视角
+        ax.view_init(elev=0, azim=180)  # 仰角为0度，方位角为180度
+        plt.tight_layout()  # 调整图像布局，确保坐标轴标签不重叠
+        plt.savefig(os.path.join(output_folder, "solution_state.png"), format="png", dpi=200)
+
+# # 2D
+# elif train_state.X_test.shape[1] == 2:
+#     for i in range(y_dim):
+#         plt.figure()
+#         plt.scatter(train_state.X_test[:, 0], train_state.X_test[:, 1], c=best_y[:, i], cmap='viridis', marker='.')
+#         plt.xlabel("$x$")
+#         plt.ylabel("$t$")
+#         # plt.colorbar(label="$\phi(x, t)$")  # 添加颜色条
+#         # 自定义视角
+#         plt.xticks(rotation=100)
+#         plt.yticks(rotation=20)
+#         plt.title("Solution State for $y_{}$".format(i + 1))
+#         plt.savefig(os.path.join(output_folder, "solution_state_{}.png".format(i + 1)), format="png", dpi=200)
+
+
 # 神经网络输出的残差
 if y_test is not None:
     plt.figure(figsize=(6, 5))  # 设置图像大小
@@ -218,29 +332,4 @@ if best_ystd is not None:
     plt.ylabel("std(y)")
     plt.tight_layout()
     plt.savefig(os.path.join(output_folder, "best_ystd.png"), format="png", dpi=200)
-
-# 绘制数值解与解析解的图像并比较误差
-x = np.linspace(-a / 2, a / 2, 100).reshape((-1, 1))
-y_pred = model.predict(x)
-y_exact = phi_analytical(x)
-
-plt.figure(figsize=(12, 5))
-plt.subplot(1, 2, 1)
-plt.plot(x, y_pred, label="神经网络解", color="tab:blue")
-plt.plot(x, y_exact, label="解析解", color="tab:orange")
-plt.title("数值解与解析解的比较")
-plt.xlabel("x")
-plt.ylabel("$\phi(x)$")
-plt.legend()
-
-plt.subplot(1, 2, 2)
-plt.plot(x, np.abs(y_pred - y_exact), label="绝对误差", color="tab:red")
-plt.title("数值解与解析解的绝对误差")
-plt.xlabel("x")
-plt.ylabel("绝对误差")
-plt.legend()
-
-plt.tight_layout()
-plt.savefig(os.path.join(output_folder, "solution_comparison.png"), format="png", dpi=200)
-
 plt.show()

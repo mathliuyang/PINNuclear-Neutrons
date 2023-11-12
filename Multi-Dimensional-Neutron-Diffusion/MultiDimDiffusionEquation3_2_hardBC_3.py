@@ -56,9 +56,9 @@ model = dde.Model(data, net)
 # 定义求解器
 model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pc])
 # 修改网络的偏置项，调整初始C值
-for module in net.modules():
-    if isinstance(module, torch.nn.Linear):
-        module.bias.data = torch.tensor([1.], requires_grad=True)
+# for module in net.modules():
+#     if isinstance(module, torch.nn.Linear):
+#         module.bias.data = torch.tensor([1.], requires_grad=True)
 
 # 输出初始网络在 x=0 处的值
 print("Predicted value  of the initial network at x=0 : {:f}".format(model.predict(np.array([0]))[0]))
@@ -68,10 +68,10 @@ losshistory, train_state = model.train(epochs=1000)
 # 输出在 x=0 处的值(即 C)
 print("Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
 # 确保文件夹路径存在
-output_folder = "model/算例2/model1"
+output_folder = "model/算例2/model3"
 os.makedirs(output_folder, exist_ok=True)
 
-model_path = "model/算例2/model1.pth"
+model_path = "model/算例2/model3.pth"
 # 保存模型
 torch.save(model.net.state_dict(), model_path)
 

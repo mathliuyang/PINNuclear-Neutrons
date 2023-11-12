@@ -36,7 +36,7 @@ def pde(x, phi):
 # bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
 # 扩散方程特征向量加速收敛方法验证
 observe_x = np.array([0])
-observe_phi0 = dde.icbc.PointSetBC(observe_x, phi_analytical(observe_x))
+observe_phi0 = dde.icbc.PointSetBC(observe_x, np.array([0.01]))
 # 定义数据
 data = dde.data.PDE(geom, pde, [observe_phi0], num_domain=898, num_boundary=2, anchors=observe_x, solution=phi_analytical, num_test=900)
 # 定义神经网络
@@ -56,34 +56,39 @@ model = dde.Model(data, net)
 # 定义求解器
 model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pc])
 # 修改网络的偏置项，调整初始C值
-for module in net.modules():
-    if isinstance(module, torch.nn.Linear):
-        module.bias.data = torch.tensor([1.], requires_grad=True)
+# for module in net.modules():
+#     if isinstance(module, torch.nn.Linear):
+#         module.bias.data = torch.tensor([1.], requires_grad=True)
 
 # 输出初始网络在 x=0 处的值
 print("Predicted value  of the initial network at x=0 : {:f}".format(model.predict(np.array([0]))[0]))
 
 # 训练模型
-losshistory, train_state = model.train(epochs=1000)
+model.train(epochs=1000)
 # 输出在 x=0 处的值(即 C)
 print("Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
 # 确保文件夹路径存在
-output_folder = "model/算例2/model3"
+output_folder = "model/算例2/model4"
 os.makedirs(output_folder, exist_ok=True)
 
-model_path = "model/算例2/model3.pth"
+model_path = "model/算例2/model4.pth"
 # 保存模型
 torch.save(model.net.state_dict(), model_path)
 
-# # ------------------------------------------------迁移学习-------------------------------------------------
-# # 定义模型
-# loaded_model = dde.Model(data, net)
-# # 加载模型的状态字典
-# loaded_model.net.load_state_dict(torch.load(model_path))
-# print("Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
-# # 训练模型
-# loaded_model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pc])
-# losshistory, train_state = loaded_model.train(epochs=500)
-# print("Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
-#
-# # ------------------------------------------------可视化-------------------------------------------------
+# ------------------------------------------------迁移学习-------------------------------------------------
+# 扩散方程特征向量加速收敛方法验证
+observe_x = np.array([0])
+observe_phi0 = dde.icbc.PointSetBC(observe_x, phi_analytical(observe_x))
+# 定义数据
+data = dde.data.PDE(geom, pde, [observe_phi0], num_domain=898, num_boundary=2, anchors=observe_x, solution=phi_analytical, num_test=900)
+# 定义模型
+loaded_model = dde.Model(data, net)
+# 加载模型的状态字典
+loaded_model.net.load_state_dict(torch.load(model_path))
+print("迁移学习: Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
+# 训练模型
+loaded_model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pc])
+losshistory, train_state = loaded_model.train(epochs=1000)
+print("迁移学习: Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
+
+# ------------------------------------------------可视化-------------------------------------------------

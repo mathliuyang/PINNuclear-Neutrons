@@ -15,7 +15,7 @@ k_infinity = 1.0041
 
 # 初始条件
 def phi_0(x):
-    return np.cos(np.pi * x / a) - 0.4 * np.cos(2 * np.pi * x / a) - 0.4
+    return 0.5 * (np.cos(2 * np.pi * x / a) + 1)
 
 
 # 解析解的计算
@@ -31,6 +31,7 @@ def phi(x, t):
         summation += (2 / a) * integral_result * np.cos(B_n(n) * x) * np.exp((k_n - 1) * t / l_n)
 
     return summation
+
 
 # 创建保存图像的文件夹
 output_folder = "figure/算例3"
@@ -54,11 +55,10 @@ x_mesh, t_mesh = np.meshgrid(x_values, t_values)
 # 计算解在二维网格上的值
 phi_values = phi(x_mesh, t_mesh)
 
-plt.show()
 # 绘制三维图
 fig = plt.figure(figsize=(10, 6))
 ax = fig.add_subplot(111, projection='3d')
-ax.plot_surface(x_mesh, t_mesh, phi_values, cmap='viridis', linewidth=0.5,edgecolors='k')
+ax.plot_surface(x_mesh, t_mesh, phi_values, cmap='viridis', linewidth=0.5, edgecolors='k')
 # ax.set_title('解析解')
 ax.set_xlabel('x (m)')
 ax.set_ylabel('t (s)')
@@ -69,8 +69,7 @@ ax.view_init(elev=30, azim=235)  # 仰角为30度，方位角为45度
 # colorbar = fig.colorbar(surf, ax=ax, pad=0.1)
 # colorbar.set_label('$\phi(x, t)$', rotation=270, labelpad=15)
 
-plt.show()
-
 # 保存为png
 plt.tight_layout()
-plt.savefig(os.path.join(output_folder, "AnalyticalSolution1.png"), format="png", dpi=200)
+plt.savefig(os.path.join(output_folder, "AnalyticalSolution3.png"), format="png", dpi=200)
+plt.show()

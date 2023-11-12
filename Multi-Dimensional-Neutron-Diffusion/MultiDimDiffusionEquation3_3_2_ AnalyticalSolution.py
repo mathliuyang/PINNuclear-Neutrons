@@ -10,7 +10,7 @@ v = 2.2e3  # m/s
 D = 0.211e-2  # m
 L_square = 2.1037e-4  # m^2
 a = 1  # m
-k_infinity = 1.0041
+k_infinity = 1.0001
 
 
 # 初始条件
@@ -69,8 +69,7 @@ ax.view_init(elev=30, azim=235)  # 仰角为30度，方位角为45度
 # colorbar = fig.colorbar(surf, ax=ax, pad=0.1)
 # colorbar.set_label('$\phi(x, t)$', rotation=270, labelpad=15)
 
-plt.show()
-
 # 保存为png
 plt.tight_layout()
-plt.savefig(os.path.join(output_folder, "AnalyticalSolution1.png"), format="png", dpi=200)
+plt.savefig(os.path.join(output_folder, "AnalyticalSolution2.png"), format="png", dpi=200)
+plt.show()

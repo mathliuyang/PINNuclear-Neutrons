@@ -36,7 +36,7 @@ def pde(x, phi):
 # bc = dde.icbc.DirichletBC(geom, lambda x: 0, lambda _, on_boundary: on_boundary)
 # 扩散方程特征向量加速收敛方法验证
 observe_x = np.array([0])
-observe_phi0 = dde.icbc.PointSetBC(observe_x, np.array([0.1]))
+observe_phi0 = dde.icbc.PointSetBC(observe_x, np.array([0.5]))
 # 定义数据
 data = dde.data.PDE(geom, pde, [observe_phi0], num_domain=898, num_boundary=2, anchors=observe_x, solution=phi_analytical, num_test=900)
 # 定义神经网络
@@ -68,7 +68,7 @@ model.train(epochs=1000)
 # 输出在 x=0 处的值(即 C)
 print("Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
 # 确保文件夹路径存在
-output_folder = "model/算例2/model6"
+output_folder = "model/算例2/model7"
 os.makedirs(output_folder, exist_ok=True)
 
 model_path = "model/算例2/model7.pth"
@@ -88,7 +88,7 @@ loaded_model.net.load_state_dict(torch.load(model_path))
 print("迁移学习: Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
 # 训练模型
 loaded_model.compile("adam", lr=0.001, metrics=["l2 relative error"], loss_weights=[1, Pc])
-losshistory, train_state = loaded_model.train(epochs=500)
+losshistory, train_state = loaded_model.train(epochs=1000)
 print("迁移学习: Predicted value at x=0: {:f}".format(model.predict(np.array([0]))[0]))
 
 # ------------------------------------------------可视化-------------------------------------------------

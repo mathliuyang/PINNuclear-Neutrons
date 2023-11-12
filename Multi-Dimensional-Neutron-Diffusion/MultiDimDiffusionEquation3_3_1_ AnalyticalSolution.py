@@ -69,8 +69,7 @@ ax.view_init(elev=30, azim=235)  # 仰角为30度，方位角为45度
 # colorbar = fig.colorbar(surf, ax=ax, pad=0.1)
 # colorbar.set_label('$\phi(x, t)$', rotation=270, labelpad=15)
 
-plt.show()
-
 # 保存为png
 plt.tight_layout()
 plt.savefig(os.path.join(output_folder, "AnalyticalSolution1.png"), format="png", dpi=200)
+plt.show()

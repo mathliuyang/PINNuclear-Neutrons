@@ -1,0 +1,58 @@
+\contentsline {figure}{\numberline {1.1}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf PINN网络结构图\relax }}{6}{figure.caption.1}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces \baselineskip 10pt PINN Network Structure\relax }}{6}{figure.caption.1}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 链式裂变反应示意图\relax }}{8}{figure.caption.3}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces \baselineskip 10pt Chain fission reaction diagram\relax }}{8}{figure.caption.3}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 热中子反应堆内的中子平衡\relax }}{10}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces \baselineskip 10pt Neutron balance in thermal neutron reactor\relax }}{10}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 在两种介质分界面上的中子扩散\relax }}{16}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces \baselineskip 10pt Neutron diffusion at the interface of two media\relax }}{16}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 外推距离求得的扩散方程的解\relax }}{16}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces \baselineskip 10pt The solution of the diffusion equation\relax }}{16}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 无限平板形反应堆\relax }}{18}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces \baselineskip 10pt Infinite plate reactor\relax }}{18}{figure.caption.6}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf $k_{eff}$ 并行搜索流程图\relax }}{27}{figure.caption.8}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces \baselineskip 10pt Flow chart of $k_{eff}$ parallel search\relax }}{27}{figure.caption.8}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 损失函数变化图\relax }}{34}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \baselineskip 10pt Loss function change\relax }}{34}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 优化后损失函数变化图\relax }}{34}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces \baselineskip 10pt Loss function change after optimization\relax }}{34}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 回归分析图\relax }}{34}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces \baselineskip 10pt Regression analysis\relax }}{34}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 优化后回归分析图\relax }}{34}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces \baselineskip 10pt Regression analysis after optimization\relax }}{34}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 残差分析图\relax }}{35}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces \baselineskip 10pt Regression analysis\relax }}{35}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 优化后残差分析图\relax }}{35}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces \baselineskip 10pt Regression analysis after optimization\relax }}{35}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 硬边界条件回归分析图\relax }}{36}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces \baselineskip 10pt Regression analysis with hard BC\relax }}{36}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 硬边界条件残差分析图\relax }}{36}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces \baselineskip 10pt Residual analysis with hard BC\relax }}{36}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例1解析解\relax }}{38}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces \baselineskip 10pt Analytical solution of case 1\relax }}{38}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例2解析解\relax }}{38}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces \baselineskip 10pt Analytical solution of case 2\relax }}{38}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例3解析解\relax }}{38}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces \baselineskip 10pt Analytical solution of case 3\relax }}{38}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例4解析解\relax }}{38}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces \baselineskip 10pt Analytical solution of case 4\relax }}{38}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例1散点图\relax }}{39}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces \baselineskip 10pt Scatter plot of case 1\relax }}{39}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例2散点图\relax }}{39}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces \baselineskip 10pt Scatter plot of case 2\relax }}{39}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例3散点图\relax }}{39}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces \baselineskip 10pt Scatter plot of case 3\relax }}{39}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例4散点图\relax }}{39}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces \baselineskip 10pt Scatter plot of case 4\relax }}{39}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例5散点图\relax }}{41}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces \baselineskip 10pt Scatter plot of case 5\relax }}{41}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例6散点图\relax }}{41}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces \baselineskip 10pt Scatter plot of case 6\relax }}{41}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例1网格点分布图\relax }}{42}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces \baselineskip 10pt Grid Point Distribution Plot for Case 1\relax }}{42}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例2网格点分布图\relax }}{42}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces \baselineskip 10pt Grid Point Distribution Plot for Case 2\relax }}{42}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例3网格点分布图\relax }}{42}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces \baselineskip 10pt Grid Point Distribution Plot for Case 3\relax }}{42}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.23}{\ignorespaces \baselineskip 10pt\fontsize {9pt}{\baselineskip }\selectfont \bf 算例4网格点分布图\relax }}{42}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.23}{\ignorespaces \baselineskip 10pt Grid Point Distribution Plot for Case 4\relax }}{42}{figure.caption.20}%
