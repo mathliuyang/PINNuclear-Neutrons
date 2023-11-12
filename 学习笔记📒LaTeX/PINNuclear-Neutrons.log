@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  13 NOV 2023 06:59
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  13 NOV 2023 07:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1088,6 +1088,10 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 \tf@lof=\write5
 \openout5 = `PINNuclear-Neutrons.lof'.
 
+ (./PINNuclear-Neutrons.lot)
+\tf@lot=\write6
+\openout6 = `PINNuclear-Neutrons.lot'.
+
  [4]
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
@@ -1102,9 +1106,9 @@ Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 [11]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 321.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 322.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 321.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 322.
  [12] [13]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 [14] [15]
@@ -1122,15 +1126,15 @@ Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=
 [25] [26]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1261.
+(hyperref)                removing `math shift' on input line 1262.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1261.
+(hyperref)                removing `subscript' on input line 1262.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1261.
+(hyperref)                removing `math shift' on input line 1262.
 
 File: ./figure/k_eff并行搜索流程图.png Graphic file (type bmp)
 <./figure/k_eff并行搜索流程图.png>
@@ -1183,15 +1187,15 @@ File: ./figure/算例2/硬边界/y_test.png Graphic file (type bmp)
  [36]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1760.
+(hyperref)                removing `math shift' on input line 1761.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1760.
+(hyperref)                removing `subscript' on input line 1761.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1760.
+(hyperref)                removing `math shift' on input line 1761.
 
 [37]
 File: ./figure/算例3/AnalyticalSolution1.png Graphic file (type bmp)
@@ -1243,10 +1247,10 @@ Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
 (rerunfilecheck)             Checksum: D55893C63D673E6958D44195A8A98246;4683.
  ) 
 Here is how much of TeX's memory you used:
- 22887 strings out of 476683
- 480322 string characters out of 5804047
+ 22893 strings out of 476683
+ 480438 string characters out of 5804047
  2245018 words of memory out of 5000000
- 42601 multiletter control sequences out of 15000+600000
+ 42604 multiletter control sequences out of 15000+600000
  535968 words of font info for 205 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,18n,111p,1217b,1926s stack positions out of 10000i,1000n,20000p,200000b,200000s
