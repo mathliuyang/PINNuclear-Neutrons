@@ -5,6 +5,21 @@
 \newblock Artificial {{Neural Networks}} for {{Solving Ordinary}} and {{Partial Differential Equations}}.
 \newblock {\em IEEE Trans. Neural Netw. 9}, 5 (Sept./1998), 987--1000.
 
+\bibitem{luDeepXDEDeepLearning2021}
+{\sc Lu, L., Meng, X., Mao, Z., and Karniadakis, G.~E.}
+\newblock {{DeepXDE}}: {{A Deep Learning Library}} for {{Solving Differential Equations}}.
+\newblock {\em Siam Rev. 63}, 1 (Jan. 2021), 208--228.
+
+\bibitem{margossianReviewAutomaticDifferentiation2019}
+{\sc Margossian, C.~C.}
+\newblock A review of automatic differentiation and its efficient implementation.
+\newblock {\em Wires Data Min. Knowl. Discovery 9}, 4 (2019), e1305.
+
+\bibitem{pangFPINNsFractionalPhysicsInformed2019}
+{\sc Pang, G., Lu, L., and Karniadakis, G.~E.}
+\newblock {{fPINNs}}: {{Fractional Physics-Informed Neural Networks}}.
+\newblock {\em Siam J Sci Comput 41}, 4 (Jan. 2019), A2603--A2626.
+
 \bibitem{raissiPhysicsinformedNeuralNetworks2019}
 {\sc Raissi, M., Perdikaris, P., and Karniadakis, G.~E.}
 \newblock Physics-informed neural networks: {{A}} deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations.

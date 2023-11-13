@@ -1,7 +1,9 @@
-\contentsline {table}{\numberline {1}{\ignorespaces 核裂变释放的能量\relax }}{8}{table.caption.2}%
-\contentsline {table}{\numberline {2}{\ignorespaces 多群中子学扩散方程模型各项解释\relax }}{25}{table.caption.7}%
-\contentsline {table}{\numberline {3}{\ignorespaces 神经网络超参数及相关设置\relax }}{29}{table.caption.9}%
-\contentsline {table}{\numberline {4}{\ignorespaces 神经网络初始值敏感性分析结果\relax }}{37}{table.caption.14}%
-\contentsline {table}{\numberline {5}{\ignorespaces 稳态扩散方程数值解误差分布\relax }}{39}{table.caption.16}%
-\contentsline {table}{\numberline {6}{\ignorespaces $k_{\text {eff}}$ 搜索计算结果误差\relax }}{40}{table.caption.18}%
-\contentsline {table}{\numberline {7}{\ignorespaces 网格点分布敏感性分析结果\relax }}{43}{table.caption.21}%
+\contentsline {table}{\numberline {1}{\ignorespaces 使用AD计算$\frac {\partial y}{\partial x_1}$和$\frac {\partial y}{\partial x_2}$的示例,其中$\left (x_1, x_2\right )=(2,1)$\relax }}{8}{table.caption.2}%
+\contentsline {table}{\numberline {2}{\ignorespaces 基于残差的自适应加密(RAR)以改善训练中残差点的分布\relax }}{10}{table.caption.4}%
+\contentsline {table}{\numberline {3}{\ignorespaces ${ }^{235} \mathrm {U}$ 核裂变释放的能量\relax }}{11}{table.caption.5}%
+\contentsline {table}{\numberline {4}{\ignorespaces 多群中子学扩散方程模型各项解释\relax }}{28}{table.caption.10}%
+\contentsline {table}{\numberline {5}{\ignorespaces 神经网络超参数及相关设置\relax }}{32}{table.caption.12}%
+\contentsline {table}{\numberline {6}{\ignorespaces 神经网络初始值敏感性分析结果\relax }}{40}{table.caption.17}%
+\contentsline {table}{\numberline {7}{\ignorespaces 稳态扩散方程数值解误差分布\relax }}{42}{table.caption.19}%
+\contentsline {table}{\numberline {8}{\ignorespaces $k_{\text {eff}}$ 搜索计算结果误差\relax }}{43}{table.caption.21}%
+\contentsline {table}{\numberline {9}{\ignorespaces 网格点分布敏感性分析结果\relax }}{46}{table.caption.24}%

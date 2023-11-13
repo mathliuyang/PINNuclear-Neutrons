@@ -1,18 +1,13 @@
-import matplotlib.pyplot as plt
-from matplotlib.font_manager import FontProperties
+import numpy as np
 
-# 替换为您的字体文件路径
-font_path = '/System/Library/Fonts/STHeiti Light.ttc'
+# 创建一个NumPy数组
+arr = np.array([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9])
 
-# 添加字体路径
-font_properties = FontProperties(fname=font_path)
-plt.rcParams['font.sans-serif'] = [font_properties.get_name()]
+# 使用argsort获取数组索引，按值从大到小排序
+sorted_indices = np.argsort(arr)[::-1]
 
-# 示例
-plt.figure()
-plt.plot([1, 2, 3], label="示例", color="tab:blue")
-plt.title("示例标题")
-plt.xlabel("X轴")
-plt.ylabel("Y轴")
-plt.legend()
-plt.show()
+# 获取前10个最大值的索引
+top_10_indices = sorted_indices[:10]
+
+print("数组:", arr)
+print("前10个最大值的索引:", top_10_indices)

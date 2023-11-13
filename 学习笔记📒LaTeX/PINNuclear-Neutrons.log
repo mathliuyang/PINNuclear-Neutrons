@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  13 NOV 2023 07:02
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  14 NOV 2023 02:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1092,53 +1092,56 @@ Package fontspec Info: Font family 'STFangsong(0)' created for font
 \tf@lot=\write6
 \openout6 = `PINNuclear-Neutrons.lot'.
 
- [4]
+ [4] [5]
 File: ./figure/PINN网络结构图.pdf Graphic file (type pdf)
 <use ./figure/PINN网络结构图.pdf>
- [5] [6] [7]
+ [6] [7] [8]
+File: ./figure/IDEs&FDE 的PINN 算法.pdf Graphic file (type pdf)
+<use ./figure/IDEs&FDE 的PINN 算法.pdf>
+ [9] [10]
 File: ./figure/链式裂变反应示意图.png Graphic file (type bmp)
 <./figure/链式裂变反应示意图.png>
- [8] [9]
+ [11] [12]
 File: ./figure/热中子反应堆内的中子平衡.png Graphic file (type bmp)
 <./figure/热中子反应堆内的中子平衡.png>
- [10]
+ [13]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[11]
+[14]
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 322.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 461.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <5> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 322.
- [12] [13]
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 461.
+ [15] [16]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[14] [15]
+[17] [18]
 File: ./figure/在两种介质分界面上的中子扩散.png Graphic file (type bmp)
 <./figure/在两种介质分界面上的中子扩散.png>
 File: ./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png Graphic file (type bmp)
 <./figure/应用输运理论和扩散理论的外推距离求得的扩散方程的解.png>
- [16] [17]
+ [19] [20]
 File: ./figure/无限平板形反应堆.png Graphic file (type bmp)
 <./figure/无限平板形反应堆.png>
- [18] [19] [20] [21] [22] [23]
+ [21] [22] [23] [24] [25] [26]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[24]
+[27]
 Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=tex-text;!
-[25] [26]
+[28] [29]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1262.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1262.
+(hyperref)                removing `math shift' on input line 1401.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1262.
+(hyperref)                removing `subscript' on input line 1401.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1401.
 
 File: ./figure/k_eff并行搜索流程图.png Graphic file (type bmp)
 <./figure/k_eff并行搜索流程图.png>
-[27] [28]
+[30] [31]
 
 Package fontspec Warning: Font "STFangsong" does not contain requested Script
 (fontspec)                "CJK".
@@ -1166,7 +1169,7 @@ Package fontspec Info: Font family 'CourierNew(0)' created for font 'Courier
 (fontspec)             New/BI/OT:script=latn;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
- [29] [30] [31] [32] [33]
+ [32] [33] [34] [35] [36]
 File: ./figure/算例1/losshistory.png Graphic file (type bmp)
 <./figure/算例1/losshistory.png>
 File: ./figure/算例2/losshistory.png Graphic file (type bmp)
@@ -1179,25 +1182,25 @@ File: ./figure/算例1/y_test.png Graphic file (type bmp)
 <./figure/算例1/y_test.png>
 File: ./figure/算例2/y_test.png Graphic file (type bmp)
 <./figure/算例2/y_test.png>
- [34] [35]
+ [37] [38]
 File: ./figure/算例2/硬边界/solution_state.png Graphic file (type bmp)
 <./figure/算例2/硬边界/solution_state.png>
 File: ./figure/算例2/硬边界/y_test.png Graphic file (type bmp)
 <./figure/算例2/硬边界/y_test.png>
- [36]
+ [39]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1761.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1761.
+(hyperref)                removing `math shift' on input line 1900.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1761.
+(hyperref)                removing `subscript' on input line 1900.
 
-[37]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1900.
+
+[40]
 File: ./figure/算例3/AnalyticalSolution1.png Graphic file (type bmp)
 <./figure/算例3/AnalyticalSolution1.png>
 File: ./figure/算例3/AnalyticalSolution2.png Graphic file (type bmp)
@@ -1206,7 +1209,7 @@ File: ./figure/算例3/AnalyticalSolution3.png Graphic file (type bmp)
 <./figure/算例3/AnalyticalSolution3.png>
 File: ./figure/算例3/AnalyticalSolution4.png Graphic file (type bmp)
 <./figure/算例3/AnalyticalSolution4.png>
- [38]
+ [41]
 File: ./figure/算例3/散点图/1/solution_state.png Graphic file (type bmp)
 <./figure/算例3/散点图/1/solution_state.png>
 File: ./figure/算例3/散点图/2/solution_state.png Graphic file (type bmp)
@@ -1215,12 +1218,12 @@ File: ./figure/算例3/散点图/3/solution_state.png Graphic file (type bmp)
 <./figure/算例3/散点图/3/solution_state.png>
 File: ./figure/算例3/散点图/4/solution_state.png Graphic file (type bmp)
 <./figure/算例3/散点图/4/solution_state.png>
- [39] [40]
+ [42] [43]
 File: ./figure/算例3/散点图/5/solution_state.png Graphic file (type bmp)
 <./figure/算例3/散点图/5/solution_state.png>
 File: ./figure/算例3/散点图/6/solution_state.png Graphic file (type bmp)
 <./figure/算例3/散点图/6/solution_state.png>
- [41]
+ [44]
 File: ./figure/算例4/1/散点.png Graphic file (type bmp)
 <./figure/算例4/1/散点.png>
 File: ./figure/算例4/2/散点.png Graphic file (type bmp)
@@ -1229,7 +1232,10 @@ File: ./figure/算例4/3/散点.png Graphic file (type bmp)
 <./figure/算例4/3/散点.png>
 File: ./figure/算例4/4/散点.png Graphic file (type bmp)
 <./figure/算例4/4/散点.png>
- [42] [43] (./PINNuclear-Neutrons.bbl) [44]
+ [45] [46]
+File: ./figure/算例4/RAR/solution_state.png Graphic file (type bmp)
+<./figure/算例4/RAR/solution_state.png>
+ [47] (./PINNuclear-Neutrons.bbl) [48]
 File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 <./figure/个人形象照/头像.JPEG>
 
@@ -1237,22 +1243,22 @@ File: ./figure/个人形象照/头像.JPEG Graphic file (type bmp)
 Package caption Warning: Unused \captionsetup[algorithm] on input line 566.
 See the caption package documentation for explanation.
 
-[45] 
+[49] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./PINNuclear-Neutrons.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
-(rerunfilecheck)             Checksum: D55893C63D673E6958D44195A8A98246;4683.
+(rerunfilecheck)             Checksum: E4D6880A4232BF357ACB19794FD16C3C;5084.
  ) 
 Here is how much of TeX's memory you used:
- 22893 strings out of 476683
- 480438 string characters out of 5804047
+ 22928 strings out of 476683
+ 479175 string characters out of 5804047
  2245018 words of memory out of 5000000
- 42604 multiletter control sequences out of 15000+600000
- 535968 words of font info for 205 fonts, out of 8000000 for 9000
+ 42634 multiletter control sequences out of 15000+600000
+ 535992 words of font info for 208 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 103i,18n,111p,1217b,1926s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 103i,19n,111p,1217b,1958s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PINNuclear-Neutrons.pdf (45 pages).
+Output written on PINNuclear-Neutrons.pdf (49 pages).
