@@ -25,10 +25,10 @@
 \newblock Physics-informed neural networks: {{A}} deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations.
 \newblock {\em Journal of Computational Physics 378\/} (Feb. 2019), 686--707.
 
-\bibitem{LiuDongHeFanYingDuiYouXiaoZengZhiXiShuShenDuXueXiZhiJieSouSuoQiuJieFangFa}
+\bibitem{LiuDongHeFanYingDuiYouXiaoZengZhiXiShuShenDuXueXiZhiJieSouSuoQiuJieFangFa2023}
 {\sc 刘东, 唐雷, 安萍, 张斌, and 江勇}.
 \newblock {核反应堆有效增殖系数深度学习直接搜索求解方法}.
-\newblock {\em 核动力工程\/}, 1--9.
+\newblock {\em 核动力工程\/} (2023), 1--9.
 
 \bibitem{LiuDongJiYuPINNShenDuJiQiXueXiJiShuQiuJieDuoWeiZhongZiXueKuoSanFangCheng2022}
 {\sc 刘东, 罗琦, 唐雷, 安萍, and 杨帆}.
