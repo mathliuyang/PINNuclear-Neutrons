@@ -41,7 +41,7 @@
 \OnlineDate{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{PINNuclear-Neutrons 项目笔记}{PINNuclear-Neutrons}
+\title{基于 PINN 求解核反应堆中子学扩散方程的研究学习笔记}{PINNuclear-Neutrons}
 
 \entitle{PINNuclear-Neutrons Project Notes}{PINNuclear-Neutrons}
 
@@ -73,7 +73,7 @@
 % \comment{\dag~同等贡献}
 %\encomment{\dag~Equal contribution}
 
-\abstract{PINNuclear-Neutrons项目的主要目标在于学习并复现刘东老师团队的核反应堆物理学论文,该论文通过物理反应神经网络(PINN)和深度学习技术解决多维中子学扩散方程,以实现对中子传输的精确模拟,为核能技术提供高效准确的数值求解方法.
+\abstract{PINN在核反应堆中子行为（PINNuclear-Neutrons）的学习笔记主要目标在于学习并复现刘东老师团队的核反应堆物理学论文,该论文通过物理反应神经网络(PINN)和深度学习技术解决多维中子学扩散方程,以实现对中子传输的精确模拟,为核能技术提供高效准确的数值求解方法.
 
 在学习过程中,首先深入探讨了PINN和自动微分算法等核心知识, 并系统性学习了核反应堆物理分析的基础知识,包括裂变能量释放、链式裂变反应、热中子反应堆中子循环等,为后续中子学扩散方程的学习奠定了基础.
 
@@ -89,7 +89,7 @@ In the in-depth review of Professor Liu Dong's paper titled "Solving Multi-dimen
 In the practical implementation of the algorithm, challenges were addressed through the fine-tuning of hyperparameters in deep machine learning and the validation of steady-state diffusion equations under critical conditions. While certain theoretical ambiguities persisted throughout the project, the process significantly contributed to a profound understanding of the application of PINN and deep learning in the domain of neutron physics in nuclear reactors.
 Looking ahead, there is a commitment to further explore and expand the application of this methodology in the field of neutron physics in reactor physics. Simultaneously, there is an anticipation of its application to a broader spectrum of engineering challenges. Through the study of this paper, a clearer understanding of the immense potential of deep learning techniques in addressing scientific and engineering problems has emerged, providing novel perspectives and insights for future academic research.}
 
-\keywords{基于物理信息指引的神经网络模型; 深度学习; 核反应堆; 中子学扩散方程}
+\keywords{物理信息神经网络; 深度学习; 核反应堆; 中子学扩散方程}
 
 \enkeywords{PINN; Deep Learning; Nuclear Reactor; Neutron Diffusion Equation}
 
@@ -1348,6 +1348,7 @@ $$
 其单能群存在独立的外中子源 $S_0(\boldsymbol{r}, t)$ 的扩散方程\footnote{推导细节见第\ref{sec:均匀裸堆的单群理论}节式\eqref{eq:均匀裸堆的单群扩散方程1110}}就可以写成
 \begin{align}
 \frac{1}{Dv} \frac{\partial \phi(\boldsymbol{r}, t)}{\partial t}&=\nabla^2 \phi(\boldsymbol{r}, t)+\frac{k_{\infty}-1}{L^2} \phi(\boldsymbol{r}, t)+\frac{1}{D}S_0(\boldsymbol{r}, t)
+\label{eq:单群无外源扩散方程}
 \end{align}
 
 其单能群无外源扩散方程\footnote{推导细节见第\ref{sec:均匀裸堆的单群扩散方程的解}节式\eqref{eq:单群扩散方程}}形式可写为:
@@ -1783,7 +1784,7 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后,
 
 具体做法是定义神经网络输出的转换：
 \begin{equation}
-    \phi(\vec{x})=\vec{x} \cdot(\pi-\vec{x}) \cdot y+\vec{x}
+    \phi(\vec{x})=(\vec{x}+\frac{a}{2}) \cdot(\vec{x}-\frac{a}{2}) \cdot y
 \end{equation}
 并将其应用于网络.当 $\vec{x}=\pm \frac{a}{2}$ 时,边界条件 $\phi(\pm \frac{a}{2})=0$ 得到满足.这表明边界约束的两端都是硬条件.相关代码段如下所示：
 
@@ -1794,7 +1795,7 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后,
     net.apply_output_transform(output_transform)
 \end{lstlisting}
 
-在这段代码中,定义了一个名为 \texttt{output\_transform} 的函数,它对输出进行了转换.具体而言,对于给定的输入 \texttt{x} 和输出 \texttt{y},转换后的输出是 $\vec{x} \cdot (\pi - \vec{x}) \cdot y + \vec{x}$.
+在这段代码中,定义了一个名为 \texttt{output\_transform} 的函数,它对输出进行了转换.具体而言,对于给定的输入 \texttt{x} 和输出 \texttt{y},转换后的输出是 $(\vec{x}+\frac{a}{2}) \cdot(\vec{x}-\frac{a}{2}) \cdot y$.
 
 然后,通过 \texttt{net.apply\_output\_transform(output\_transform)} 将这个输出转换函数应用于网络.这表示通过这个转换函数考虑了边界条件的硬约束,确保网络的输出满足问题的物理边界条件.
 
@@ -1899,7 +1900,7 @@ $k$ 值的搜索方法可采用二分法或 者将 $k$ 等分成一定数量后,
 
 \subsubsection{瞬态条件扩散方程求解及$k_{\text{eff}}$搜索方法验证}
 
-根据 \ref{sec:均匀裸堆的单群扩散方程的解} 节中的讨论,瞬态方程式 (2) 在平板几何真空边界条件下解析解为:
+根据 \ref{sec:均匀裸堆的单群扩散方程的解} 节中的讨论,瞬态方程式 \ref{eq:单群无外源扩散方程} 在平板几何真空边界条件下解析解为:
 \begin{equation}
 \begin{aligned}
 \phi(x, t)= & \sum_{n=1}^{\infty} \frac{2}{a}\left[\int_{-a / 2}^{a / 2} \phi_0\left(x^{\prime}\right) \cos \frac{(2 n-1) \pi}{a} x^{\prime} \mathrm{d} x^{\prime}\right] \times \\

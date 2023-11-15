@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  14 NOV 2023 02:57
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.21)  15 NOV 2023 12:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1129,15 +1129,15 @@ Missing character: There is no 、 (U+3001) in font [lmroman10-regular]:mapping=
 [28] [29]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1401.
+(hyperref)                removing `math shift' on input line 1402.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1401.
+(hyperref)                removing `subscript' on input line 1402.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1401.
+(hyperref)                removing `math shift' on input line 1402.
 
 File: ./figure/k_eff并行搜索流程图.png Graphic file (type bmp)
 <./figure/k_eff并行搜索流程图.png>
@@ -1190,15 +1190,15 @@ File: ./figure/算例2/硬边界/y_test.png Graphic file (type bmp)
  [39]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1900.
+(hyperref)                removing `math shift' on input line 1901.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 1900.
+(hyperref)                removing `subscript' on input line 1901.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1900.
+(hyperref)                removing `math shift' on input line 1901.
 
 [40]
 File: ./figure/算例3/AnalyticalSolution1.png Graphic file (type bmp)
@@ -1253,10 +1253,10 @@ Package rerunfilecheck Info: File `PINNuclear-Neutrons.out' has not changed.
 (rerunfilecheck)             Checksum: E4D6880A4232BF357ACB19794FD16C3C;5084.
  ) 
 Here is how much of TeX's memory you used:
- 22928 strings out of 476683
- 479175 string characters out of 5804047
+ 22953 strings out of 476683
+ 480879 string characters out of 5804047
  2245018 words of memory out of 5000000
- 42634 multiletter control sequences out of 15000+600000
+ 42659 multiletter control sequences out of 15000+600000
  535992 words of font info for 208 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,19n,111p,1217b,1958s stack positions out of 10000i,1000n,20000p,200000b,200000s

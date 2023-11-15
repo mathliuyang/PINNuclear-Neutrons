@@ -334,7 +334,7 @@
   \else
   \noindent
   \begin{picture}(0,0){\put(0,-5){\color[rgb]{0.4,0.4,0.4}\line(1,0){455}}}\end{picture}
-  {\vskip2.3mm\noindent{\heiti 摘要\quad\,\,}\ignorespaces\fangsong\@abstract\vspace{1mm}\\
+  {\vskip2.3mm\noindent{\heiti 概述\quad\,\,}\ignorespaces\fangsong\@abstract\vspace{1mm}\\
   \noindent{\heiti 关键词\quad\,\,}\ignorespaces\fangsong\@keywords\\}
   \begin{picture}(0,0){\put(0,5){\color[rgb]{0.4,0.4,0.4}\line(1,0){455}}}\end{picture}
   \fi
@@ -378,7 +378,7 @@
     \else
     \noindent\hspace*{-2.9mm}
     \begin{tabular}{p{\textwidth}}
-    \renewcommand{\baselinestretch}{0.8}\jiuhao\textbf{Abstract}\quad\@enabstract\\
+    \renewcommand{\baselinestretch}{0.8}\jiuhao\textbf{Overview}\quad\@enabstract\\
     \renewcommand{\baselinestretch}{0.8}\jiuhao\textbf{Keywords}\quad\@enkeywords
     \end{tabular}
     \fi
